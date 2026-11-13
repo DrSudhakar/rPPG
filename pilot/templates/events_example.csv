@@ -1,0 +1,4 @@
+wall_time,event,block,light,note
+1794300010.200,recording_start,,,
+1794300012.000,block_start,ita_capture,light1_500lux,
+1794300042.000,block_end,ita_capture,light1_500lux,

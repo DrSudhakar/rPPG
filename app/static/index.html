@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAMA Live</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">समा</span> SAMA <span id="modeTag" class="tag">live</span></div>
+  <div class="banner">Research demonstrator. Not a medical device. No diagnosis. Readings may be withheld when they are not reliable.</div>
+</header>
+
+<main class="grid">
+  <!-- left: camera and pulse trace -->
+  <section class="col camera">
+    <div class="videoWrap" id="videoWrap">
+      <video id="video" playsinline muted></video>
+      <img id="preview" alt="" hidden>
+      <canvas id="overlay"></canvas>
+      <div id="motionBanner" class="motionBanner" hidden></div>
+      <div id="idle" class="idle">Camera off</div>
+    </div>
+    <div class="traceCard">
+      <div class="traceHead"><span>Pulse (last <span id="dispS">10</span> s)</span><span class="muted" id="beatNote">dots mark detected beats (≈1 s delay)</span></div>
+      <canvas id="trace" height="140"></canvas>
+    </div>
+    <div class="boxTools">
+      <span class="muted">Draw on the video:</span>
+      <label><input type="radio" name="drawMode" value="face_box" checked> Face box</label>
+      <label class="labOnly"><input type="radio" name="drawMode" value="white_box"> Grey/white card</label>
+      <label class="labOnly"><input type="radio" name="drawMode" value="chart_corners"> Chart corners (4 clicks)</label>
+      <label class="labOnly">Card reflectance <input id="cardRefl" type="number" step="0.01" min="0.05" max="0.99" value="0.18" style="width:5em"></label>
+      <span id="whiteCheck" class="pill labOnly">card: –</span>
+    </div>
+  </section>
+
+  <!-- right: readings, quality, controls -->
+  <section class="col side">
+    <div class="card hrCard">
+      <div class="label">Heart rate</div>
+      <div class="hr"><span id="hr">–</span><span class="unit">bpm</span></div>
+      <div id="interval" class="muted">&nbsp;</div>
+      <div id="reason" class="reason">&nbsp;</div>
+      <div class="beatDotWrap"><span id="beatDot" class="beatDot"></span><span class="muted" id="methodTag">POS</span></div>
+    </div>
+
+    <div class="card">
+      <div class="label">Heart-rate variability <span class="muted">(last 60 s, still periods only)</span></div>
+      <div class="hrvRow">
+        <div><div class="big" id="rmssd">–</div><div class="muted">RMSSD ms</div></div>
+        <div><div class="big" id="sdnn">–</div><div class="muted">SDNN ms</div></div>
+        <div><div class="big" id="pnn50">–</div><div class="muted">pNN50 %</div></div>
+      </div>
+      <div id="hrvNote" class="muted">&nbsp;</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Signal quality</div>
+      <div class="pills">
+        <span class="pill" id="qMotion">motion –</span>
+        <span class="pill" id="qFace">face –</span>
+        <span class="pill" id="qLight">light –</span>
+        <span class="pill" id="qFps">fps –</span>
+      </div>
+      <ul id="warnings" class="warnings"></ul>
+    </div>
+
+    <!-- browser mode controls -->
+    <div class="card browserOnly">
+      <div class="label">Session</div>
+      <div class="row"><label>Participant id (optional: saves readings only)<input id="pid" placeholder="e.g. P01"></label></div>
+      <div class="row"><label>ITA° if known (optional)<input id="ita" type="number" step="0.1" placeholder="leave empty"></label></div>
+      <div class="row buttons"><button id="startBtn" class="primary">Start camera</button><button id="stopBtn">Stop</button></div>
+    </div>
+
+    <!-- lab recorder controls -->
+    <div class="card labOnly">
+      <div class="label">Lab recorder <span id="recTimer" class="muted"></span></div>
+      <div class="row two"><label>Participant id<input id="labPid" placeholder="P01"></label><label>Operator<input id="labOp" placeholder="initials"></label></div>
+      <div class="row buttons"><button id="recStart" class="primary">Start recording</button><button id="recStop" class="danger">Stop recording</button></div>
+      <div class="label small">Protocol blocks</div>
+      <div class="row two"><label>Light<select id="labLight"></select></label><label>Block<select id="labBlock"></select></label></div>
+      <div class="row buttons"><button id="blockStart">Block start</button><button id="blockEnd">Block end</button><button id="syncMark">Sync mark (flash)</button></div>
+      <div class="row"><input id="noteText" placeholder="note (e.g. participant coughed)"><button id="noteBtn">Add note</button></div>
+      <ol id="events" class="events"></ol>
+      <div id="labMsg" class="muted"></div>
+    </div>
+
+    <details class="card knobs">
+      <summary>Knobs (live)</summary>
+      <div class="row two">
+        <label>Method<select id="kMethod"><option>POS</option><option>CHROM</option><option>SAMA</option></select></label>
+        <label>HR window (s)<input id="kHrWin" type="number" min="8" max="30" step="1"></label>
+      </div>
+      <div class="row two">
+        <label>Motion warn<input id="kWarn" type="number" step="0.5" min="0.5"></label>
+        <label>Motion abstain<input id="kAbst" type="number" step="0.5" min="1"></label>
+      </div>
+      <div class="row two">
+        <label>Update every (s)<input id="kUpd" type="number" step="0.5" min="0.5" max="5"></label>
+        <label class="check"><input id="kGate" type="checkbox"> reliability gate</label>
+      </div>
+      <div class="row two">
+        <label class="check"><input id="kHrv" type="checkbox"> show HRV</label>
+        <label class="check"><input id="kBeats" type="checkbox"> show beat dots</label>
+      </div>
+      <div class="row"><label class="check"><input id="kStill" type="checkbox"> HRV only when still</label></div>
+      <div id="modelInfo" class="muted small"></div>
+    </details>
+  </section>
+</main>
+<footer class="foot muted">SAMA · research use only · only colour averages leave the browser in camera mode; the lab recorder keeps video on this PC.</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

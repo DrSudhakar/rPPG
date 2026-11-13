@@ -1,0 +1,26 @@
+flowchart LR
+  subgraph REC["Recording (python -m sama record)"]
+    CAM["Webcam (YUYV 30 fps)"] --> FF["ffmpeg"]
+    FF --> MKV["webcam.mkv (lossless FFV1)"]
+    FF --> LIVE["Live analysis: HR, HRV, beat dots, motion/light/face warnings"]
+    OX["Fingertip oximeter (PC software, same clock)"] --> REF["reference.csv"]
+    UI["Operator: boxes, block markers, notes"] --> META["session.json, events.csv"]
+  end
+  subgraph PREP["Per session (python -m sama prepare)"]
+    MKV --> SIG["Patch colours, face boxes, motion"]
+    MKV --> LAD["Ladder: H.264 2000/1000/500/250, VP8 500/250"] --> SIGL["Same boxes, every level"]
+    MKV --> ITA["Camera ITA° (grey card) + colour features"]
+    REF --> SYNC["Sync: wall clock + cross-correlation"]
+    SIG --> QC["QC: frames, face, light, reference coverage"]
+  end
+  subgraph TRAIN["Training (python -m sama train)"]
+    PUB["UBFC-rPPG, PURE (contact PPG)"] --> CV["Participant K-fold: network + sigma, out-of-fold scores"]
+    CV --> BUN["Bundle: model + cross-conformal gate + CV metrics"]
+  end
+  subgraph RES["Pilot results (python -m sama pilot)"]
+    SIG & SIGL & ITA & SYNC & QC & BUN --> WIN["30 s windows in blocks: POS, CHROM, ..., SAMA"]
+    MONK["Monk ratings (1 or 2 raters)"] --> WIN
+    WIN --> S5["Section 5: feasibility, skin tone, compression, agreement"]
+    WIN --> F6["Figure 6 (pilot_figure.py)"]
+    WIN --> EXTRA["SAMA gate per stratum, HRV, ITA vs Monk, power re-check"]
+  end

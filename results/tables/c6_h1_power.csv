@@ -1,0 +1,9 @@
+method,ita_error_sd,power,type_I
+pool resampling (conditional),0.0,0.27,0.048
+pool resampling (conditional),3.0,0.268,0.056
+pool resampling (conditional),6.0,0.247,0.061
+pool resampling (conditional),10.0,0.224,0.04
+parametric (fresh participants),0.0,0.35,
+"pool resampling, endpoint log MAE",0.0,0.775,
+"pool resampling, endpoint median AE",0.0,0.154,
+"pool resampling, endpoint rank (Spearman)",0.0,0.793,

@@ -1,0 +1,17 @@
+{
+ "provenance": "SYNTHETIC",
+ "n_pilot": 8,
+ "n_usable": 8,
+ "ita_abs_error_mean": 0.5191490398892632,
+ "ita_abs_error_max": 1.0624630315593357,
+ "sync_abs_error_ms": 24.558056501056175,
+ "sync_spread_ms": 11.456947673926855,
+ "n_public": 14,
+ "train_mae_sama": 0.6577594266499895,
+ "train_mae_pos": 2.884716818517955,
+ "pilot_mae_pos": 7.97198921868235,
+ "pilot_mae_sama": 3.7128888242815674,
+ "pilot_abstention": 0.29166666666666663,
+ "pilot_coverage": 0.9117647058823529,
+ "ita_model_mae": 0.156379121154251
+}

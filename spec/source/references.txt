@@ -1,0 +1,98 @@
+  References
+    1. ANSI/AAMI EC13. Cardiac monitors, heart rate meters, and alarms. AAMI.
+    2. Barrett T, et al. Skin deep: investigating subjectivity in skin tone annotations for
+       computer vision benchmark datasets. arXiv:2305.09072, 2023.
+    3. Bondarenko M, Menon C, Elgendi M. Demographic bias in public remote
+       photoplethysmography datasets. npj Digital Medicine 8, 2025.
+    4. Chardon A, Cretois I, Hourseau C. Skin colour typology and suntanning pathways.
+       International Journal of Cosmetic Science 13:191–208, 1991.
+    5. Chari P, Kabra K, et al. Diverse R-PPG: camera-based heart rate estimation for diverse
+       subject skin-tones and scenes. arXiv:2010.12769, 2020.
+    6. Chen W, McDuff D. DeepPhys: video-based physiological measurement using
+       convolutional attention networks. ECCV 2018.
+    7. Dasari A, Arul Prakash SK, Jeni LA, Tucker CS. Evaluation of biases in remote
+       photoplethysmography methods. npj Digital Medicine 4:91, 2021.
+    8. de Haan G, Jeanne V. Robust pulse rate from chrominance-based rPPG. IEEE
+       Transactions on Biomedical Engineering 60:2878–2886, 2013.
+    9. de Haan G, van Leest A. Improved motion robustness of remote-PPG by using the
+       blood volume pulse signature. Physiological Measurement 35:1913, 2014.
+ 10. Del Bino S, Bernerd F. Variations in skin colour and the biological consequences of
+     ultraviolet radiation exposure. British Journal of Dermatology 169 (Suppl 3):33–40, 2013.
+ 11. Finžgar M, Podržaj P. Feasibility of assessing ultra-short-term pulse rate variability from
+     video recordings. PeerJ 8:e8342, 2020.
+ 12. Harris P, et al. QUMPHY good practice guide for quantifying uncertainties for machine
+     learning models applied to photoplethysmography signals. arXiv:2607.19999, 2026.
+ 13. Indian Council of Medical Research. National ethical guidelines for biomedical and
+     health research involving human participants, 2017; Ethical guidelines for application of
+     artificial intelligence in biomedical research and healthcare, 2023.
+ 14. Koo TK, Li MY. A guideline of selecting and reporting intraclass correlation coefficients
+     for reliability research. Journal of Chiropractic Medicine 15:155–163, 2016.
+ 15. Liu X, Fromm J, Patel S, McDuff D. Multi-task temporal shift attention networks for on-
+     device contactless vitals measurement. NeurIPS 2020.
+ 16. Liu X, Hill B, Jiang Z, Patel S, McDuff D. EfficientPhys: enabling simple, fast and accurate
+     camera-based cardiac measurement. WACV 2023.
+ 17. Liu X, Narayanswamy G, Paruchuri A, et al. rPPG-Toolbox: deep remote PPG toolbox.
+     NeurIPS 2023 Datasets and Benchmarks.
+ 18. Ma R, Chen C. RF-BayesPhysNet: a Bayesian rPPG uncertainty estimation method for
+     complex scenarios. arXiv:2504.03915, 2025.
+ 19. McDuff DJ, Blackford EB, Estepp JR. The impact of video compression on remote
+     cardiac pulse measurement using imaging photoplethysmography. IEEE FG 2017.
+ 20. Meziati Sabour R, et al. UBFC-Phys: a multimodal database for psychophysiological
+     studies of social stress. IEEE Transactions on Affective Computing, 2023.
+ 21. Mishra S, Tiwary US. Heart rate measurement using video in different user states for
+     online HCI applications. Procedia Computer Science 39:20–27, 2014.
+ 22. Mishra S, Srinivasan N, Tiwary US. Cardiac–brain dynamics depend on context
+     familiarity and their interaction predicts experience of emotional arousal. Brain
+     Sciences 12:702, 2022.
+ 23. Mishra S, Srinivasan N, Asif M, Tiwary US. Affective Film Dataset from India (AFDI):
+     creation and validation with an Indian sample. Journal of Cultural Cognitive Science,
+     2023.
+ 24. Nowara EM, McDuff D, Veeraraghavan A. A meta-analysis of the impact of skin type
+     and gender on non-contact photoplethysmography measurements. CVPR Workshops
+     2020.
+ 25. Perez E, Strub F, de Vries H, Dumoulin V, Courville A. FiLM: visual reasoning with a
+     general conditioning layer. AAAI 2018.
+ 26. Poh MZ, McDuff DJ, Picard RW. Non-contact, automated cardiac pulse measurements
+     using video imaging and blind source separation. Optics Express 18:10762–10774, 2010.
+ 27. Rani A, Singh A, Mishra S. Validation of Neuphony 8-channel EEG flex cap: a
+     comparative study with BioSemi 64-channel EEG system. Frontiers in Neuroscience
+     19:1670860, 2025.
+ 28. Romano Y, Barber RF, Sabatti C, Candès EJ. With malice toward none: assessing
+     uncertainty via equalized coverage. Harvard Data Science Review 2(2), 2020.
+ 29. Sagawa S, Koh PW, Hashimoto TB, Liang P. Distributionally robust neural networks for
+     group shifts. ICLR 2020.
+ 30. Saikia T, Gupta AK, Gupta P, Liljeberg P. A skin-tone-aware dual-representation remote
+     photoplethysmography framework for contactless respiratory rate estimation.
+     arXiv:2606.21511, 2026.
+ 31. Estimating heart rate variability using facial video photoplethysmography: a pilot
+     validation study. Scientific Reports, 2026.
+ 32. Sjoding MW, Dickson RP, Iwashyna TJ, Gay SE, Valley TS. Racial bias in pulse oximetry
+     measurement. New England Journal of Medicine 383:2477–2478, 2020.
+ 33. Tang J, Chen K, Wang Y, Shi Y, Patel S, McDuff D, Liu X. MMPD: multi-domain mobile
+     video physiology dataset. IEEE EMBC 2023.
+ 34. Task Force of the European Society of Cardiology and the North American Society of
+     Pacing and Electrophysiology. Heart rate variability: standards of measurement,
+     physiological interpretation and clinical use. Circulation 93:1043–1065, 1996.
+ 35. Tian Y, Li S, Zhu Y, Elgendi M, Lam EY, et al. Adaptive physiology-informed correction for
+     reliable remote photoplethysmography heart-rate monitoring. npj Digital Medicine
+     9:233, 2026.
+ 36. TRACE-rPPG: tone-stratified robustness across compressed encodings. Open-source
+     repository, 2026 (simulation; not peer reviewed).
+ 37. Verkruysse W, Svaasand LO, Nelson JS. Remote plethysmographic imaging using
+     ambient light. Optics Express 16:21434–21445, 2008.
+ 38. Vovk V, Gammerman A, Shafer G. Algorithmic learning in a random world. Springer,
+     2005.
+ 39. Wang W, den Brinker AC, Stuijk S, de Haan G. Algorithmic principles of remote PPG.
+     IEEE Transactions on Biomedical Engineering 64:1479–1491, 2017.
+ 40. Yu Z, Li X, Zhao G. Remote photoplethysmograph signal measurement from facial
+     videos using spatio-temporal networks. BMVC 2019.
+ 41. Yu Z, Peng W, Li X, Hong X, Zhao G. Remote heart rate measurement from highly
+     compressed facial videos. ICCV 2019.
+ 42. Yu Z, et al. PhysFormer: facial video-based physiological measurement with temporal
+     difference transformer. CVPR 2022.
+ 43. News On AIR. eSanjeevani achieves milestone of 50 crore teleconsultations. 6 October
+     2026.
+ 44. Digital Personal Data Protection Act, 2023, and Digital Personal Data Protection Rules,
+     2025. Government of India.
+  Volume and page numbers of unlinked items are cited from standard references; check
+  them against the publishers' pages before submission.

@@ -1,0 +1,169 @@
+SAMA · Pilot and submission plan
+
+
+
+
+  SAMA: pilot and submission plan (not for
+  submission)
+
+  20-day plan to submission (29 October to 17 November 2026)
+  Run two tracks in parallel. Track A needs no ethics approval and guarantees a preliminary
+  figure. Track B is your own pilot and is stronger, but only if the ethics committee clears it in
+  time. Never put numbers in the proposal that you have not measured.
+
+
+     Days               Track A: public data (no      Track B: own pilot          Proposal and admin
+                        approval needed)
+
+     1–2 (29–           Request access to UBFC-       Submit a short pilot        Email ANRF to confirm
+     30 Oct)            rPPG, PURE and MMPD;          application to the          age cut-off, 24-month
+                        install rPPG-Toolbox          SVNIT ethics                duration, overhead rate
+                                                      committee (minimal          and the 2024 travel
+                                                      risk, 25 minutes, 8–12      grant; request
+                                                      adult volunteers) and       equipment quotations
+                                                      ask for expedited
+                                                      review; buy a Polar H10
+                                                      and a colour chart
+                                                      locally
+
+     3–6 (31            UBFC-rPPG is                  Build the rig: webcam       Draft the endorsement
+     Oct–3              uncompressed: make the        recording                   letter; check the phone
+     Nov)               codec ladder with             uncompressed                model's manual
+                        transcode_ladder.sh,          (640×480, 30 fps),          exposure in Open
+                        estimate ITA° per subject,    phone on a stand, Polar     Camera
+                        run POS, CHROM and            H10 logging RR
+                        pretrained TS-CAN             intervals, LED flash for
+                                                      sync; test it on yourself
+
+     7–12 (4–           If MMPD arrives: heart-rate   If approved: record 8–      Final edits to sections
+     9 Nov)             error by Fitzpatrick type     12 volunteers across        1–4
+                        and light                     the ITA° range, 4 per
+                                                      stratum if possible
+
+
+
+
+                                                                                                       Page 1 of 4
+SAMA · Pilot and submission plan
+
+
+
+
+     Days               Track A: public data (no     Track B: own pilot   Proposal and admin
+                        approval needed)
+
+     13–15              Assemble pilot_hr.csv from   Add Track B rows     Run pilot_figure.py; fill
+     (10–12             Track A                                           the brackets in section
+     Nov)                                                                 5; re-run power.py with
+                                                                          the pilot spread
+
+     16–18                                                                Paste quotations into
+     (13–15                                                               the budget; verify
+     Nov)                                                                 references; give the
+                                                                          draft and the stress-
+                                                                          test tab to one
+                                                                          colleague to attack
+
+     19–20                                                                Upload with a day to
+     (16–17                                                               spare
+     Nov)
+
+
+  If ethics approval does not arrive in time, build Figure 6 from Track A only, title section 5
+  "Preliminary analysis of public data", and state that the 10 protocol pilot sessions are
+  scheduled for months 2–3 (already in the plan). A public-data figure is weaker than your
+  own data but far stronger than no figure.
+
+  What the figure must show to persuade a reviewer: that your pipeline runs end to end
+  (feasibility), that error moves with ITA° even in a small sample (panel A), and that the
+  compression ladder works and changes error (panel B). It does not need significance.
+
+
+  Pilot protocol and how to make Figure 6
+  Mini-protocol (25 minutes per volunteer). Five minutes of set-up, then under light 1 (desk
+  LED, about 500 lux): rest 3 minutes, mock consultation 3 minutes, mental arithmetic 2
+  minutes. Switch to light 2 (room light, about 100 lux) and repeat. Keep a colour chart in
+  view at the start of each half. Flash an LED (or clap) at the start and end of each block for
+  synchronisation.
+
+  Equipment you need now: a USB webcam that can record uncompressed video, any
+  Android phone on a stand, a Polar H10 with a logging app that saves RR intervals (for
+  example Polar Sensor Logger), a 24-patch colour chart, a desk LED lamp and a lux-meter
+  app. A colorimeter is better for ITA°; if you have none yet, use ita_from_patch.py on
+  calibrated frames and call the values approximate.
+
+
+
+                                                                                                 Page 2 of 4
+SAMA · Pilot and submission plan
+
+
+
+
+  Analysis, step by step.
+
+   1. Cut every recording into 30-second windows using the flash marks.
+   2. Reference heart rate for each window: 60,000 divided by the mean RR interval (ms)
+      from the Polar H10.
+   3. Make the codec ladder from the uncompressed webcam video:
+      ./transcode_ladder.sh webcam.avi ladder_P01 .
+   4. Run POS, CHROM and pretrained TS-CAN from rPPG-Toolbox on the lossless video and
+      on each H.264 level, and save heart rate per window.
+   5. Get each volunteer's ITA° (colorimeter, or python ita_from_patch.py cheek.png --
+        white white_patch.png ).
+   6. Put all rows into one CSV (columns below) and run python pilot_figure.py
+        pilot_hr.csv --method POS .
+   7. Read off the numbers for the brackets in section 5. From the same CSV, compute the
+      between-person SD of MAE and the within-person SD of the 500 kbps penalty, put
+      them into power.py, and re-run it. If power drops below 0.8, say so in section 6 and use
+      the safeguard (up to 50 per stratum).
+
+     participant_id,ita_deg,method,bitrate_kbps,hr_ref_bpm,hr_cam_bpm
+     P01,34.2,POS,0,72.4,73.1
+     P01,34.2,POS,500,72.4,75.0
+
+
+  The two rows above only show the format; bitrate_kbps is 0 for lossless video. The
+  scripts (pilot_figure.py, transcode_ladder.sh, ita_from_patch.py, power.py) come with this
+  proposal as separate files. pilot_figure.py was tested on synthetic data and run with --
+  template it draws the placeholder now in Figure 6.
+
+
+
+  Submission checklist
+        Age on the call's cut-off date is within the PM-ECRG limit (your CV has no date of
+        birth)
+        ANRF confirms that 24 months is allowed; if 36 is required, keep the same budget and
+        use year 3 for dissemination only
+        ANRF overhead rate known, and the total with overheads is at most ₹20 lakh (₹19.85
+        lakh at 10%)
+        ANRF confirms that the 2024 travel grant is not a prior project grant
+
+
+
+
+                                                                                             Page 3 of 4
+SAMA · Pilot and submission plan
+
+
+
+
+        Ethics: SVNIT's committee exists and is registered, or a DHR-registered committee is
+        named; status line in section 9.2 filled in
+        Written quotations for every equipment line, and the budget table updated
+        Endorsement letter lists lab space, GPU cluster and any existing cameras or biosignal
+        kit
+        Figure 6 replaced and every [bracket] in section 5 filled; italic notes deleted
+        Phone model chosen with manual exposure confirmed in Open Camera
+        MMPD and other dataset licences allow the use described
+        Reference volumes and pages checked
+        Subject area: Engineering Sciences, Computer, Electrical, Electronics and
+        Communication Engineering
+        Only one PM-ECRG proposal submitted
+        A colleague has read the draft as a hostile reviewer, using the stress-test tab
+
+
+
+
+                                                                                          Page 4 of 4
+

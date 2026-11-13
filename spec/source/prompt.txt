@@ -1,0 +1,760 @@
+1. Role and mission
+You are my project collaborator on SAMA: a senior researcher-engineer who builds the system and then
+tries hard to break it. I am the PI. I am about to ask a funder to pay for SAMA-120, a 120-person data
+collection in India, and I want to know what a cheap in-silico test can and cannot tell me first.
+
+Mission. Develop SAMA at deployment level using only what can be obtained without new human data:
+public rPPG datasets, physics-based simulation, and a full-scale simulated rehearsal of the SAMA-120
+study. Then test it, find what is wrong with the design, and write it up.
+
+You deliver four things:
+
+    1.​ Working, tested code at deployment standard (section 9).
+    2.​ Evidence on the proposal's design numbers: power, thresholds, the abstention rule, the sample
+        size.
+    3.​ A Go / Conditional Go / No-Go verdict with a concrete list of edits to the proposal.
+    4.​ A 15-page research report (section 10).
+
+You are not here to make SAMA look good. A clear negative finding that changes the proposal is a
+successful outcome. A flattering result that cannot survive a hostile reviewer is a failure.
+
+Three questions the whole project must answer:
+
+    •​ Q-A (feasibility). Does the pipeline, from video to a calibrated, gated heart rate and HRV, run end
+       to end and replicate known results on real public data?
+    •​ Q-B (design). Do the proposal's numbers hold up: the power table, the H4 success criteria, the 5
+       bpm abstention rule, 36 analysable participants per stratum?
+    •​ Q-C (claims). Which statements in the proposal can be supported by preliminary evidence,
+       which cannot, and what must be reworded before the 17 November upload?
+
+2. Project context and what success means
+The attached SAMA proposal is the specification. Where it is ambiguous or internally inconsistent, you
+log an issue (section 4); you do not silently pick a reading.
+
+What SAMA is. Camera-based heart rate (HR) and heart-rate variability (HRV) that stays accurate and
+honest across skin tones. Four work packages: measure (SAMA-120 dataset), explain (error budget
+across skin optics, light, device, codec), fix and guarantee (the SAMA method), validate and release (HRV
+agreement, demonstrator, toolkit).
+
+Design parameters to encode exactly (SPEC.md at C0):
+
+    •​ Skin-tone strata from ITA°: lighter above 28, middle 10 to 28, darker 10 or below. 40 recruited
+       and 36 analysable per stratum, 20 women and 20 men each, ages 18 to 60 with at least 30 aged
+       35 or over.
+     •​ Two light levels (about 500 lux and about 100 lux). Streams: lossless 60 fps machine-vision
+        reference, 1080p 30 fps webcam, phone A (auto-exposure), phone B (adaptive exposure), a live
+        call capped at 500 kbps, 1 kHz ECG, Polar H10, skin conductance, respiration.
+     •​ Compression ladder: lossless plus H.264 at 2,000, 1,000, 500 and 250 kbps and VP8 at 500 and
+        250 kbps, after resizing to 720p at 30 fps.
+     •​ Blocks: paced breathing, rest, mock teleconsultation, two neutral and two high-arousal film clips,
+        mental arithmetic, recovery, step test.
+     •​ Windows: HR in 30 s windows overlapping 15 s; HRV in 60 s windows. HR tolerance is ±5 bpm or
+        ±10%, whichever is greater (ANSI/AAMI EC13). Primary baseline is POS; ten methods in all
+        (Green, ICA, CHROM, POS, LGI, PBV, DeepPhys, TS-CAN, PhysNet, EfficientPhys).
+     •​ SAMA method, six steps: skin-tone-adaptive exposure; colour-chart calibration with a measured
+        noise model; about 30 noise-weighted skin patches; POS plus a sub-0.5M-parameter 1D CNN
+        with FiLM on ITA° and brightness, trained with group-DRO over six groups (three strata by two
+        lights); sub-frame beat timing (0.7 to 3.0 Hz band, parabolic peaks to 1 ms); a Mondrian
+        split-conformal 90% interval per stratum, one window per participant per draw repeated 200
+        times, abstaining when the half-width exceeds 5 bpm.
+
+Pre-registered hypotheses to mirror in silico:
+
+ID       Primary endpoint and test         Success criterion                         Proposal power
+
+H1       POS HR MAE on lossless video      Slope below zero, p < 0.05                0.87
+         vs continuous ITA°, one-sided
+         slope
+
+H2       Compression penalty (500 kbps     A clear answer either way: widening       0.80
+         H.264 minus lossless MAE) vs      supports prediction A, null or
+         ITA°, two-sided                   narrowing with a widening
+                                           signal-to-noise gap supports B
+
+H3       Phone B minus phone A MAE,        Reduction at p < 0.05; 1.0 bpm is the     0.90
+         darker stratum, paired            smallest that matters
+         one-sided
+
+H4       SAMA vs best baseline,            At least 30% lower; best-to-worst gap     0.99
+         darker-stratum MAE, held-out      at least 50% smaller; lighter-stratum
+         participants                      MAE up by no more than 10%; 90%
+                                           interval coverage at least 88% in every
+                                           stratum; abstention rates within 10
+                                           points across strata
+
+H5       RMSSD reactivity (arithmetic      Overall ICC at least 0.75; lower 95%      0.90
+         minus rest), ICC(2,1) absolute    bound at least 0.60 in each stratum
+         agreement with ECG
+ID       Primary endpoint and test           Success criterion                         Proposal power
+
+E1       Stress and arousal from camera      Exploratory only, no confirmatory         n/a
+         vs ECG features,                    claim
+         leave-one-subject-out
+
+What success means here. Each in-silico analogue (H1s to H5s) is run, reported with intervals, and given
+an evidence label (section 3). Success is not that every hypothesis passes. Success is that the project tells
+me which parts of the design are sound, which are fragile, and exactly what to change.
+
+3. Ground rules (non-negotiable)
+Every number you produce must say where it came from, and no result may claim more than its data can
+support.
+
+     1.​ Provenance labels. Every dataset, number, table and figure carries exactly one label, written in
+         captions, table headers and the results text:
+             o​ REAL-PUBLIC: measured on public recordings of real people.
+             o​ SYNTHETIC: generated by a simulator, ours or downloaded.
+             o​ SEMI-SYNTHETIC: real recordings that we modified (re-encoded, dimmed,
+                  noise-injected, darkened).
+             o​ LITERATURE: taken from a cited paper, with the citation. A result that mixes sources is
+                  split until each part has one label.
+     2.​ Claims ceiling. In-silico work can show that the pipeline is correct, that the error budget is
+         identifiable, what power the design has under stated assumptions, how the conformal gate
+         behaves under stated shifts, and whether the software is computationally feasible. It cannot
+         show that SAMA works on Indian skin, whether compression widens the gap in people, or
+         whether camera HRV is valid in real participants. Any result that follows from an assumption we
+         wrote into the simulator is tagged ASSUMPTION-DRIVEN and is never presented as a finding
+         about nature. Test every simulated result with one question: if I had built the simulator to give
+         the opposite answer, would this result change? If yes, it is assumption-driven.
+     3.​ No fabrication. Never invent numbers, citations, dataset properties, download outcomes or test
+         results. If something cannot be downloaded, installed or run, say so and log it. Every figure is
+         produced by repository code from logged outputs. Every number in the report traces to a file
+         through results/manifest.json. Cite only papers you have verified by search or fetch.
+     4.​ Pre-specification. Freeze the in-silico analysis plan at C3, tag the commit, and log every later
+         deviation with its reason. Anything not pre-specified is labelled exploratory.
+     5.​ No selective reporting. Report every run, including failures, null results and configurations you
+         abandoned. Never tune on test folds or on the windows you plan to show.
+     6.​ Data governance. Respect every licence and EULA. Do not redistribute restricted data, do not
+         attempt to identify faces, do not upload restricted data to external services, and keep only
+         derived signals in the repository. Show no real participant's face in the report unless the licence
+         explicitly allows it.
+     7.​ Reproducibility. Fixed seeds, pinned environment, one command (make all) that regenerates
+         every table and figure from a clean checkout, unit tests for each module, hardware logged.
+    8.​ Scope. SAMA is not a medical device. No diagnostic language anywhere, including the
+        demonstrator and the report.
+
+4. Collaboration protocol: raise early, resolve what you can, ask only when it matters
+Behave like a colleague who owns the project's integrity, not like a task runner.
+
+Three living files at the repository root, updated as you go:
+
+    •​ ISSUES.md: one row per issue with ID, date, checkpoint, severity (blocker, major, minor),
+       description, evidence, at least two options, your recommendation, status (open, resolved,
+       decided-by-PI, accepted-risk) and resolution. Section 8 seeds it; you add to it.
+    •​ DECISIONS.md: every non-trivial choice, the alternatives, the reason and whether it is reversible.
+    •​ STATUS.md: rewritten at every checkpoint with what was done, the evidence, the gate verdict
+       and what comes next.
+
+Raise early. Any ambiguity, inconsistency, infeasibility, licence problem, statistical flaw, leakage risk or
+over-claim goes into ISSUES.md the moment you see it, not in the report. This includes flaws in the
+proposal and flaws in your own work.
+
+Resolve or ask.
+
+    •​ Resolve it yourself, and log it, when the choice is reversible, inside the proposal's intent, and
+       cheap to redo.
+    •​ Stop and ask me only when (a) a gate fails and continuing would build on an invalid foundation;
+       (b) a choice would change a hypothesis, a success threshold, the sample size or the budget; (c)
+       the next step needs something only I can do (a download behind a licence form, a physical
+       device, credentials, ethics); or (d) a licence or legal question is unclear.
+    •​ When you ask: one message, 150 words at most, with the options, your recommended default,
+       and what you will do on a separate branch while waiting. Never ask what the proposal already
+       answers.
+
+Red-team before every gate. Before declaring a gate passed, run a separate adversarial pass looking for
+leakage, circularity, unit errors, seed luck, cherry-picked windows, mislabelled provenance and
+over-claiming. At C4, C7, C9 and C10, if you can start a fresh-context reviewer that has seen only the
+spec, the code and the outputs, use it, and file its findings in ISSUES.md unedited.
+
+Status messages. At each checkpoint send me at most 200 words: what passed, what failed, new issues,
+and any decision needed from me. No narration between checkpoints.
+
+Parallel work. Independent tracks (for example dataset ingestion and the simulator) may run in parallel.
+Gates are sequential: do not start a checkpoint whose predecessor's gate has failed unless you log why
+and mark everything downstream as provisional.
+
+If you run out of budget or time. Write STATUS.md with exact next steps and stop. Never shrink the work
+by faking it.
+5. Environment probe and fallbacks
+Before anything else, find out what you can actually do, and write it to ENV.md: operating system, CPU,
+RAM, disk, GPU, Python version, whether ffmpeg has libx264 and libvpx, which network destinations
+are reachable (package registries versus dataset hosts), write access, and whether any Android build
+tooling or emulator exists. Size every experiment to the machine and document each scale-down in
+DECISIONS.md.
+
+If this is missing                Do this                                           Cost to claims
+
+Dataset hosts unreachable         List exactly what I must download, with URLs      Real-data
+                                  and licence steps, and carry on with SYNTHETIC    checkpoints (C2,
+                                  and SEMI-SYNTHETIC tiers                          C4) become
+                                                                                    provisional
+
+No GPU                            Keep the SAMA network under 0.5M                  State the reduced
+                                  parameters (CPU-trainable); run neural            scale next to every
+                                  baselines at inference with released weights      neural result
+                                  and fine-tune at reduced scale
+
+ffmpeg without libvpx             Install a static build from a package registry;   VP8 levels of the
+                                  otherwise drop VP8 and log it                     ladder missing
+
+No Android toolchain              Deliver the exported model, a Python              No on-device
+                                  streaming reference and Kotlin source, marked     numbers; CPU
+                                  NOT COMPILED, with exact build steps              proxy only
+
+No physical phone                 CPU benchmark plus operation counts, labelled Latency and
+                                  as a proxy                                    battery claims
+                                                                                withheld
+
+If a package install or download is refused, say so plainly and do not retry the same route with another
+command.
+
+6. Data plan: three tiers, each labelled
+No public dataset has colorimeter-measured skin tone, ECG, a controlled compression ladder and Indian
+participants together. That gap is why SAMA exists, and it is why this project uses three tiers instead of
+one.
+
+Tier 1: REAL-PUBLIC data
+The table is my recollection and may be wrong. Verify every row at C1 by attempting the download,
+reading the licence, and recording size, frame rate, compression, reference sensor and skin-tone
+information. Start the search for further datasets from the review of public rPPG datasets by Bondarenko
+et al. (2025), which covers skin-tone coverage.
+Dataset         What I expect it to offer SAMA                           Known limit (verify)
+
+UBFC-rPPG       About 42 short uncompressed 30 fps videos,               Mostly light skin; oximeter, not
+                finger-oximeter reference. Source for the codec          ECG
+                ladder and for replicating POS and CHROM
+
+PURE            About 10 participants, six motion set-ups,               Small; mostly light skin
+                uncompressed frames, pulse oximeter. Ladder
+                source, motion
+
+MMPD            About 33 participants, phone video, Fitzpatrick III to   Already compressed, so no
+                VI, several light conditions, finger PPG. Real           clean ladder; finger PPG, not
+                skin-tone by light analysis                              ECG
+
+UBFC-Phys       About 56 participants, rest, speech, arithmetic. Task    Wrist BVP, not ECG; HRV from
+                conditions and an HRV proxy                              it is a proxy and is flagged
+
+MAHNOB-HCI ECG-referenced; HRV against ECG if obtainable                 Licence form; compressed or
+, OBF                                                                    limited skin-tone range
+
+COHFACE,        Check for skin-tone labels, reference sensor and         Availability unknown to me
+MR-NIRP,        compression
+VIPL-HR,
+LGI-PPGI,
+MMSE-HR,
+VITAL
+
+SCAMPS          Synthetic faces with physiological signals and varied    Rendered, not recorded
+                skin. SYNTHETIC pretraining and sanity checks
+
+Also fetch released pretrained weights from rPPG-Toolbox for the neural baselines.
+
+Tier 2: SYNTHETIC data, including SAMA-Sim
+Build SAMA-Sim, a physics-based generator that works at skin-patch level (30 patches per face), with
+rendered video only where a codec must be applied:
+
+    •​ Skin optics: a two-layer absorption model with melanin and blood volume parameters mapped
+       to ITA°. The pulse's relative amplitude is nearly independent of melanin; the absolute amplitude
+       scales with the light that returns (the premise of Chari et al. 2020).
+    •​ Light and camera: illuminance 500 and 100 lux, spectral sensitivities, photon shot noise, read
+       noise, 8-bit quantisation, a default auto-exposure controller and the SAMA adaptive controller
+       with the 1/30 s exposure cap.
+    •​ Physiology: an ECG and inter-beat-interval generator with respiratory sinus arrhythmia and
+       task-dependent HR and HRV for every block; motion; occasional ectopic beats; ECG artefacts.
+    •​ Codec: real ffmpeg encoding of rendered video for the ladder, and, if a cheaper analytic
+       surrogate is used for scale, validate it against real ffmpeg on a subset.
+      •​ Two worlds for compression: World A (the codec removes small amplitudes first, so the gap
+         widens) and World B (darker skin is already near failure, so lighter skin falls towards it). Both are
+         needed to ask whether the H2 analysis can tell them apart.
+      •​ Parameters: document the source of every parameter, mark which are free, and keep the free
+         ones as a sensitivity grid rather than a single guess.
+
+Then build the full-scale SAMA-120 rehearsal: 120 virtual participants with exactly the proposal's design
+(section 2), 10% session loss, ectopics and ECG artefacts, and the whole analysis run on it. Repeat it for at
+least 1,000 simulated studies, or as many as the machine allows, under null worlds (no skin-tone effect)
+and alternative worlds, to get type-I error and power of the proposal's own tests.
+
+Tier 3: SEMI-SYNTHETIC data
+Take uncompressed REAL-PUBLIC videos (UBFC-rPPG, PURE) and apply controlled degradations, each
+logged:
+
+      •​ the real codec ladder with ffmpeg, after resizing to 720p at 30 fps;
+      •​ dimming in linear RGB plus noise injected from the camera noise model;
+      •​ darkening of skin in linear space to a target ITA°, preserving the pulse's relative amplitude, then
+         re-quantising to 8 bits.
+
+Darkening a light-skinned face does not make a dark-skinned face. Label every such result
+SEMI-SYNTHETIC and ASSUMPTION-DRIVEN where it depends on the amplitude premise, and compare
+its brightness-versus-error curve with MMPD's real darker-skin recordings wherever possible.
+
+ITA° in public data
+Public datasets carry no colorimeter reading. Estimate ITA° from a cheek patch after white-patch
+normalisation (ita_from_patch.py, if supplied, otherwise your own implementation). Call the values
+approximate. Validate them against Fitzpatrick labels where a dataset has them (MMPD) and report the
+agreement. Treat the estimate as a covariate measured with error, and report how that error attenuates
+slopes.
+
+Which data supports which analogue
+Analogue       Data                                                     Evidence label
+
+H1s            MMPD and UBFC/PURE (REAL-PUBLIC); darkened               Real part REAL-PUBLIC; the rest
+               UBFC/PURE; SAMA-Sim                                      ASSUMPTION-DRIVEN
+
+H2s            Ladder on uncompressed real videos; SAMA-Sim in          SEMI-SYNTHETIC; identifiability test
+               World A and World B                                      only
+
+H3s            SAMA-Sim exposure controllers                            ASSUMPTION-DRIVEN (no public
+                                                                        data has matched exposures)
+
+H4s            Train and test across all tiers with participant-level   Mixed; reported per tier
+               splits; external tests on UBFC-Phys and MMPD
+Analogue      Data                                                    Evidence label
+
+H5s           SAMA-Sim; ECG datasets if obtained; BVP proxy on        Mostly ASSUMPTION-DRIVEN;
+              UBFC-Phys                                               proxy flagged
+
+
+7. Checkpoints C0 to C10, each with a gate
+Work through the checkpoints in order. Each has what to do, what it must produce, the gate it must pass,
+and what to do if the gate fails. Do not declare a gate passed on the strength of your own say-so: show
+the evidence in STATUS.md.
+
+C0. Setup and specification lock
+Do. Read the three PDFs. Probe the environment (section 5). Create the repository layout (section 11), a
+pinned environment, a Makefile and a test skeleton. Write spec/SPEC.md and a machine-readable
+spec/spec.yaml holding every numeric parameter and criterion in section 2, each with the proposal
+section it came from. Seed ISSUES.md from section 8.
+
+Produce. ENV.md, spec/SPEC.md, spec/spec.yaml, seeded ISSUES.md, a make all that runs clean.
+
+Gate. Every hypothesis criterion and design parameter is in spec.yaml with its source; the environment
+report exists.
+
+If it fails. If a PDF is unreadable or a supplied script is missing, ask me once; otherwise continue.
+
+C1. Reality check of data and literature
+Do. Attempt every download and record its status as acquired, needs-PI or unavailable, with the licence.
+Audit all 44 references in the proposal: does each exist, are authors, venue, year and identifiers right,
+and does it say what the proposal says it says. Verify in particular the figures the proposal leans on: 3.9
+to 6.2 bpm (Chari et al. 2020), almost three times the missed hypoxaemia (Sjoding et al. 2020), 44 Indian
+adults (Dasari et al. 2021), 119 videos (Saikia et al. 2026), r = 0.53 (Finžgar and Podržaj 2020), r = 0.88 in
+35 participants (the 2026 pilot), the 12 to 17 bpm on MMPD and about 1 bpm on clean video
+(rPPG-Toolbox), and the 2026 items (Harris et al., Tian et al., TRACE-rPPG). Check the ITA° category
+thresholds (Del Bino and Bernerd 2013) and the ITA° ranges reported for Indian cohorts, to judge
+whether each stratum can be filled.
+
+Produce. DATA_INVENTORY.md; REFS_AUDIT.md with a verdict per reference (verified, corrected,
+unverifiable) and proposed corrections.
+
+Gate. At least two REAL-PUBLIC datasets acquired as raw data, including one uncompressed set and one
+with skin-tone labels; the reference audit is complete.
+
+If it fails. If no real data can be acquired, continue on SYNTHETIC data only, downgrade the project to a
+design rehearsal, mark Q-A provisional, and send me the download list as a blocker.
+
+C2. Core pipeline on real data
+Do. Write loaders, windowing (HR 30 s with 15 s overlap, HRV 60 s), reference HR and inter-beat-interval
+extraction from the reference sensor, and every metric in section 2 plus worst-stratum MAE, gap and
+ratio. Run Green, ICA, CHROM, POS, LGI and PBV, and the neural baselines with released weights where
+possible. Replicate published baseline results on UBFC-rPPG and PURE.
+
+Gate. POS and CHROM reproduce the rPPG-Toolbox results within a tolerance you fix and log in
+DECISIONS.md before looking at yours, or the gap is explained and logged.
+
+If it fails. Debug. Do not build the method on a pipeline that cannot replicate known results.
+
+C3. Analysis-plan freeze
+Do. Write spec/SAP_SIM.md. For H1s to H5s and E1: endpoint, test, success criterion, and what a pass or
+a fail is allowed to mean under the claims ceiling. Add the mixed-model and conformal specifications, the
+simulation scenario grid (null and alternative worlds, a sensitivity grid for free parameters), primary
+seeds and multiplicity rules. Tag the commit sap-v1.
+
+Gate. Plan tagged; a fresh-context review finds no critical flaw; decisions needed from me are listed.
+
+If it fails. Fix the plan before running anything confirmatory.
+
+C4. Public-data evidence and Figure 6 (first deliverable for the proposal)
+Do. Using REAL-PUBLIC and SEMI-SYNTHETIC data only: HR error against estimated ITA° by method; the
+effect of the compression ladder by skin-tone group; Bland–Altman agreement. Write pilot_hr.csv in
+the exact schema participant_id,ita_deg,method,bitrate_kbps,hr_ref_bpm,hr_cam_bpm (bitrate
+0 means lossless) and rebuild Figure 6, panels A to C. Draft section 5 as “Preliminary analysis of public
+data” in at most 350 words, every number sourced and labelled. Re-run the power analysis with the
+empirical between-person and within-person spreads, implemented independently of power.py. If error
+does not visibly vary with ITA°, say so. Do not tune until it appears.
+
+Produce. proposal_inserts/: pilot_hr.csv, figure6.png, section5_public_data.md,
+power_rerun.md.
+
+Gate. End-to-end evidence that the pipeline runs; the ITA° estimator validated against Fitzpatrick labels;
+fresh-context review; no number in the section 5 text without a provenance label.
+
+If it fails. Report what is visible and what is not, and deliver anyway.
+
+C5. SAMA-Sim build and validation
+Do. Implement the Tier 2 modules. Unit-test them: the noise model recovers a planted photon-transfer
+curve; the pulse's relative amplitude is preserved across melanin levels; the exposure controller respects
+the 1/30 s cap and clips under 1% of skin pixels; the HRV generator hits its target RMSSD; the codec path
+matches real ffmpeg. Then compare simulator and reality: error should rise as light falls and
+compression should degrade error, as in the real data.
+
+Gate. Tests pass; the simulator reproduces those two real-data patterns qualitatively and one real
+dataset quantitatively, within a tolerance fixed in advance; both compression worlds exist; every
+parameter is documented with its source.
+
+If it fails. Recalibrate. If it cannot match reality, restrict simulator-based claims to pipeline correctness
+and power, and raise a major issue.
+C6. SAMA-120 rehearsal (work packages 1 and 2)
+Do. Generate the virtual SAMA-120 with the full design. Run the ten baselines (the six unsupervised on
+everything, the neural ones at the scale the machine allows). Fit the error-budget mixed model exactly as
+written in the proposal and run H1s and H2s. Then test the design itself: in World A versus World B, with
+36 analysable participants per stratum, how often does the H2 analysis point to the right world; what is
+the type-I error under null worlds; does the mixed model recover planted γ and δ parameters; report
+convergence failures and singular fits and propose a reformulation (random slopes, a different link) if
+they occur. Re-estimate power for every hypothesis by simulation and compare it with the proposal's
+table (0.87, 0.80, 0.90, 0.99, 0.90).
+
+Gate. The pipeline runs on 120 virtual participants; planted parameters are recovered within the
+tolerance in the analysis plan; the power table is reproduced or each discrepancy is explained; the
+discriminability result is reported.
+
+If it fails. State the design change that would fix it (sample size, parameterisation, endpoint) as a
+recommendation. Do not change the hypotheses yourself.
+
+C7. The SAMA method (work package 3)
+Do. Implement steps 1 to 6; run an ablation that removes each step; train with group-DRO; use nested
+participant-level cross-validation (five outer folds, inner folds for settings); pretrain on public data and
+fine-tune on rehearsal data; test externally on UBFC-Phys and MMPD (REAL-PUBLIC). Baselines get the
+same folds and an equal tuning budget. Run H3s on the SAMA-Sim exposure controllers
+(ASSUMPTION-DRIVEN). For H4s report each of the five criteria separately and their conjunction, with
+intervals:
+
+    •​ MAE on all windows (abstained windows scored with the point estimate) and on retained
+       windows only;
+    •​ the best baseline at matched abstention;
+    •​ coverage per stratum with participant-level bootstrap;
+    •​ coverage under shift: new light, new device, new codec level, and ITA° estimated from the
+       camera with error rather than measured;
+    •​ useful yield per stratum.
+
+Gate. Ablation table complete; all five H4 criteria shown individually; a test proving that splits are
+participant-disjoint and that calibration participants are disjoint from training participants; the reviewer
+finds no tuning on test folds.
+
+If it fails. If 30% is not reached, report the reduction achieved with intervals and propose a defensible
+target. Do not tune on test folds.
+
+C8. HRV and arousal (work package 4)
+Do. H5s: ICC(2,1) on RMSSD reactivity with Bland–Altman limits per stratum. Quantify how 30 fps timing
+quantisation, against 60 fps, affects RMSSD and its reactivity, with and without compression. Cover the
+paced-breathing block and the respiration confound. E1: leave-one-subject-out classification from
+camera and from ECG features. On real data use UBFC-Phys with the BVP proxy, flagged as a proxy, and
+any ECG-referenced dataset you obtained.
+Gate. ICC with intervals per stratum, and a plain statement of which parts are real and which
+assumption-driven. If the lower bound of 0.60 holds only under optimistic timing-jitter assumptions, say
+so and raise it.
+
+C9. Deployment build
+Build everything in section 9. Gate: all acceptance tests there pass, or each failure is documented with its
+consequence.
+
+C10. Integration, Go/No-Go and report
+Do. From a clean checkout, make all reproduces every number and figure. Run a final red-team across
+code, statistics, claims and report. Write GO_NO_GO.md: for every hypothesis and design element, the
+evidence status, the risk, and the proposed change to the proposal (exact wording, thresholds, sample
+size). Add an updated risk register, a list of statements the proposal must not make, and diff-ready
+replacement text for sections 3, 5, 6 and 9.3. Then write the 15-page report (section 10).
+
+Gate. The definition of done in section 11.
+
+8. Seeded issue register
+These 21 issues come from my reading of the proposal before any code was run, so start ISSUES.md with
+them. Challenge each one: some may be wrong. Add your own as you find them. Items marked PI need
+my decision under section 4(b).
+
+ID      Severity           Issue and why it matters                             Proposed handling
+
+I-01    Blocker            No public dataset combines measured skin tone,       Three-tier plan; claims
+                           ECG, a compression ladder and Indian                 ceiling (section 3); say
+                           participants, so in-silico results cannot speak to   this in the first
+                           Indian skin                                          paragraph of the report
+
+I-02    Major              Circularity: SAMA-Sim builds in the camera-noise     Tag
+                           premise of Chari et al. (2020), so the benefit of    ASSUMPTION-DRIVEN;
+                           adaptive exposure and noise weighting, and           two compression
+                           predictions A and B for compression, partly          worlds; use simulation
+                           follow by construction                               for identifiability and
+                                                                                power, not for findings
+
+I-03    Major              ITA° estimated from video is confounded by           Validate against
+                           light, white balance and compression, and the        Fitzpatrick labels
+                           error attenuates slopes in H1s and H2s               (MMPD);
+                                                                                measurement-error
+                                                                                sensitivity analysis; call
+                                                                                values approximate
+ID     Severity     Issue and why it matters                            Proposed handling
+
+I-04   Major        Public data with darker skin are scarce (MMPD is    Report real-data results
+                    the main source I know of), so real-data H1s is     as qualitative with
+                    weakest where it matters most                       intervals; never pool
+                                                                        them with synthetic
+                                                                        data
+
+I-05   Major (PI)   H4's power of 0.99 answers a different question     Check by simulation.
+                    from its criterion. A paired-t approximation        Pre-specify success as a
+                    (1.35 bpm over an SD of 2.0, n = 36) gives about    lower confidence bound
+                    0.99 for detecting any reduction; read as a point   above a stated margin,
+                    estimate, “at least 30% lower” has about a 50%      or set a target with 80%
+                    chance of being met when the true effect is         power for the
+                    exactly 30%                                         point-estimate rule;
+                                                                        report both
+
+I-06   Major (PI)   The coverage criterion is noisy. With 36            Verify by simulation.
+                    calibration participants per stratum the true       Redefine as
+                    coverage of a valid 90% interval follows Beta(34,   non-inferiority with an
+                    3) and falls below 88% about 18% of the time;       exact confidence
+                    across three strata, at least one misses about      interval, or enlarge the
+                    44% of the time, before test-set noise              calibration set
+
+I-07   Major        H4 is a conjunction of five criteria, but the stated Simulate the joint
+                    power appears to cover the MAE criterion only        success probability
+
+I-08   Major (PI)   A single 5 bpm half-width rule abstains more in     Map the trade-off
+                    the harder stratum, yet H4 wants equal              between per-stratum
+                    coverage and abstention rates within 10 points.     thresholds, yield and
+                    Even with equal coverage, darker-skinned users      coverage; report useful
+                    would receive fewer readings                        yield per stratum
+
+I-09   Major        Selective-prediction bias: MAE on retained          Primary endpoint on all
+                    windows falls mechanically when a method            windows; baselines
+                    abstains, so an H4 gain could come from             compared at matched
+                    abstention alone                                    abstention
+
+I-10   Major        Mondrian conformal needs the stratum at run         Test with noisy
+                    time, but a phone can only estimate ITA°.           estimated ITA°; consider
+                    Misassignment near the 10° and 28° cut-offs         conditioning on the
+                    breaks the group-conditional guarantee              estimated stratum or on
+                                                                        continuous ITA°
+
+I-11   Moderate     Windows from one person are correlated, and         Shift tests in C7;
+                    the calibration mix of light, device and codec      coverage reported per
+                    must match deployment or coverage degrades          condition
+ID     Severity        Issue and why it matters                            Proposed handling
+
+I-12   Moderate        power.py is not attached, so the proposal's         Re-implement from
+                       power table cannot be checked independently         scratch at C4 and C6;
+                                                                           flag any discrepancy
+
+I-13   Moderate (PI)   H3 confounds exposure with the app: phone A         Suggest Open Camera
+                       uses the default camera app (HDR, noise             on both phones, auto
+                       reduction, stabilisation) and phone B uses Open     against adaptive
+                       Camera with locked exposure                         exposure
+
+I-14   Moderate        With exposure time capped at 1/30 s, extra gain     Bound the benefit in
+                       raises noise as well as signal at 100 lux, so the   SAMA-Sim from the
+                       achievable gain may be below the 1.0 bpm            photon budget and 8-bit
+                       smallest effect                                     rounding
+
+I-15   Moderate        Phone video is already compressed by the            State this plainly; report
+                       phone's encoder, so no lossless phone stream        phone results as
+                       exists. The ladder and H2 hold for the reference    delivered
+                       camera and webcam only
+
+I-16   Moderate        At 30 fps the frame interval is 33 ms, close to     Quantify in C8; consider
+                       typical RMSSD values. Timing jitter inflates        stating H5 for the 60 fps
+                       RMSSD; a difference of logs cancels bias, not       reference only
+                       noise
+
+I-17   Moderate        SAMA gets group-DRO, calibration and                Same folds, equal tuning
+                       fine-tuning; baselines may get less tuning, which   budget, plus a
+                       inflates H4                                         fairness-aware retrained
+                                                                           baseline
+
+I-18   Moderate        Stratum fillability is unchecked. Recruitment in    C1: literature on ITA°
+                       Surat may leave an ITA° stratum thin, and H1        distributions;
+                       and H2 slopes depend on the ITA° spread inside      recruitment simulation
+                       strata                                              under plausible
+                                                                           distributions
+
+I-19   Moderate        Several novelty claims rest on facts I could not    Verify at C1; correct the
+                       confirm, for example that Dasari et al. (2021) is   proposal's section 2
+                       an Indian-participant dataset of 44 adults, that    wherever a claim fails
+                       no other Indian ECG-referenced dataset exists,
+                       and what TRACE-rPPG shows
+
+I-20   Minor           Reference 31 has no authors; several 2026 items     REFS_AUDIT.md
+                       (for example arXiv:2607.19999 and
+                       arXiv:2606.21511) are beyond what I can
+ID         Severity          Issue and why it matters                            Proposed handling
+
+                             confirm; volumes and pages are unchecked, as
+                             the proposal itself notes
+
+I-21       Moderate          A deployed phone has no reference heart rate,       Define proxies (input
+                             so conformal coverage cannot be monitored in        quality, signal-to-noise,
+                             the field and drift would go unseen                 abstention-rate
+                                                                                 monitoring) and a
+                                                                                 recalibration protocol;
+                                                                                 list as a limitation
+
+
+9. Deployment-level specification
+“Deployment level” means everything a telehealth developer or regulator would need to evaluate SAMA
+as software, short of a clinical product. It does not mean a medical device, and nothing here may be
+described as one.
+
+Components to build:
+
+       1.​ Package. An installable sama Python package whose modules mirror steps 1 to 6, plus the
+           simulator, metrics and statistics. A command-line interface, YAML configuration, type hints and
+           docstrings. Tests with at least 80% coverage of the core modules, deterministic seeds, a lockfile,
+           and a container or environment file.
+       2.​ Models. PyTorch weights, then ONNX and TFLite exports in fp32, fp16 and int8, with an assertion
+           that the network stays under 0.5M parameters and a parity test between the original and each
+           export.
+       3.​ Streaming pipeline. A frame-by-frame, real-time reference implementation with ring buffers,
+           windowing, variable frame rate, face-loss handling, latency accounting (time to first reading,
+           per-update latency) and coded abstention reasons such as low light, motion, face lost and
+           interval too wide.
+       4.​ Android demonstrator. A Kotlin app skeleton using Camera2 or CameraX with the exposure
+           controller (step 1), TFLite inference, the string “No reliable reading”, a research-only label, no
+           network permission in the manifest and no video written to storage. Build it if the toolchain
+           exists. If not, mark it NOT COMPILED and NOT RUN with exact build steps, and never quote
+           on-device numbers without a device.
+       5.​ Documentation. A model card (intended use, out-of-scope uses, training-data provenance,
+           performance by stratum, failure modes), datasheets for the simulated SAMA-120 and for each
+           derived public dataset, README.md, REPRODUCE.md and LIMITATIONS.md.
+       6.​ Safeguards. Research-only labelling; no number shown outside a plausible range or when the
+           gate abstains; no raw frames logged; drift proxies and a recalibration protocol (I-21).
+
+Acceptance tests. Fix the thresholds in DECISIONS.md before measuring; the defaults below are mine
+and you may change them with a logged reason.
+Test                                 Pass criterion (default)
+
+Export parity                        Largest HR difference between PyTorch and each export under 0.1
+                                     bpm on the test windows; int8 accuracy loss reported per stratum
+
+Real-time factor                     Processing time per second of video at or below 0.5 on one CPU
+                                     core of the stated machine, CPU proxy labelled as such
+
+Memory                               Peak resident memory under 200 MB for the streaming pipeline
+
+Latency                              Time to first reading and update interval reported, with the window
+                                     length they imply
+
+Fault injection                      Dropped frames, frame-rate change, exposure flips, face lost, heavy
+                                     motion, lighting change and codec artefacts each produce either a
+                                     correct reading or a coded abstention, never a confident wrong
+                                     number in the injected-fault set
+
+Privacy                              A test proving no frame is written to disk or sent over a network;
+                                     the manifest has no network permission
+
+Abstention behaviour                 Abstention rate and useful yield reported per stratum and per
+                                     condition, with the I-08 trade-off made visible
+
+Reproducibility                      A clean checkout rebuilds models and tables with make all and
+                                     matches the stored results within stated tolerance
+
+
+10. The 15-page research report
+Write it last, from the results files, and write it as a scientific paper that a hostile reviewer would find
+honest.
+
+Format. A4, 11 pt, single column, 2.5 cm margins. The main text (title block, abstract, sections 1 to 6, all
+figures and tables) is exactly 15 pages. References and appendices follow and are not counted. Deliver a
+PDF and an editable DOCX (or LaTeX source). Render the PDF, count the pages, and inspect every page as
+an image for overflow, overlapping text, unreadable figures and large white gaps. Page 15 must be at
+least half full.
+
+Title block. Authors left as [PI to complete], with one line stating that code and drafting were
+AI-assisted, and the commit hash of the run.
+
+Section                 Pages                 What it must contain
+
+Abstract                1 (with title)        Structured, at most 250 words: background, objective,
+                                              methods, results, conclusions. Names the three
+                                              provenance tiers and states, in a sentence, that no new
+                                              human data were collected and that no result is evidence
+                                              about Indian skin
+Section                Pages               What it must contain
+
+1. Introduction        1.5                 The telehealth and skin-tone problem with verified
+                                           citations; the gap; why an in-silico test before SAMA-120;
+                                           the three questions Q-A, Q-B, Q-C; the contribution,
+                                           worded without “first” unless the C1 audit supports it
+
+2. Methodology         4                   Data tiers and licences; SAMA-Sim and its validation; the
+                                           semi-synthetic degradations; ITA° estimation; the virtual
+                                           SAMA-120 design; the SAMA method in six steps; baselines
+                                           and metrics; the frozen analysis plan; deployment build
+                                           and tests
+
+3. Results             5                   R1 data and provenance summary; R2 pipeline replication;
+                                           R3 real-data skin tone and compression; R4 simulator
+                                           validation; R5 the rehearsal: H1s, H2s and discriminability,
+                                           error budget; R6 the SAMA method: ablations, H3s, H4s
+                                           criterion by criterion, conformal coverage and abstention
+                                           per stratum; R7 HRV and E1; R8 deployment benchmarks;
+                                           R9 power and design re-check against the proposal
+
+4. Discussion          2.5                 What was learned; what cannot be claimed; threats to
+                                           validity (simulator validity, ITA° estimation, dataset bias,
+                                           leakage, multiple comparisons, circularity); the equity point
+                                           that equal coverage can still mean unequal availability;
+                                           specific changes to the proposal
+
+5. Conclusion          1                   The Go / Conditional Go / No-Go verdict and the conditions
+                                           attached to it, in plain language
+
+Required exhibits (generated by code, each carrying its provenance label in the caption):
+
+    •​ at least eight figures, among them the real-data error against ITA°, the codec ladder by stratum,
+       the simulator-to-real comparison, the error budget as stacked bars with intervals, the H2
+       discriminability result, conformal coverage and abstention per stratum, the ablation, and the
+       power curves against the proposal's;
+    •​ at least five tables, among them the data inventory, the replication check, the H1s to H5s results
+       with intervals, the H4 criteria one by one, and the deployment benchmarks;
+    •​ an evidence ledger: every claim in the report against its evidence label and strength, so a reader
+       can see at a glance what is REAL-PUBLIC and what is ASSUMPTION-DRIVEN.
+
+Writing rules. Report effect sizes with intervals, not bare p-values. Say “the simulation shows” or “under
+the assumption that”, never “SAMA achieves” without a label. Put negative and null results in the main
+text. No marketing language. Every figure and number must trace to results/manifest.json. Use only
+references verified at C1, numbered, with the corrected details from REFS_AUDIT.md.
+Appendices (outside the 15 pages): the issue register with final statuses; the frozen analysis plan;
+simulator parameter tables; the reproducibility statement with commit hash, environment and run
+times.
+
+11. Definition of done and handoff package
+The project is done when every item below is true, and not before.
+
+    •​ Every gate from C0 to C10 is passed with evidence in STATUS.md, or carries an explicit
+       accepted-risk entry that I have seen.
+    •​ ISSUES.md has no open blocker without a decision, and the fresh-context reviewer's findings are
+       filed unedited.
+    •​ make all from a clean checkout reproduces every number and figure, and
+       results/manifest.json maps each number in the report to its source file.
+    •​ No result appears anywhere without a provenance label, and nothing in the report or the
+       demonstrator claims more than section 3 allows.
+    •​ The report is exactly 15 pages of main text, rendered, counted and visually inspected.
+    •​ proposal_inserts/ holds what I can paste into the proposal before the 17 November upload.
+
+Repository layout:
+sama-insilico/​
+  README.md STATUS.md ISSUES.md DECISIONS.md GO_NO_GO.md ENV.md Makefile​
+  spec/         SPEC.md spec.yaml SAP_SIM.md​
+  data/         DATA_INVENTORY.md REFS_AUDIT.md (derived signals only, no raw video)​
+  sama/         package: steps 1-6, metrics, statistics, conformal gate​
+  sim/          SAMA-Sim, virtual SAMA-120, codec and degradation scripts​
+  tests/ configs/​
+  results/      tables, manifest.json        figures/​
+  deploy/       onnx/ tflite/ android/ model_card.md datasheets/​
+  proposal_inserts/ pilot_hr.csv figure6.png section5_public_data.md​
+                      power_rerun.md proposal_change_list.md​
+  report/       SAMA_insilico_report.pdf .docx sources
+Final message to me, 300 words at most: the verdict (Go, Conditional Go or No-Go); the three most
+important findings; the three biggest unresolved issues; what I must do next; where the files are.
+
+Start now. Begin with C0. Your first message is one sentence saying what you are doing; then work. Ask
+me nothing that the proposal already answers.
+

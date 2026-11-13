@@ -1,0 +1,1355 @@
+SAMA · Final proposal
+
+
+
+
+  SAMA: final PM-ECRG proposal
+     Oct 28, 2026       · @Sudhakar Mishra
+
+  This is the submission draft, written to be pasted into the ANRF portal and the technical-
+  document template. Before upload, replace three things: Figure 6 with your real pilot
+  figure, equipment prices with written quotations, and the ethics line in section 9 with your
+  approval status.
+
+
+  Portal fields
+  Each field is within the ANRF limit (counted before writing). Paste as written.
+
+  Title (146 of 500 characters)
+
+  SAMA: Skin-tone-equitable measurement of heart rate and heart-rate variability from
+  facial video, towards camera-based care for Indian populations
+
+  Project summary (2,016 of 3,000 characters)
+
+  Video consultations now reach crores of Indians through eSanjeevani, yet they carry no
+  vital signs. Remote photoplethysmography (rPPG) reads the pulse from tiny colour
+  changes in facial skin using an ordinary webcam or phone, but the signal weakens in
+  darker skin, dim light and compressed video: the same optical problem that made pulse
+  oximeters miss low oxygen in darker-skinned patients. No Indian dataset measures skin
+  tone objectively, records ECG-grade ground truth and tests the video compression that
+  teleconsultations use. SAMA (Sanskrit: equal) will measure, explain, fix and guarantee
+  camera-based heart rate (HR) and heart-rate variability (HRV) across Indian skin tones.
+  WP1 records 120 adults in three colorimeter-measured skin-tone strata (Individual
+  Typology Angle), balanced for gender, with 1 kHz ECG, four synchronised cameras, two
+  light levels and a seven-level compression ladder, during rest, a mock teleconsultation,
+  emotional film clips from the PI's Indian database (AFDI), mental stress and post-exercise
+  recovery. WP2 audits 10 rPPG methods and splits each person's error into skin optics,
+  light, device and compression, testing whether compression widens the skin-tone gap.
+  WP3 develops the SAMA method: skin-tone-adaptive camera exposure, calibrated noise-
+  weighted pulse extraction trained to minimise the worst-served group's error, and an
+  equal-reliability gate that calibrates 90% intervals separately for each skin-tone stratum
+  and withholds unreliable readings. WP4 tests HRV agreement with ECG in every stratum
+  and releases an open toolkit and an on-device Android research demonstrator. Five pre-
+  registered hypotheses each have a numeric success criterion and about 80% power or
+
+
+
+                                                                                        Page 1 of 31
+SAMA · Final proposal
+
+
+
+
+  more. Outputs are an open dataset, reference error tables for developers and regulators,
+  open code and four papers. The project builds on the PI's video heart-rate work (2014),
+  cardiac-emotion research (2022) and AFDI (2023), costs Rs 18.04 lakh over 24 months and
+  makes no clinical deployment claim.
+
+  Keywords
+
+  remote photoplethysmography; skin tone; video compression; heart-rate variability;
+  conformal prediction; digital health
+
+  Objectives (882 of 1,500 characters)
+                                          What does it mean by colorimeter-measured skin tone
+
+    1. Build SAMA-120: 120 adults in three colorimeter-measured skin-tone strata, balanced
+       for gender, with 1 kHz ECG, four synchronised cameras, two light levels and a seven-
+       level video-compression ladder.
+    2. Quantify how the heart-rate and HRV error of 10 rPPG methods changes with skin
+       tone, and split it into skin-optics, light, device and compression components, testing
+       whether compression widens the skin-tone gap.
+    3. Develop and validate the SAMA method (skin-tone-adaptive exposure, calibrated
+       noise-weighted pulse extraction trained for worst-group error, and per-stratum
+       calibrated abstention) to cut darkest-stratum heart-rate error by at least 30% while
+        keeping interval coverage at 88% or more in every stratum.
+    4. Test whether camera-derived HRV agrees with ECG in every skin-tone stratum, and
+       release an open dataset, toolkit and on-device Android research demonstrator.
+
+  Expected output and outcome (772 of 1,500 characters)
+
+    1. SAMA-120, to our knowledge the first Indian rPPG dataset with colorimeter-measured
+       skin tone, 1 kHz ECG and a controlled compression ladder (faces under controlled
+       access; signals and labels open).
+    2. Reference error tables by skin tone, light, device and bitrate for telehealth developers,
+       standards bodies and regulators.
+    3. An open, skin-tone-equitable rPPG method that withholds readings it cannot trust,
+       with reliability reported per stratum.
+    4. Evidence on whether camera-based HRV is valid enough for stress assessment in
+       every skin-tone group.
+    5. Four papers (dataset descriptor, audit, method, HRV), open code, an Android research
+       demonstrator and a one-day developer workshop.
+    6. One trained JRF and a reusable physiological-video recording facility at SVNIT.
+
+
+
+
+                                                                                                Page 2 of 31
+SAMA · Final proposal
+
+
+
+
+  1. Origin of the proposal
+  SAMA asks whether an ordinary phone or laptop camera can give every Indian, whatever
+  their skin tone, a trustworthy heart rate and heart-rate variability (HRV), and it shows
+  exactly where it cannot. The question grows out of the PI's own record:
+
+        His M.Tech work measured heart rate from facial video in different user states (best
+        paper, IHCI 2014).
+        His PhD and postdoctoral work showed that cardiac and brain dynamics jointly predict
+        emotional arousal in Indian viewers (Brain Sciences 2022), using the Affective Film
+        Dataset from India (AFDI), which he built and validated (2023).
+        His group has validated a low-cost physiological device against a laboratory reference
+        system (Frontiers in Neuroscience 2025).
+
+  Joining a Department of Artificial Intelligence turned this into a deployable question.
+  Three facts make it urgent.
+
+    1. Scale. eSanjeevani, India's national telemedicine service, passed 50 crore
+       teleconsultations in October 2026. Each consultation has a camera but records no vital
+       signs.
+    2. A known equity failure. Optical sensors depend on how light passes through skin.
+       Pulse oximeters missed hidden low oxygen almost three times as often in Black
+       patients as in white patients (Sjoding et al. 2020). In the largest skin-tone-labelled
+       rPPG study, camera heart-rate error was 6.2 beats a minute for Fitzpatrick types V–VI
+       against 3.9 for types I–II (Chari et al. 2020), and darker skin is under-represented in
+       public rPPG datasets (Bondarenko et al. 2025).
+    3. India is missing. The two Indian rPPG datasets we found record heart rate only, against
+       a finger oximeter, in 44 adults (Dasari et al. 2021), and respiration only, in 119 videos
+       (Saikia et al. 2026). Neither measures skin tone with an instrument, uses ECG, or tests
+       video compression.
+
+  Scope. SAMA is a measurement-science project in healthy adults. It produces the
+  evidence and open tools that any later clinical validation or platform decision would need.
+  It builds no medical device and claims no deployment.
+
+
+
+
+                                                                                            Page 3 of 31
+SAMA · Final proposal
+
+
+
+
+  Figure 1. SAMA measures, explains, fixes and guarantees camera-based pulse
+  measurement across Indian skin tones in four work packages, each ending in an output
+  that stands on its own.
+
+
+  2. Status of research and the gap
+
+  2.1 International status
+  Methods. Remote photoplethysmography (rPPG) recovers the pulse from colour changes
+  in facial skin (Verkruysse et al. 2008). Signal-processing methods separate pulse from
+  noise by blind source separation (Poh et al. 2010) or skin-reflectance models (CHROM, de
+  Haan and Jeanne 2013; POS, Wang et al. 2017). Deep networks followed (DeepPhys,
+  PhysNet, TS-CAN, PhysFormer, EfficientPhys). The open rPPG-Toolbox (Liu et al. 2023)
+  now benchmarks them on common footing. Its tables show the field's core weakness:
+  trained networks reach about 1 beat a minute on clean laboratory video but 12–17 on the
+  harder MMPD set.
+
+  Skin tone. A meta-analysis found larger errors for darker skin (Nowara et al. 2020). On the
+  VITAL dataset, error rose from 3.9 to 6.2 beats a minute between Fitzpatrick types I–II and
+  V–VI (Chari et al. 2020). Their optical analysis traced the bias to camera noise, not
+  biophysics: melanin leaves the pulse's relative size almost unchanged but lowers the light
+
+
+
+                                                                                        Page 4 of 31
+SAMA · Final proposal
+
+
+
+
+  reaching the sensor. MMPD (Tang et al. 2023) reported errors above 10 beats a minute for
+  most unsupervised methods on Fitzpatrick types IV–VI. Skin tone is almost always
+  labelled by eye on the Fitzpatrick scale, which annotators apply inconsistently (Barrett et
+  al. 2023).
+
+  Compression. Video compression degrades rPPG (McDuff et al. 2017), and networks have
+  been built for compressed video (Yu et al. 2019). Whether compression widens the skin-
+  tone gap has not been tested on recorded people. The only study we found is an
+  unreviewed 2026 simulation (TRACE-rPPG): compression did not widen the gap in mean
+  error, because darker skin was already near failure, while signal fidelity fell far more for
+  darker skin.
+
+  HRV. HRV needs individual beats, which rPPG recovers less reliably. Against a reference
+  sensor, video-derived RMSSD correlated only r = 0.53 (Finžgar and Podržaj 2020). A 2026
+  pilot found r = 0.88 for lnRMSSD at rest, but in 35 white participants only, and reported no
+  ICC.
+
+  Reliability. Recent work estimates rPPG uncertainty with Bayesian networks (Ma and
+  Chen 2025) or corrects implausible heart rates (Tian et al. 2026), but neither reports
+  reliability by skin tone. A 2026 metrology guide for PPG recommends conformal
+  prediction (Harris et al. 2026), and statistics offers intervals with equal coverage for every
+  group (Romano et al. 2020). We found no rPPG study that guarantees equal reliability
+  across skin tones.
+
+
+  2.2 National status
+  Dasari et al. (2021) recorded 44 Indian adults outdoors on a smartphone against a finger
+  oximeter: heart rate only, wide error, no measured skin tone. Saikia, Gupta and colleagues
+  (IIT Indore, 2026) released 119 videos for respiratory rate and showed that skin-tone-
+  aware channel weighting helps, with weaker results at both ends of the skin-tone range
+  for lack of samples. The PI's video heart-rate (2014) and cardiac–emotion (2022) studies
+  are the closest Indian work on affective cardiac sensing. No Indian group, to our
+  knowledge, has released an ECG-referenced, skin-tone-measured rPPG dataset.
+
+
+  2.3 The gap, and what is new
+
+     Closest prior work   What it did                          What it left open
+
+     Chari et al. 2020    54 people, Fitzpatrick labels, two   No ECG or HRV; no compression;
+     (VITAL)              lights; physics of skin-tone bias    no Indian participants
+
+
+
+
+                                                                                          Page 5 of 31
+SAMA · Final proposal
+
+
+
+
+     Closest prior work    What it did                         What it left open
+
+     Tang et al. 2023      33 people, Fitzpatrick III–VI,      Finger-PPG reference; already-
+     (MMPD)                phone video, four lights            compressed video; heart rate
+                                                               only
+
+     Dasari et al. 2021    44 Indian adults, smartphone        Oximeter reference; heart rate
+                                                               only; no measured skin tone
+
+     TRACE-rPPG 2026       Compression × skin tone,            No recorded people; not peer
+                           simulated                           reviewed
+
+     Liu et al. 2023       Common benchmark of 12              Heart rate only; no results by skin
+     (rPPG-Toolbox)        methods                             tone
+
+
+  SAMA adds five things, each new to our knowledge:
+
+    1. Skin tone measured with an instrument (colorimeter ITA°), not judged by eye, in an
+       Indian sample.
+    2. An error budget. A lossless reference camera, synchronised consumer cameras, two
+       light levels and an offline compression ladder let each person's error be split into skin
+       optics, light, device and codec.
+    3. The first real-data test of whether compression widens the skin-tone gap, with two
+       competing predictions set out in advance (Figure 2).
+    4. Fairness at capture, not only in the algorithm: skin-tone-adaptive exposure tested
+       against auto-exposure on the same phone model.
+    5. An equal-reliability guarantee: intervals calibrated separately for each skin-tone
+       stratum, with abstention rates audited per stratum, and HRV judged against 1 kHz ECG
+       in every stratum.
+
+
+
+
+                                                                                              Page 6 of 31
+SAMA · Final proposal
+
+
+
+
+  Figure 2. Each stage from room light to video codec can shrink the pulse or bury it in noise;
+  darker skin is affected at the epidermis, the sensor and the codec. The two predictions for
+  compression are tested in H2.
+
+
+  3. Research questions and pre-registered hypotheses
+  SAMA answers four questions:
+
+    1. How large is the skin-tone gradient in camera heart-rate and HRV error among Indians,
+       and how much of it comes from light, device and compression?
+    2. Does video compression widen that gradient, or does darker-skin error already sit at a
+       floor?
+    3. Can changes at capture and in the algorithm close the gap, with equal reliability in
+       every skin-tone group?
+    4. Is camera-derived HRV valid enough for stress assessment in every skin-tone group?
+
+  Each hypothesis has one primary endpoint, one test and a numeric success criterion,
+  registered on the Open Science Framework before the first participant is recorded. Skin-
+  tone strata are fixed in advance from Individual Typology Angle (ITA°) categories (Del Bino
+  and Bernerd 2013): lighter, ITA° above 28; middle, 10 to 28; darker, 10 or below. The primary
+
+
+
+                                                                                              Page 7 of 31
+SAMA · Final proposal
+
+
+
+
+  baseline for H1 to H3 is POS, chosen in advance because it was the most consistent
+  unsupervised method across four test sets in rPPG-Toolbox. Error is mean absolute error
+  (MAE) against ECG in 30-second windows, averaged per participant.
+
+
+     Hypothesis          Primary endpoint   Test                 Success criterion    Power*
+
+     H1 Error rises as   Heart-rate MAE,    Slope of MAE on      Slope below zero     0.87
+     skin tone darkens   POS, lossless      ITA° (continuous),   at p < 0.05
+                         reference video,   one-sided
+                         both lights
+
+     H2 Compression      Compression        Slope of penalty     A clear answer       0.80
+     changes the skin-   penalty: MAE at    on ITA°, two-sided   either way:
+     tone gap            500 kbps H.264                          widening
+                         minus lossless                          supports
+                         MAE                                     prediction A; a
+                                                                 null or narrowing,
+                                                                 with a widening
+                                                                 signal-to-noise
+                                                                 gap, supports B
+
+     H3 Adaptive         Phone B            Paired test, one-    Mean reduction       0.90
+     exposure helps      (adaptive) minus   sided                at p < 0.05; 1.0
+     darker skin         phone A (auto-                          bpm is the
+                         exposure) MAE,                          smallest
+                         darker stratum                          reduction that
+                                                                 matters
+
+
+
+
+                                                                                         Page 8 of 31
+SAMA · Final proposal
+
+
+
+
+     Hypothesis          Primary endpoint    Test                 Success criterion    Power*
+
+     H4 The SAMA         Darker-stratum      Paired test, one-    At least 30%         0.99
+     method closes       MAE, SAMA vs        sided                lower; best-to-
+     the gap with        best baseline,                           worst stratum
+     equal reliability   held-out                                 gap at least 50%
+                         participants                             smaller; lighter-
+                                                                  stratum MAE not
+                                                                  raised by more
+                                                                  than 10%;
+                                                                  coverage of 90%
+                                                                  intervals at least
+                                                                  88% in every
+                                                                  stratum;
+                                                                  abstention rates
+                                                                  within 10
+                                                                  percentage
+                                                                  points across
+                                                                  strata
+
+     H5 Camera HRV       RMSSD reactivity    ICC(2,1), absolute   Overall ICC at       0.90
+     agrees with ECG     (arithmetic minus   agreement, with      least 0.75; lower
+     in every stratum    rest), lossless     Bland–Altman         95% bound at
+                         video, standard     limits               least 0.60 in each
+                         light                                    stratum
+
+     E1 (exploratory)    Leave-one-          Paired               Reported with        n/a
+     Stress and          subject-out         comparison per       confidence
+     arousal are as      accuracy, camera    stratum              intervals; no
+     detectable from     vs ECG features                          confirmatory
+     camera as from                                               claim
+     ECG
+
+
+  *Power at 36 analysable participants per stratum (40 recruited, 10% loss), from 3,000
+  simulated studies each; assumptions in section 6.
+
+  Every outcome is publishable. If H1 fails, Indian users face a smaller gap than feared, and
+  SAMA-120 proves it. If H2 supports prediction A, low-bandwidth calls are a hidden equity
+  risk and on-device measurement before compression is the remedy; if it supports B, the
+  remedy must come at capture and in the algorithm. If H3 or H4 fail, the error budget still
+  shows developers and regulators exactly where camera vital signs must not be shown.
+
+
+
+
+                                                                                             Page 9 of 31
+SAMA · Final proposal
+
+
+
+
+  4. Methodology
+  Four work packages run as measure, explain, fix and guarantee (Figure 3). Recording ends
+  at month 12, so analysis, methods and release have a full year on complete data. Each
+  package ends in a deliverable that stands on its own, so a delay in one does not void the
+  others.
+
+
+
+
+  Figure 3. Work packages, their tasks, hypotheses and deliverables.
+
+
+  WP1 · SAMA-120 dataset (months 1–15)
+  Participants. 120 adults aged 18–60: SVNIT students and staff, who come from across
+  India, and Surat residents. Recruitment is by quota: 40 per skin-tone stratum, with 20
+  women and 20 men in each. Skin tone is measured at screening, so each quota fills by
+  measurement, not by guess. At least 30 participants will be aged 35 or over, to widen the
+  HRV range. Ten pilot sessions in months 2–3 are separate from the 120.
+
+  Who is excluded, and why. Exclusions are limited to conditions that make the ECG
+  ground truth invalid.
+
+
+
+
+                                                                                       Page 10 of 31
+SAMA · Final proposal
+
+
+
+
+     Condition                            Rule              Reason
+
+     Pacemaker or other implanted         Excluded          A paced rhythm makes HRV non-
+     cardiac device                                         physiological
+
+     Known atrial fibrillation or other   Excluded          RMSSD and SDNN are defined
+     sustained arrhythmia                                   only on normal beats (Task Force
+                                                            1996)
+
+     Occasional ectopic beats             Kept              Ectopic beats found on ECG are
+                                                            edited; windows with more than
+                                                            5% edited beats are dropped
+                                                            from HRV analysis only
+
+     Beta-blockers or other heart-rate-   Kept and          They blunt heart-rate reactivity,
+     lowering medicines                   recorded          so these participants are left out
+                                                            of H5 and E1 only; heart-rate
+                                                            accuracy is unaffected
+
+     Beard, spectacles, bindi, make-up,   Kept and          Common among Indian users, and
+     head covering                        recorded          they affect rPPG, so they belong
+                                                            in the data
+
+     Any "yes" on the PAR-Q+ physical-    Kept; step test   Safety
+     activity questionnaire               skipped
+
+
+  Skin tone, measured. A portable colorimeter takes three CIELAB readings each at the
+  forehead and both cheeks. The Individual Typology Angle (Chardon et al. 1991) is
+  computed from their mean:
+
+     \mathrm{ITA}^{\circ} = \arctan\!\left(\frac{L^{*}-50}
+     {b^{*}}\right)\times\frac{180}{\pi}
+
+
+  The same ITA° is also computed from each camera after colour-chart calibration, so the
+  project can report how well a phone alone estimates skin tone. Participants and two
+  trained raters also give Monk Skin Tone ratings, and participants report their Fitzpatrick
+  type; inter-rater agreement is reported.
+
+  Recording set-up. All streams share one clock (Lab Streaming Layer) and an LED flash at
+  the start and end of every block. A month-2 test checks that drift stays below one
+  reference-video frame (17 ms).
+
+
+
+
+                                                                                          Page 11 of 31
+SAMA · Final proposal
+
+
+
+
+     Stream                Device                              Why it is there
+
+     Reference video       USB3 machine-vision colour          Best-case signal, and the source
+                           camera, 60 fps, saved losslessly    of the compression ladder
+
+     Webcam                1080p USB webcam, 30 fps, as        Laptop consultation
+                           the camera delivers it
+
+     Phone A               Mid-range Android phone, front      A typical patient phone
+                           camera, default auto-exposure
+
+     Phone B               Same phone model, open-             Tests H3; the two units swap
+                           source Open Camera app with         roles between participants
+                           exposure locked by the skin-
+                           tone-adaptive rule (WP3)
+
+     Live call             Webcam stream sent through a        Checks that offline compression
+                           self-hosted Jitsi Meet server       predicts a real call
+                           on the lab network, capped at
+                           500 kbps, recorded at the
+                           receiving end
+
+     ECG                   BITalino, lead II, 1,000 Hz         Ground truth for beats and HRV
+
+     Chest-strap ECG       Polar H10, RR intervals             Second reference and backup
+
+     Skin conductance,     BITalino EDA and respiration        Arousal check; breathing, which
+     respiration           belt                                shapes HRV
+
+     Light                 Lux meter at the face; colour       Covariate and colour calibration
+                           chart in the first frame of every
+                           block
+
+
+  Session protocol (Figure 4). About 80 minutes, of which 47 are recorded on every stream
+  at once. Each half of the session repeats the same blocks under one light level, about 500
+  lux diffuse LED or about 100 lux overhead light, so every condition is measured within the
+  same person under both. Light order, the assignment of the four AFDI clips (two neutral,
+  two high-arousal) and which phone unit is adaptive are counterbalanced. In the mock
+  teleconsultation, a researcher on a video link asks ten scripted history-taking questions
+  (symptoms, medicines, sleep) and the participant answers naturally. A one-minute step
+  test followed by three seated minutes gives each person a falling heart rate from about
+  the range seen with fever or anxiety. Participants are paid ₹750.
+
+
+
+
+                                                                                           Page 12 of 31
+SAMA · Final proposal
+
+
+
+
+  Figure 4. One session. The inner timeline is to scale.
+
+  Compression ladder. The lossless reference video is resized to 720p at 30 fps and re-
+  encoded with ffmpeg: H.264 at 2,000, 1,000, 500 and 250 kbps, and VP8 (the codec
+  WebRTC video calls must support) at 500 and 250 kbps. With the lossless original this
+  gives seven levels per recording. The encoding scripts are released.
+
+  Quality control. Every month the team checks ECG quality, synchronisation and quota
+  progress. A session is re-recorded if more than 20% of its ECG is unusable.
+
+  Data handling. Faces cannot be anonymised, so consent is tiered: SVNIT research use
+  only, or sharing under a data-use agreement. Raw video is kept encrypted on an offline
+  server and released only to signed institutional users. ECG, derived signals, ITA° values
+  and labels are released openly under CC BY 4.0. Notice, consent, purpose limitation and
+  retention follow the Digital Personal Data Protection Act 2023 and its 2025 Rules.
+
+  Deliverables. D1.1 pre-registered protocol and ethics approval, month 3. D1.2 first 60
+  participants, month 8. D1.3 all 120 participants and quality report, month 12. D1 data
+  release and dataset descriptor submitted to Scientific Data, month 15.
+
+
+  WP2 · Bias audit and error budget (months 6–15)
+  Baselines. Ten methods run in rPPG-Toolbox: six unsupervised (Green, ICA, CHROM, POS,
+  LGI, PBV) and four neural (DeepPhys, TS-CAN, PhysNet, EfficientPhys). TS-CAN and
+  EfficientPhys are included because they run on phones. Each neural model is tested
+
+
+
+                                                                                           Page 13 of 31
+SAMA · Final proposal
+
+
+
+
+  twice: as released (pretrained on PURE, UBFC-rPPG or SCAMPS) and fine-tuned on
+  SAMA-120 by five-fold cross-validation split by participant, with every stratum
+  represented in every fold.
+
+  Metrics. In 30-second windows, overlapping by 15 seconds:
+
+        heart rate: MAE, RMSE, Pearson r, signal-to-noise ratio (dB), and the share of windows
+        within the heart-rate-monitor tolerance of ±5 beats a minute or ±10%, whichever is
+        greater (ANSI/AAMI EC13);
+        beats, in 60-second windows: inter-beat-interval error (ms), and RMSSD and SDNN
+        error;
+        fairness: worst-stratum MAE, and the gap and ratio between the worst and best strata.
+
+  Error budget. For participant i, block b and each combination of light, device and codec, a
+  linear mixed model splits the error into parts:
+
+     \log(1+e_{ib\ell dc}) = \beta_0 + \beta_1\,\mathrm{ITA}_i + \textstyle\sum_k
+     \gamma_k X_k + \sum_k \delta_k\,\mathrm{ITA}_i X_k +
+     \boldsymbol{\theta}^{\top}\mathbf{z}_{ib} + u_i + v_b + \varepsilon_{ib\ell
+     dc}
+
+
+  Here e is the window's absolute heart-rate error. X_k are indicators for dim light, each
+  consumer device and each codec level, so γ_k is a component's average cost and δ_k how
+  that cost changes with skin tone. z holds head motion (from face landmarks), age, sex,
+  beard and spectacles; u_i and v_b are random effects for participant and block type. The
+  log handles the skew of errors. Each stratum's budget, the predicted error on lossless
+  video in good light plus the increment from each component, is shown as a stacked bar
+  with participant-bootstrap confidence intervals.
+
+  H1 analysis. The primary test regresses each participant's mean MAE (POS, lossless
+  reference video, both lights, all seated blocks) on ITA°, one-sided. The mixed model is the
+  sensitivity analysis. Secondary analyses repeat this for the other nine methods with Holm
+  correction, and replace ITA° with Monk and Fitzpatrick ratings to show what visual labels
+  miss.
+
+  H2 analysis. Each participant's compression penalty, MAE at 500 kbps H.264 minus
+  lossless MAE, is regressed on ITA°, two-sided. Secondary analyses treat the whole ladder
+  as a dose–response (ITA° × log bitrate), repeat it for VP8 and for signal-to-noise ratio, and
+  compare the live-call recordings with offline 500 kbps encoding to check that the ladder
+  predicts a real call.
+
+
+
+
+                                                                                         Page 14 of 31
+SAMA · Final proposal
+
+
+
+
+  Deliverables. D2.1 internal interim audit on the first 40 participants, month 9. D2 audit
+  paper and open reference error tables, month 15.
+
+
+  WP3 · The SAMA method (months 9–20)
+  Chari et al. (2020) traced the skin-tone gap to too little pulse signal above camera noise.
+  SAMA attacks that cause at three points: at capture, during extraction, and when
+  deciding whether to report a number (Figure 5). Each step below is specified well enough
+  to be re-implemented from this text.
+
+
+
+
+  Figure 5. The SAMA method. Steps 1, 4 and 6 are new; steps 2, 3 and 5 adapt established
+  methods.
+
+  Step 1. Skin-tone-adaptive exposure (new). Phone auto-exposure is tuned for a pleasing
+  picture, not for the pulse, and can leave a darker face low in the sensor's range, where
+  noise and 8-bit rounding swamp the pulse. Before each block, a 10-second calibration
+  measures the face's mean brightness. Exposure time (capped at 1/30 s to keep 30 frames
+  a second) and then sensor gain are raised until the face reaches a target share of full
+  scale, with under 1% of skin pixels clipped. White balance is locked from the colour chart.
+  The target is fixed from the pilot. H3 tests this rule against default auto-exposure on the
+  same phone model.
+
+
+
+
+                                                                                         Page 15 of 31
+SAMA · Final proposal
+
+
+
+
+  Step 2. Calibration and a measured noise model. The 24-patch colour chart gives each
+  camera's mapping to linear RGB. Static frames of the chart give the camera's noise
+  variance at every brightness level (the photon-transfer method), so the expected noise of
+  each skin patch is known rather than guessed.
+
+  Step 3. Noise-weighted skin patches. A face mesh places about 30 patches on the
+  forehead and cheeks. Eyes, mouth, beard, bindi and specular highlights are masked. Each
+  patch is weighted by its pulse-band power divided by its expected noise variance. This
+  extends the signal-to-noise weighting of Chari et al. (2020) with a measured, camera-
+  specific noise model.
+
+  Step 4. Physics-guided, worst-group-trained extraction (new). POS projection of the
+  weighted linear RGB gives a candidate pulse. A small one-dimensional convolutional
+  network (under 0.5 million parameters, so it runs on a phone) refines it from the patch
+  traces. Feature-wise linear modulation (Perez et al. 2018) lets the network use the
+  measured ITA° and face brightness. The loss combines negative Pearson correlation with
+  a spectral heart-rate term. Training uses group distributionally robust optimisation
+  (Sagawa et al. 2020) over six groups, three strata by two light levels, so the network
+  minimises the worst group's loss rather than the average.
+
+  Step 5. Sub-frame beat timing. After band-pass filtering (0.7–3.0 Hz), pulse peaks are
+  located by parabolic interpolation to 1 ms. Inter-beat intervals pass the same artefact
+  rules as the ECG, then give heart rate, RMSSD and SDNN.
+
+  Step 6. Equal-reliability gate (new). Group-conditional (Mondrian) split conformal
+  prediction (Vovk et al. 2005; Romano et al. 2020) gives each window a 90% interval for
+  heart rate, calibrated separately for each skin-tone stratum on participants never used in
+  training:
+
+     s_j=\frac{|\hat h_j-h_j|}{\hat\sigma(x_j)},\qquad \hat q_g=\text{the
+     }\left\lceil 0.9\,(n_g+1)\right\rceil\text{-th smallest } s_j \text{ in
+     stratum } g,\qquad C(x)=\hat h\pm\hat q_g\,\hat\sigma(x)
+
+
+  Here ĥ is the camera estimate, h the ECG value, and σ̂ (x) a difficulty score learned from
+  patch signal-to-noise, motion and brightness. A reading is shown only if the interval's half-
+  width is at most 5 beats a minute; otherwise the system says "no reliable reading".
+  Because windows from one person are correlated, calibration draws one window per
+  participant and repeats the draw 200 times. Reported per stratum: coverage, interval
+  width, abstention rate and useful yield (windows shown and within ±5 beats a minute).
+
+
+
+
+                                                                                         Page 16 of 31
+SAMA · Final proposal
+
+
+
+
+  Training and validation. Pretraining uses public datasets (PURE, UBFC-rPPG, UBFC-Phys
+  and the synthetic SCAMPS). Fine-tuning on SAMA-120 uses nested cross-validation split
+  by participant: five outer folds for testing, inner folds for settings. Ablations remove each
+  step in turn to show what it contributes. External tests use UBFC-Phys and MMPD.
+
+  Measure before you compress. Steps 2–6 also run on the compressed ladder, so the
+  project reports, per stratum, how much accuracy is kept by measuring on the phone
+  before video is compressed for the call.
+
+  H3 and H4 analyses follow section 3. The best baseline for H4 is fixed as the baseline with
+  the lowest darker-stratum MAE in the same outer folds.
+
+  Deliverables. D3 method paper, open model and code, month 20.
+
+
+  WP4 · HRV, stress and release (months 13–24)
+  HRV agreement (H5). For every segment of at least 60 seconds, RMSSD and SDNN are
+  computed from ECG and from the camera, using both SAMA and the best baseline. The
+  primary endpoint is RMSSD reactivity (log RMSSD in mental arithmetic minus the
+  preceding rest) on lossless reference video in good light. Agreement is judged by ICC(2,1),
+  absolute agreement, against the bands of Koo and Li (2016), with Bland–Altman limits for
+  each stratum. Secondary analyses cover the other lights, devices and codec levels; the
+  paced-breathing block tests beat recovery when HRV is large. The respiration belt shows
+  whether apparent HRV changes are driven by breathing.
+
+  Stress and arousal (E1, exploratory). Leave-one-subject-out classifiers (logistic
+  regression and gradient boosting on heart rate, RMSSD, SDNN and pulse amplitude)
+  separate arithmetic from rest and high- from low-arousal clips. Each is trained once on
+  ECG features and once on camera features, and accuracy is compared per stratum with
+  bootstrap intervals. Skin conductance gives an independent arousal check. This links
+  SAMA to tele-mental-health, where Tele-MANAS has begun adding video consultations in
+  some states, without a confirmatory claim.
+
+  On-device research demonstrator. The SAMA model is converted to TensorFlow Lite and
+  runs steps 1–6 inside an Android app built on Open Camera's exposure control, so no
+  video leaves the phone. It is tested for latency, battery use and abstention on the two
+  study phones and one entry-level phone, using recorded SAMA sessions and short live
+  sessions with 10 lab volunteers under the same ethics approval. It is a research
+  demonstrator: not a medical device and not for diagnosis.
+
+
+
+
+                                                                                          Page 17 of 31
+SAMA · Final proposal
+
+
+
+
+  Release. Toolkit v1.0 with model weights, reference error tables, codec scripts and the
+  demonstrator's source code, on GitHub under an open licence. The dataset goes through
+  a controlled-access portal, and SVNIT will offer it for listing on IndiaAI's AIKosh under the
+  same terms. A one-day workshop at SVNIT shows telehealth developers how to use the
+  tables and toolkit.
+
+  Deliverables. D4.1 HRV paper, month 22. D4.2 workshop, month 23. D4.3 toolkit v1.0,
+  demonstrator and final report, month 24.
+
+
+  5. Preliminary work and pilot results
+  Already in hand. The PI has extracted heart rate from facial video (2014), built and
+  validated the AFDI clips used here (2023), shown that cardiac signals track emotional
+  arousal in Indian viewers (2022), and validated a low-cost physiological device against a
+  reference system (2025). SVNIT provides laboratory space and a GPU cluster.
+
+  Pilot study (fill in the brackets from your pilot; delete this note before submission). In
+  November 2026, [n] volunteers spanning ITA° [min] to [max] were recorded for 25
+  minutes with a webcam, a phone and a Polar H10 chest-strap ECG, under two light levels,
+  with a colour chart in view. Uncompressed webcam video was re-encoded at 2,000, 1,000,
+  500 and 250 kbps. Four results matter for this proposal:
+
+    1. Feasibility. All streams synchronised to within [x] ms; a session took [y] minutes; [k] of
+       [n] recordings were usable.
+    2. Skin tone. POS heart-rate error rose by [a] beats a minute for every 10° fall in ITA°
+       (Figure 6A).
+    3. Compression. At 500 kbps, error rose by [b] beats a minute in the darker group and [c]
+       in the lighter group (Figure 6B).
+    4. Agreement. Camera minus reference heart rate: bias [d], 95% limits [e] to [f] beats a
+       minute (Figure 6C).
+
+  These are feasibility numbers from a small sample, not tests of the hypotheses; the pilot's
+  between-person spread is used to re-check the power analysis in section 6.
+
+
+
+
+                                                                                           Page 18 of 31
+SAMA · Final proposal
+
+
+
+
+  Figure 6. Pilot results. TEMPLATE: replace with the figure made by pilot_figure.py from
+  your pilot data (see the pilot plan tab). (A) Per-participant heart-rate error against ITA° for
+  each method. (B) Error by bitrate in each skin-tone group. (C) Bland–Altman agreement
+  with the reference.
+
+
+  6. Sample size and statistics
+  With 40 participants recruited per stratum and 36 analysable after a 10% loss allowance,
+  every confirmatory test has about 80% power or more (Figure 7). Power was estimated by
+  simulating 3,000 studies per sample size under the assumptions below, each anchored in
+  published data or set at the smallest effect that would change advice. The simulation
+  code is released with the protocol.
+
+
+     Hypothesis         Assumed effect        Where the               Spread assumed      Power at 36
+                                              assumption comes                            / 40 per
+                                              from                                        stratum
+
+     H1                 MAE rises by 2.0      Chari et al. (2020):    Between-person      0.87 / 0.90
+                        beats a minute        +2.06 from              SD 2.0, right-
+                        from the lightest     Fitzpatrick III–IV to   skewed
+                        to the darkest        V–VI
+                        ITA°
+
+     H2                 The 500 kbps          Smallest difference     Within-person SD    0.80 / 0.85
+                        penalty is 1.0 beat   that would change       1.0, re-estimated
+                        a minute larger at    advice; no prior real   from the pilot
+                        the darkest ITA°      data
+
+
+
+
+                                                                                                  Page 19 of 31
+SAMA · Final proposal
+
+
+
+
+     Hypothesis         Assumed effect    Where the            Spread assumed      Power at 36
+                                          assumption comes                         / 40 per
+                                          from                                     stratum
+
+     H3                 Adaptive          Smallest reduction   SD of paired        0.90 / 0.92
+                        exposure lowers   that matters         differences 2.0
+                        darker-stratum
+                        MAE by 1.0
+
+     H4                 SAMA lowers       The success          SD of paired        0.99 / 0.99
+                        darker-stratum    threshold itself     differences 2.0
+                        MAE by 30% (4.5
+                        to 3.15)
+
+     H5                 True ICC 0.85;    Resting lnRMSSD r    Fisher-z interval   0.90 / 0.93
+                        criterion lower   = 0.88 in a 2026
+                        95% bound at      validation study
+                        least 0.60
+
+
+
+
+  Figure 7. Power of each confirmatory test against the number of analysable participants
+  per stratum (3,000 simulated studies per point, α = 0.05).
+
+  Analysis rules, fixed in advance.
+
+        Multiplicity. Each hypothesis has one primary test at α = 0.05, one-sided where the
+        direction is stated. Secondary analyses within a hypothesis use Holm correction.
+        Exploratory analyses are labelled as such.
+
+
+
+
+                                                                                           Page 20 of 31
+SAMA · Final proposal
+
+
+
+
+         Missing data. Windows with unusable ECG are dropped by a pre-set quality rule.
+         Participants with partial data stay in every analysis their data allow. The 10% allowance
+         covers lost sessions.
+         Safeguard on the assumptions. If the pilot or the interim audit at month 9 shows more
+         spread than assumed, the power analysis is re-run and the sample raised to up to 50
+         per stratum. The 30 extra sessions cost ₹22,500, which the contingency line covers.
+         Transparency. Pre-registration on OSF before the first participant; deviations reported
+         with reasons; analysis code released.
+
+
+  7. Time schedule
+  Recording runs from month 3 to month 12; each work package ends in a public deliverable
+  that a reviewer can check.
+
+
+
+
+  Figure 8. Activities by month. Bars include both the start and end months.
+
+
+     Month              Milestone                                How it can be checked
+
+     3                  Ethics approval, OSF pre-registration,   Approval letter, OSF link, test
+                        synchronisation test passed (D1.1)       report
+
+     8                  60 participants recorded (D1.2)          Quality report
+
+
+
+
+                                                                                               Page 21 of 31
+SAMA · Final proposal
+
+
+
+
+     Month              Milestone                                          How it can be checked
+
+     9                  Interim audit of the first 40 participants;        Internal report
+                        power re-check (D2.1)
+
+     12                 120 participants recorded (D1.3)                   Quality report
+
+     15                 Dataset released; descriptor and audit papers      DOI, preprints
+                        submitted; error tables public (D1, D2)
+
+     20                 Method paper submitted; model and code             Preprint, GitHub release
+                        public (D3)
+
+     22                 HRV paper submitted (D4.1)                         Preprint
+
+     23                 Developer workshop at SVNIT (D4.2)                 Programme and attendance
+
+     24                 Toolkit v1.0, demonstrator and final report        GitHub release, report
+                        (D4.3)
+
+
+
+
+  8. Budget
+  The request is ₹18,04,300 over 24 months, plus overheads at ANRF's rate; at 10%
+  overheads the total is about ₹19.85 lakh. No imported high-end instrument and no GPU
+  server is requested.
+
+
+     Head                        Item                                     Year 1      Year 2        Total (₹)
+                                                                          (₹)         (₹)
+
+     Equipment                   2 BITalino (r)evolution kits with ECG,   70,000      —             70,000
+                                 skin-conductance and respiration
+                                 sensors
+
+     Equipment                   2 Polar H10 chest-strap ECG sensors      18,000      —             18,000
+
+     Equipment                   USB3 machine-vision colour camera        75,000      —             75,000
+                                 (1080p, 60 fps, global shutter) with
+                                 lens
+
+     Equipment                   2 USB webcams, 1080p                     20,000      —             20,000
+
+     Equipment                   2 mid-range Android phones of one        62,000      —             62,000
+                                 model, and 1 entry-level phone
+
+
+
+
+                                                                                                         Page 22 of 31
+SAMA · Final proposal
+
+
+
+
+     Head               Item                                    Year 1      Year 2      Total (₹)
+                                                                (₹)         (₹)
+
+     Equipment          Portable colorimeter (CIELAB) for       45,000      —           45,000
+                        skin ITA°
+
+     Equipment          24-patch colour chart, 2 dimmable       55,000      —           55,000
+                        LED panels, lux meter, tripods and
+                        mounts, step platform
+
+     Equipment          Acquisition workstation (8-core, 64     1,50,000    —           1,50,000
+                        GB RAM, 4 TB NVMe) and 2 × 8 TB
+                        backup drives
+
+     Equipment                                                  4,95,000    —           4,95,000
+     total
+
+     Manpower           1 JRF, months 3–24, at ₹37,000 +        4,44,000    5,32,800    9,76,800
+                        20% HRA = ₹44,400 a month
+
+     Consumables        Participant payments: 130 sessions      97,500      —           97,500
+                        (120 + 10 pilot) at ₹750
+
+     Consumables        ECG electrodes, gel, skin               35,000      10,000      45,000
+                        preparation, hygiene supplies,
+                        printing
+
+     Travel             Two national conferences; one visit     30,000      70,000      1,00,000
+                        to an Indian telehealth developer to
+                        share the error tables
+
+     Contingency        Repairs, extra sessions if the power    40,000      50,000      90,000
+                        re-check needs them, open-access
+                        charges with prior approval
+
+     Recurring total                                            6,46,500    6,62,800    13,09,300
+
+     Grand total                                                11,41,500   6,62,800    18,04,300
+
+
+  Justification.
+
+        ECG at 1,000 Hz is needed because HRV ground truth depends on beat timing to the
+        millisecond; two BITalino kits let two sessions run in parallel. The Polar H10 sensors are
+        a validated second reference and a backup.
+
+
+
+
+                                                                                             Page 23 of 31
+SAMA · Final proposal
+
+
+
+
+        Four cameras are the experiment. The machine-vision camera gives the best-case
+        signal and the lossless source for the compression ladder. The webcams and phones
+        give what patients actually use. Two units of one phone model isolate the effect of
+        exposure (H3); the entry-level phone tests the demonstrator on a budget device.
+        The colorimeter measures skin tone with an instrument, the basis of every skin-tone
+        claim; it also checks camera-derived ITA°.
+        Controlled light is needed to test light as a cause; the lux meter makes it a measured
+        covariate.
+        The workstation writes several video streams losslessly in real time (about 1 GB a
+        minute, roughly 6 TB over the study). Backup drives keep raw faces off any cloud.
+        Software is all open source: rPPG-Toolbox, Open Camera, Jitsi Meet, ffmpeg, Lab
+        Streaming Layer. Model training uses SVNIT's GPU cluster.
+        The JRF is costed from month 3, because recruitment usually takes two months after
+        sanction. HRA is nil if hostel accommodation is provided, saving ₹1.63 lakh.
+        Prices are estimates from list prices and Indian retail. They will be replaced with
+        written quotations before submission.
+
+
+  9. Use of outcomes, ethics and risks
+
+  9.1 Who uses the outcomes
+
+     Output                           Who uses it                    For what
+
+     Reference error tables by        Telehealth platform            Deciding where camera
+     skin tone, light, device and     developers, standards          vital signs can be shown,
+     bitrate                          bodies, regulators             and to whom, before any
+                                                                     feature reaches patients
+
+     SAMA-120 dataset                 Indian and international       Testing their own methods
+                                      researchers, start-ups         on Indian skin tones
+                                                                     without collecting new data
+
+     SAMA method and toolkit          Developers of camera-based     An equitable starting point
+                                      health apps                    that refuses readings it
+                                                                     cannot trust
+
+
+
+
+                                                                                              Page 24 of 31
+SAMA · Final proposal
+
+
+
+
+     Output                          Who uses it                    For what
+
+     Error-budget findings on        Video-call and telemedicine    Choosing between
+     compression                     engineers                      measuring on the phone
+                                                                    and measuring from
+                                                                    received video
+
+
+  SAMA itself deploys nothing. A clinical project in patients, and the CDSCO software-as-a-
+  medical-device route, would come after it and would need exactly this evidence. The work
+  fits the IndiaAI Mission's Safe and Trusted AI pillar and the fairness principle of ICMR's
+  2023 ethical guidelines for AI in biomedical research and healthcare. Any licence will be
+  non-exclusive, through SVNIT, with all academic outputs open.
+
+
+  9.2 Ethics and data protection
+        Approval. The study is minimal-risk and non-invasive. Recording starts only after
+        approval from SVNIT's Institutional Ethics Committee or a DHR-registered committee,
+        following the ICMR National Ethical Guidelines (2017). [Status: application submitted
+        on [date] / approval number [ ].]
+        Consent and safety. Written, tiered consent; anyone may stop at any time. Negative
+        film clips come from the validated AFDI set and are mild; everyone is debriefed and
+        given the contacts of the campus counsellor and Tele-MANAS (14416). The step test is
+        offered only to those cleared by the PAR-Q+.
+        Data. Raw video encrypted offline, access logged, never uploaded to a cloud;
+        controlled access for faces, open release for derived signals; notice, consent, purpose
+        limitation, retention and breach handling under the DPDP Act 2023 and Rules 2025.
+        Not a medical device. SAMA makes no diagnosis, and the demonstrator is labelled for
+        research only.
+
+
+
+
+                                                                                          Page 25 of 31
+SAMA · Final proposal
+
+
+
+
+  9.3 Risks
+
+     Risk                  Likelihood   Mitigation                   If it happens anyway
+
+     The darker stratum    Medium       Screening by                 H1 and H2 use continuous
+     (ITA° ≤ 10) fills                  colorimeter; outreach        ITA°, so they stand;
+     slowly                             through SVNIT's pan-         achieved numbers are
+                                        India student and staff      reported
+                                        body and community
+                                        groups; monthly quota
+                                        tracking
+
+     More spread than      Medium       Pilot and month-9 re-        Effects reported with
+     assumed, so less                   check; up to 50 per          confidence intervals
+     power                              stratum from
+                                        contingency
+
+     Ethics approval       Medium       Application filed before     Set-up and
+     delayed                            sanction; minimal-risk       synchronisation work
+                                        category                     continue; JRF budgeted
+                                                                     from month 3
+
+     JRF joins late        Medium       PI runs set-up and pilot;    Exploratory E1 is dropped
+                                        M.Tech projects support      before any confirmatory
+                                        WP2                          work
+
+     Live-call recording   Low to       Offline ladder is            Ladder reported alone
+     is unstable           medium       primary; the live call
+                                        only validates it
+
+     Chosen phone lacks    Low          Phone model chosen           Another model with
+     manual exposure                    after checking manual        verified controls
+     control                            controls in the pilot
+
+     SAMA misses the       Medium       Ablations show which         Negative result published
+     30% target                         step helps; the gate still   with the error budget,
+                                        reports reliability          which is useful on its own
+
+     Privacy breach of     Low, high    Offline encryption,          Breach protocol under the
+     face video            impact       access log, no cloud         DPDP Rules
+
+
+
+
+                                                                                             Page 26 of 31
+SAMA · Final proposal
+
+
+
+
+     Risk                   Likelihood         Mitigation                  If it happens anyway
+
+     Another group          Medium             Measured skin tone,         Results become
+     publishes similar                         ECG, compression            complementary
+     data                                      ladder and Indian
+                                               sample together are
+                                               distinct; preprint at
+                                               month 15
+
+
+
+
+  10. Expertise, roles and facilities
+  Every method in SAMA maps to something the PI has already published.
+
+
+     SAMA needs                                         PI's prior work
+
+     Pulse and HRV from facial video                    Mishra and Tiwary, Procedia Computer
+                                                        Science 2014 (best paper, IHCI 2014)
+
+     Cardiac signals during emotion                     Mishra, Srinivasan and Tiwary, Brain
+                                                        Sciences 2022
+
+     Validated Indian emotional stimuli                 AFDI, Journal of Cultural Cognitive Science
+                                                        2023
+
+     Validating a device against a reference            Rani, Singh and Mishra, Frontiers in
+     system                                             Neuroscience 2025
+
+     Recording large multimodal datasets with           DENS dataset, IEEE Access 2023; 90-
+     participants                                       participant EEGManyLabs recordings at IIT
+                                                        Kanpur
+
+     Deep learning on physiological signals             ICASSP 2026; IEEE INDICON 2023; IHCI 2022
+
+
+  Roles.
+
+
+     Person                           Role
+
+     PI                               Design, ethics, pre-registration, protocol, statistics,
+                                      method development, supervision, papers
+
+     JRF                              Recruitment, recording, data curation, baseline
+                                      benchmarking, Android demonstrator
+
+
+
+                                                                                                  Page 27 of 31
+SAMA · Final proposal
+
+
+
+
+     Person                         Role
+
+     M.Tech students (unfunded)     Codec ladder, ablations, toolkit documentation
+
+
+  Facilities at SVNIT. Laboratory space in the Department of Artificial Intelligence, the
+  institute GPU cluster, internet, library and administrative support. [List any existing
+  cameras or biosignal equipment in the endorsement letter, so nothing is bought twice.]
+
+  Projects submitted or under implementation. 2026 ANRF-ARG pre-proposal "Prakriti-
+  Yantra" (not funded). No project is under implementation.
+
+  Experts who could review fairly (check current affiliations; do not list former
+  supervisors): Dr Puneet Gupta, IIT Indore (skin-tone-aware rPPG with Indian data); Prof.
+  Conrad Tucker, Carnegie Mellon University (bias in rPPG, with Indian participants); Prof.
+  Achuta Kadambi, UCLA (physics of skin-tone bias in rPPG); Dr Daniel McDuff (rPPG-
+  Toolbox; video compression and rPPG); Dr Mohamed Elgendi (demographic bias in rPPG
+  datasets).
+
+
+  References
+    1. ANSI/AAMI EC13. Cardiac monitors, heart rate meters, and alarms. AAMI.
+    2. Barrett T, et al. Skin deep: investigating subjectivity in skin tone annotations for
+       computer vision benchmark datasets. arXiv:2305.09072, 2023.
+    3. Bondarenko M, Menon C, Elgendi M. Demographic bias in public remote
+       photoplethysmography datasets. npj Digital Medicine 8, 2025.
+    4. Chardon A, Cretois I, Hourseau C. Skin colour typology and suntanning pathways.
+       International Journal of Cosmetic Science 13:191–208, 1991.
+    5. Chari P, Kabra K, et al. Diverse R-PPG: camera-based heart rate estimation for diverse
+       subject skin-tones and scenes. arXiv:2010.12769, 2020.
+    6. Chen W, McDuff D. DeepPhys: video-based physiological measurement using
+       convolutional attention networks. ECCV 2018.
+    7. Dasari A, Arul Prakash SK, Jeni LA, Tucker CS. Evaluation of biases in remote
+       photoplethysmography methods. npj Digital Medicine 4:91, 2021.
+    8. de Haan G, Jeanne V. Robust pulse rate from chrominance-based rPPG. IEEE
+       Transactions on Biomedical Engineering 60:2878–2886, 2013.
+    9. de Haan G, van Leest A. Improved motion robustness of remote-PPG by using the
+       blood volume pulse signature. Physiological Measurement 35:1913, 2014.
+
+
+
+
+                                                                                              Page 28 of 31
+SAMA · Final proposal
+
+
+
+
+ 10. Del Bino S, Bernerd F. Variations in skin colour and the biological consequences of
+     ultraviolet radiation exposure. British Journal of Dermatology 169 (Suppl 3):33–40, 2013.
+ 11. Finžgar M, Podržaj P. Feasibility of assessing ultra-short-term pulse rate variability from
+     video recordings. PeerJ 8:e8342, 2020.
+ 12. Harris P, et al. QUMPHY good practice guide for quantifying uncertainties for machine
+     learning models applied to photoplethysmography signals. arXiv:2607.19999, 2026.
+ 13. Indian Council of Medical Research. National ethical guidelines for biomedical and
+     health research involving human participants, 2017; Ethical guidelines for application of
+     artificial intelligence in biomedical research and healthcare, 2023.
+ 14. Koo TK, Li MY. A guideline of selecting and reporting intraclass correlation coefficients
+     for reliability research. Journal of Chiropractic Medicine 15:155–163, 2016.
+ 15. Liu X, Fromm J, Patel S, McDuff D. Multi-task temporal shift attention networks for on-
+     device contactless vitals measurement. NeurIPS 2020.
+ 16. Liu X, Hill B, Jiang Z, Patel S, McDuff D. EfficientPhys: enabling simple, fast and accurate
+     camera-based cardiac measurement. WACV 2023.
+ 17. Liu X, Narayanswamy G, Paruchuri A, et al. rPPG-Toolbox: deep remote PPG toolbox.
+     NeurIPS 2023 Datasets and Benchmarks.
+ 18. Ma R, Chen C. RF-BayesPhysNet: a Bayesian rPPG uncertainty estimation method for
+     complex scenarios. arXiv:2504.03915, 2025.
+ 19. McDuff DJ, Blackford EB, Estepp JR. The impact of video compression on remote
+     cardiac pulse measurement using imaging photoplethysmography. IEEE FG 2017.
+ 20. Meziati Sabour R, et al. UBFC-Phys: a multimodal database for psychophysiological
+     studies of social stress. IEEE Transactions on Affective Computing, 2023.
+ 21. Mishra S, Tiwary US. Heart rate measurement using video in different user states for
+     online HCI applications. Procedia Computer Science 39:20–27, 2014.
+ 22. Mishra S, Srinivasan N, Tiwary US. Cardiac–brain dynamics depend on context
+     familiarity and their interaction predicts experience of emotional arousal. Brain
+     Sciences 12:702, 2022.
+ 23. Mishra S, Srinivasan N, Asif M, Tiwary US. Affective Film Dataset from India (AFDI):
+     creation and validation with an Indian sample. Journal of Cultural Cognitive Science,
+     2023.
+ 24. Nowara EM, McDuff D, Veeraraghavan A. A meta-analysis of the impact of skin type
+     and gender on non-contact photoplethysmography measurements. CVPR Workshops
+     2020.
+
+
+
+
+                                                                                          Page 29 of 31
+SAMA · Final proposal
+
+
+
+
+ 25. Perez E, Strub F, de Vries H, Dumoulin V, Courville A. FiLM: visual reasoning with a
+     general conditioning layer. AAAI 2018.
+ 26. Poh MZ, McDuff DJ, Picard RW. Non-contact, automated cardiac pulse measurements
+     using video imaging and blind source separation. Optics Express 18:10762–10774, 2010.
+ 27. Rani A, Singh A, Mishra S. Validation of Neuphony 8-channel EEG flex cap: a
+     comparative study with BioSemi 64-channel EEG system. Frontiers in Neuroscience
+     19:1670860, 2025.
+ 28. Romano Y, Barber RF, Sabatti C, Candès EJ. With malice toward none: assessing
+     uncertainty via equalized coverage. Harvard Data Science Review 2(2), 2020.
+ 29. Sagawa S, Koh PW, Hashimoto TB, Liang P. Distributionally robust neural networks for
+     group shifts. ICLR 2020.
+ 30. Saikia T, Gupta AK, Gupta P, Liljeberg P. A skin-tone-aware dual-representation remote
+     photoplethysmography framework for contactless respiratory rate estimation.
+     arXiv:2606.21511, 2026.
+ 31. Estimating heart rate variability using facial video photoplethysmography: a pilot
+     validation study. Scientific Reports, 2026.
+ 32. Sjoding MW, Dickson RP, Iwashyna TJ, Gay SE, Valley TS. Racial bias in pulse oximetry
+     measurement. New England Journal of Medicine 383:2477–2478, 2020.
+ 33. Tang J, Chen K, Wang Y, Shi Y, Patel S, McDuff D, Liu X. MMPD: multi-domain mobile
+     video physiology dataset. IEEE EMBC 2023.
+ 34. Task Force of the European Society of Cardiology and the North American Society of
+     Pacing and Electrophysiology. Heart rate variability: standards of measurement,
+     physiological interpretation and clinical use. Circulation 93:1043–1065, 1996.
+ 35. Tian Y, Li S, Zhu Y, Elgendi M, Lam EY, et al. Adaptive physiology-informed correction for
+     reliable remote photoplethysmography heart-rate monitoring. npj Digital Medicine
+     9:233, 2026.
+ 36. TRACE-rPPG: tone-stratified robustness across compressed encodings. Open-source
+     repository, 2026 (simulation; not peer reviewed).
+ 37. Verkruysse W, Svaasand LO, Nelson JS. Remote plethysmographic imaging using
+     ambient light. Optics Express 16:21434–21445, 2008.
+ 38. Vovk V, Gammerman A, Shafer G. Algorithmic learning in a random world. Springer,
+     2005.
+ 39. Wang W, den Brinker AC, Stuijk S, de Haan G. Algorithmic principles of remote PPG.
+     IEEE Transactions on Biomedical Engineering 64:1479–1491, 2017.
+
+
+
+
+                                                                                            Page 30 of 31
+SAMA · Final proposal
+
+
+
+
+ 40. Yu Z, Li X, Zhao G. Remote photoplethysmograph signal measurement from facial
+     videos using spatio-temporal networks. BMVC 2019.
+ 41. Yu Z, Peng W, Li X, Hong X, Zhao G. Remote heart rate measurement from highly
+     compressed facial videos. ICCV 2019.
+ 42. Yu Z, et al. PhysFormer: facial video-based physiological measurement with temporal
+     difference transformer. CVPR 2022.
+ 43. News On AIR. eSanjeevani achieves milestone of 50 crore teleconsultations. 6 October
+     2026.
+ 44. Digital Personal Data Protection Act, 2023, and Digital Personal Data Protection Rules,
+     2025. Government of India.
+
+  Volume and page numbers of unlinked items are cited from standard references; check
+  them against the publishers' pages before submission.
+
+
+
+
+                                                                                       Page 31 of 31
+

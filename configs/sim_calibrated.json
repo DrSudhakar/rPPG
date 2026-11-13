@@ -1,0 +1,13 @@
+{
+ "rel_amp_green": 0.0015,
+ "pix_per_patch": 160.0,
+ "targets": {
+  "45": 2.63,
+  "-20": 4.37
+ },
+ "achieved": {
+  "45": 2.79,
+  "-20": 4.38
+ },
+ "provenance": "SYNTHETIC; calibrated to the proposal's H1 assumption (LITERATURE anchor: Chari et al. 2020 via proposal s.6); grid in results/tables/sim_calibration.csv"
+}

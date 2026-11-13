@@ -1,0 +1,14 @@
+module,statements,covered,pct
+sama/signals.py,67,61,91.0
+sama/methods.py,73,68,93.2
+sama/stats.py,125,103,82.4
+sama/conformal.py,53,46,86.8
+sama/calib.py,18,14,77.8
+sama/ita.py,15,12,80.0
+sama/net.py,143,125,87.4
+sama/export.py,121,86,71.1
+sama/streaming.py,103,69,67.0
+sama/sama_method.py,145,121,83.4
+sama/model_io.py,20,18,90.0
+sim/samasim.py,279,210,75.3
+TOTAL (core),1162,933,80.3

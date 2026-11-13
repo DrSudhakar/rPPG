@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SAMA (research)</string>
+    <string name="no_reading">No reliable reading</string>
+    <string name="research_label">Research use only — not a medical device — not for diagnosis</string>
+    <string name="warming_up">Collecting 30 seconds of signal…</string>
+    <string name="low_light">Too dark. Add light in front of you.</string>
+    <string name="motion">Too much movement. Sit still.</string>
+    <string name="face_lost">Keep your face in the box.</string>
+</resources>

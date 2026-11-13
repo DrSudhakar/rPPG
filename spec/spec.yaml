@@ -1,0 +1,105 @@
+# SAMA design parameters, locked at C0 (2026-11-02).
+# Every value cites the section of "SAMA · Final proposal" (PDF, 31 pp.) it came from.
+# Values marked insilico: true are this project's own choices (logged in DECISIONS.md).
+version: 1
+source_pdf: "SAMA · Final proposal.pdf"
+
+strata:                       # proposal s.4 WP1 "Participants", Fig 6 caption; prompt s.2
+  scale: ITA_deg
+  lighter: {gt: 28}
+  middle:  {gt: 10, le: 28}
+  darker:  {le: 10}
+  recruited_per_stratum: 40   # s.6
+  analysable_per_stratum: 36  # s.6 (10% loss)
+  women_per_stratum: 20
+  men_per_stratum: 20
+  age: {min: 18, max: 60, min_n_aged_35_plus: 30}
+  source: "s.4 WP1; s.6"
+
+lights:                       # s.4 WP1 recording set-up
+  standard_lux: 500
+  dim_lux: 100
+  source: "s.4 WP1"
+
+streams:                      # s.4 WP1 table of streams
+  reference_camera: {fps: 60, lossless: true, kind: machine_vision}
+  webcam: {resolution: 1080p, fps: 30}
+  phone_A: {exposure: auto}
+  phone_B: {exposure: adaptive}
+  live_call: {cap_kbps: 500}
+  ecg_hz: 1000
+  extras: [polar_h10, skin_conductance, respiration]
+  source: "s.4 WP1"
+
+codec_ladder:                 # s.4 WP1 / WP2
+  resize: {height: 720, fps: 30}
+  levels:
+    - {codec: lossless}
+    - {codec: h264, kbps: 2000}
+    - {codec: h264, kbps: 1000}
+    - {codec: h264, kbps: 500}
+    - {codec: h264, kbps: 250}
+    - {codec: vp8,  kbps: 500}
+    - {codec: vp8,  kbps: 250}
+  source: "s.4 WP1; transcode_ladder.sh"
+
+blocks: [paced_breathing, rest, mock_teleconsultation, neutral_clip_1, neutral_clip_2,
+         high_arousal_clip_1, high_arousal_clip_2, mental_arithmetic, recovery, step_test]
+blocks_source: "s.4 Session protocol, Fig 4"
+
+windows:                      # s.4 WP2 Metrics
+  hr: {length_s: 30, step_s: 15}
+  hrv: {length_s: 60}
+  hr_tolerance: {abs_bpm: 5, rel: 0.10, rule: max}   # ANSI/AAMI EC13
+  band_hz: [0.7, 3.0]                                # s.4 WP3 step 5
+  source: "s.4 WP2 Metrics; WP3 step 5"
+
+methods:
+  primary_baseline: POS       # s.3
+  unsupervised: [Green, ICA, CHROM, POS, LGI, PBV]
+  neural: [DeepPhys, TS-CAN, PhysNet, EfficientPhys]
+  source: "s.3; s.4 WP2 Baselines"
+
+sama_method:                  # s.4 WP3 steps 1-6
+  step1_exposure: {max_exposure_s: 0.0333333, max_clipped_skin_frac: 0.01, target_frac: "from pilot"}
+  step2_calibration: {chart_patches: 24, noise_model: photon_transfer}
+  step3_patches: {n: 30, weight: "pulse-band power / expected noise variance"}
+  step4_network: {max_params: 500000, film_inputs: [ITA_deg, brightness], loss: "neg-Pearson + spectral HR",
+                  group_dro_groups: 6}
+  step5_timing: {band_hz: [0.7, 3.0], resolution_ms: 1, interp: parabolic}
+  step6_gate: {alpha: 0.10, kind: mondrian_split_conformal_normalised, score: "|h_hat-h|/sigma_hat(x)",
+               abstain_halfwidth_bpm: 5, calib_draws: 200, one_window_per_participant: true}
+  source: "s.4 WP3"
+
+hypotheses:                   # s.3 table; s.6 table
+  alpha: 0.05
+  H1: {endpoint: "per-participant POS HR MAE, lossless reference video, both lights, seated blocks",
+       test: "OLS slope of MAE on ITA, one-sided (slope<0)", success: "p<0.05",
+       power_claimed: {n36: 0.87, n40: 0.90},
+       assumptions: {mae_lightest: 2.5, mae_darkest: 4.5, ita_range: [50, -25], between_sd: 2.0, noise: lognormal_right_skewed}}
+  H2: {endpoint: "per-participant penalty = MAE(H.264 500 kbps) - MAE(lossless)",
+       test: "OLS slope of penalty on ITA, two-sided", success: "clear answer either way (A: widening; B: null/narrowing with widening SNR gap)",
+       power_claimed: {n36: 0.80, n40: 0.85},
+       assumptions: {penalty_lightest: 1.0, penalty_darkest: 2.0, sd: 1.0}}
+  H3: {endpoint: "darker stratum, phone B minus phone A MAE", test: "paired one-sided", success: "p<0.05; 1.0 bpm smallest that matters",
+       power_claimed: {n36: 0.90, n40: 0.92}, assumptions: {delta: 1.0, sd_diff: 2.0}}
+  H4: {endpoint: "darker-stratum MAE, SAMA vs best baseline, held-out participants", test: "paired one-sided",
+       success: {darker_reduction_min: 0.30, gap_reduction_min: 0.50, lighter_increase_max: 0.10,
+                 coverage_min_every_stratum: 0.88, abstention_spread_max_pp: 10},
+       power_claimed: {n36: 0.99, n40: 0.99}, assumptions: {mae_base: 4.5, delta: 1.35, sd_diff: 2.0}}
+  H5: {endpoint: "RMSSD reactivity (log RMSSD arithmetic minus preceding rest), lossless, standard light",
+       test: "ICC(2,1) absolute agreement camera vs ECG", success: {overall_icc_min: 0.75, per_stratum_lower95_min: 0.60},
+       power_claimed: {n36: 0.90, n40: 0.93}, assumptions: {true_icc: 0.85, anchor: "resting lnRMSSD r=0.88 (2026 pilot)"}}
+  E1: {endpoint: "LOSO accuracy camera vs ECG features", exploratory: true}
+  multiplicity: "one primary test per hypothesis; Holm within hypothesis for secondaries"
+  source: "s.3 table; s.6 table"
+
+safeguards:
+  max_per_stratum_if_spread_high: 50     # s.6
+  source: "s.6 Analysis rules"
+
+insilico:                     # this project's choices (DECISIONS.md)
+  seeds: {master: 20261102}
+  rehearsal_studies: 1000
+  session_loss: 0.10
+  insilico: true

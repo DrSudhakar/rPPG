@@ -1,0 +1,173 @@
+SAMA · Reviewer stress test
+
+
+
+
+  SAMA: reviewer stress test (not for
+  submission)
+  Two objections remain open until you act: no real pilot data yet, and an unverified supply
+  of darker-skinned volunteers. Every other likely objection below is answered in the
+  proposal; the last column says how much risk is left.
+
+
+     A reviewer looking for a           Where the proposal             Risk left
+     reason to reject might say         answers it
+
+     "No preliminary data."             Section 5 and Figure 6, but    High until the pilot is done
+                                        only once you fill them with
+                                        real pilot or public-data
+                                        results
+
+     "Can you really recruit 40         Screening by colorimeter,      Medium: check the ITA°
+     people with ITA° of 10 or          pan-India campus,              spread in the pilot
+     below in Surat?"                   outreach; H1 and H2 use
+                                        continuous ITA° (section
+                                        9.3)
+
+     "No innovation in                  Three new method steps         Medium: group-DRO and
+     methodology; this is just a        (adaptive exposure, worst-     conformal prediction are
+     dataset."                          group conditioned              known tools; the novelty is
+                                        extraction, per-stratum        using them with measured
+                                        conformal gate) and the        skin tone and compression.
+                                        error-budget design            Do not oversell.
+                                        (sections 2.3, WP3, Figure
+                                        5)
+
+     "Skin-tone bias in rPPG is         Section 2.3: SAMA asks new     Low
+     already known."                    questions (causes,
+                                        compression on real data,
+                                        equal reliability, HRV per
+                                        stratum, Indian sample)
+
+     "The scientific rationale is not   Section 1's three facts with   Low
+     justified." (ARG comment)          numbers; Figure 2's
+                                        mechanism; two competing
+                                        predictions for H2
+
+
+
+
+                                                                                                 Page 1 of 4
+SAMA · Reviewer stress test
+
+
+
+
+     A reviewer looking for a          Where the proposal             Risk left
+     reason to reject might say        answers it
+
+     "The methodology lacks            Step-by-step methods,          Low
+     clarity." (ARG comment)           equations, set-up and
+                                       exclusion tables, Figures 3–
+                                       5
+
+     "Sample size is not justified."   Section 6: simulation-based    Low
+                                       power, sourced
+                                       assumptions, Figure 7, a
+                                       safeguard to raise the
+                                       sample
+
+     "Healthy volunteers are not       Scope statement (section       Medium: state the scope
+     patients; the eSanjeevani link    1); ages up to 60; step test   plainly if asked
+     is weak."                         widens heart-rate range; no
+                                       deployment claim; clinical
+                                       study named as the next
+                                       step (9.1)
+
+     "Why exclude arrhythmia and       Exclusion table with a         Low
+     similar conditions?"              reason per row; only
+                                       conditions that invalidate
+                                       the ECG ground truth
+
+     "One JRF cannot do this in 24     130 sessions over 10 months    Low to medium
+     months."                          is about 3 a week; toolbox
+                                       baselines exist; exploratory
+                                       work is dropped first (9.3)
+
+     "A lossless machine-vision        It is the best-case bound      Low
+     camera is not what patients       and the ladder's source;
+     use."                             webcam and phones are
+                                       recorded alongside (WP1
+                                       table)
+
+     "Offline compression is not a     Live Jitsi call at 500 kbps    Low
+     real video call."                 recorded and compared
+                                       with the ladder (WP1, WP2)
+
+
+
+
+                                                                                            Page 2 of 4
+SAMA · Reviewer stress test
+
+
+
+
+     A reviewer looking for a          Where the proposal             Risk left
+     reason to reject might say        answers it
+
+     "Teleconsultation apps cannot     A dedicated Android app        Low
+     control exposure."                can (Open Camera's
+                                       controls); H3 tells platform
+                                       developers whether it is
+                                       worth doing
+
+     "The arousal part is a            Reduced to exploratory E1,     Low
+     distraction."                     with no confirmatory claim
+
+     "ICC of 0.75 is arbitrary."       Koo and Li (2016) bands; a     Low
+                                       lower-bound criterion per
+                                       stratum
+
+     "Five hypotheses invite false     One primary test each;         Low
+     positives."                       Holm within hypotheses;
+                                       pre-registration (section 6)
+
+     "What if the hypotheses fail?"    "Every outcome is              Low
+                                       publishable" (section 3)
+
+     "The conformal guarantee          One window per participant     Low
+     assumes independent               per draw, repeated 200
+     windows."                         times; cross-dataset tests
+                                       (WP3)
+
+     "India's users have cheap         Entry-level phone in the       Low
+     phones."                          demonstrator tests; 250
+                                       kbps is in the ladder
+
+     "Face video is a privacy risk."   Tiered consent, offline        Low
+                                       encryption, controlled
+                                       access, DPDP Act (9.2)
+
+     "Why this budget?"                Item-wise justification; all   Low once quotations are
+                                       software open source; GPU      attached
+                                       cluster used (section 8)
+
+     "Overlaps with IIT Indore's       Theirs is respiration; SAMA    Low
+     work."                            is HR, HRV, compression
+                                       and reliability; Dr Gupta is
+                                       suggested as a reviewer
+
+
+
+
+                                                                                                Page 3 of 4
+SAMA · Reviewer stress test
+
+
+
+
+     A reviewer looking for a       Where the proposal            Risk left
+     reason to reject might say     answers it
+
+     "The PI's rPPG record is one   Expertise table maps every    Medium: the pilot figure is
+     2014 paper."                   method to published work,     your best answer
+                                    including device validation
+                                    and large datasets (section
+                                    10)
+
+
+
+
+                                                                                           Page 4 of 4
+

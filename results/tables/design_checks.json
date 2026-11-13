@@ -1,0 +1,196 @@
+{
+ "power_rerun": [
+  {
+   "n_per_stratum": 36,
+   "H1": 0.8766666666666667,
+   "H2": 0.8036666666666666,
+   "H3": 0.9016666666666666,
+   "H4_any_reduction": 0.9883333333333333,
+   "H5_fisher_one": 0.911,
+   "H5_f_one": 0.908,
+   "H5_joint_fisher": 0.746,
+   "H5_joint_f": 0.738
+  },
+  {
+   "n_per_stratum": 40,
+   "H1": 0.9036666666666666,
+   "H2": 0.838,
+   "H3": 0.9293333333333333,
+   "H4_any_reduction": 0.994,
+   "H5_fisher_one": 0.923,
+   "H5_f_one": 0.9185,
+   "H5_joint_fisher": 0.8155,
+   "H5_joint_f": 0.807
+  }
+ ],
+ "h4_rules": [
+  {
+   "true_reduction": 0.2,
+   "any_reduction_p05": 0.84,
+   "point_estimate_ge30pct": 0.103,
+   "lower95_gt_0": 0.84,
+   "lower95_ge_10pct": 0.38433333333333336
+  },
+  {
+   "true_reduction": 0.3,
+   "any_reduction_p05": 0.9913333333333333,
+   "point_estimate_ge30pct": 0.508,
+   "lower95_gt_0": 0.9913333333333333,
+   "lower95_ge_10pct": 0.8296666666666667
+  },
+  {
+   "true_reduction": 0.4,
+   "any_reduction_p05": 0.9996666666666667,
+   "point_estimate_ge30pct": 0.901,
+   "lower95_gt_0": 0.9996666666666667,
+   "lower95_ge_10pct": 0.99
+  },
+  {
+   "true_reduction": 0.5,
+   "any_reduction_p05": 1.0,
+   "point_estimate_ge30pct": 0.9956666666666667,
+   "lower95_gt_0": 1.0,
+   "lower95_ge_10pct": 1.0
+  }
+ ],
+ "coverage": [
+  {
+   "n_cal": 7,
+   "k": 8,
+   "finite_quantile": false,
+   "p_one_stratum": 1.0,
+   "p_all_three": 1.0,
+   "beta_p_below_088": NaN
+  },
+  {
+   "n_cal": 8,
+   "k": 9,
+   "finite_quantile": false,
+   "p_one_stratum": 1.0,
+   "p_all_three": 1.0,
+   "beta_p_below_088": NaN
+  },
+  {
+   "n_cal": 9,
+   "k": 9,
+   "finite_quantile": true,
+   "p_one_stratum": 0.682,
+   "p_all_three": 0.315,
+   "beta_p_below_088": 0.31647838182886606
+  },
+  {
+   "n_cal": 14,
+   "k": 14,
+   "finite_quantile": true,
+   "p_one_stratum": 0.821,
+   "p_all_three": 0.5645,
+   "beta_p_below_088": 0.16701574306830982
+  },
+  {
+   "n_cal": 20,
+   "k": 19,
+   "finite_quantile": true,
+   "p_one_stratum": 0.7165,
+   "p_all_three": 0.364,
+   "beta_p_below_088": 0.2890976853787066
+  },
+  {
+   "n_cal": 36,
+   "k": 34,
+   "finite_quantile": true,
+   "p_one_stratum": 0.82,
+   "p_all_three": 0.555,
+   "beta_p_below_088": 0.17679902551500132
+  },
+  {
+   "n_cal": 72,
+   "k": 66,
+   "finite_quantile": true,
+   "p_one_stratum": 0.761,
+   "p_all_three": 0.4405,
+   "beta_p_below_088": 0.2243770427364918
+  }
+ ],
+ "recruitment": {
+  "p_lighter": 0.15357,
+  "p_middle": 0.184135,
+  "p_darker": 0.662295,
+  "screened_median": 262.0,
+  "screened_p90": 311.0,
+  "source": "LITERATURE: Pawar et al. 2024 (n=368 Indian adults, cheek ITA clusters); city not Surat"
+ },
+ "h1_sensitivity": [
+  {
+   "ita_distribution": "proposal ranges",
+   "between_sd": 2.0,
+   "ita_error_sd": 0.0,
+   "power_n36": 0.862
+  },
+  {
+   "ita_distribution": "proposal ranges",
+   "between_sd": 2.0,
+   "ita_error_sd": 6.0,
+   "power_n36": 0.8653333333333333
+  },
+  {
+   "ita_distribution": "proposal ranges",
+   "between_sd": 4.0,
+   "ita_error_sd": 0.0,
+   "power_n36": 0.43466666666666665
+  },
+  {
+   "ita_distribution": "proposal ranges",
+   "between_sd": 4.0,
+   "ita_error_sd": 6.0,
+   "power_n36": 0.39666666666666667
+  },
+  {
+   "ita_distribution": "proposal ranges",
+   "between_sd": 6.0,
+   "ita_error_sd": 0.0,
+   "power_n36": 0.2613333333333333
+  },
+  {
+   "ita_distribution": "proposal ranges",
+   "between_sd": 6.0,
+   "ita_error_sd": 6.0,
+   "power_n36": 0.23933333333333334
+  },
+  {
+   "ita_distribution": "Indian mixture (Pawar 2024)",
+   "between_sd": 2.0,
+   "ita_error_sd": 0.0,
+   "power_n36": 0.97
+  },
+  {
+   "ita_distribution": "Indian mixture (Pawar 2024)",
+   "between_sd": 2.0,
+   "ita_error_sd": 6.0,
+   "power_n36": 0.964
+  },
+  {
+   "ita_distribution": "Indian mixture (Pawar 2024)",
+   "between_sd": 4.0,
+   "ita_error_sd": 0.0,
+   "power_n36": 0.5473333333333333
+  },
+  {
+   "ita_distribution": "Indian mixture (Pawar 2024)",
+   "between_sd": 4.0,
+   "ita_error_sd": 6.0,
+   "power_n36": 0.57
+  },
+  {
+   "ita_distribution": "Indian mixture (Pawar 2024)",
+   "between_sd": 6.0,
+   "ita_error_sd": 0.0,
+   "power_n36": 0.33266666666666667
+  },
+  {
+   "ita_distribution": "Indian mixture (Pawar 2024)",
+   "between_sd": 6.0,
+   "ita_error_sd": 6.0,
+   "power_n36": 0.344
+  }
+ ]
+}

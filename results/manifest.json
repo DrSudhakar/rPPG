@@ -1,0 +1,1264 @@
+{
+ "commit": "aeffe95263475823dc42bd85372bb2b614a1713e",
+ "files": [
+  {
+   "path": "results/c6_summary.json",
+   "sha256": "20716f1631331671fd49e836bf1fc0ffb8659ad91c2a16d272a2bd39a296ef74",
+   "generated_by": "analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/c7_summary.json",
+   "sha256": "a063ae5d7c23878fc683b3e7bb79621de5840fc22ae721308492dac75d1bffa1",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/c9_summary.json",
+   "sha256": "401cd25f8f2ca77ccc78ef59a974f94edde629bb3452435e385c98ea7fe314fc",
+   "generated_by": "see Makefile",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/app_live.png",
+   "sha256": "2810747d432b0ee01a796143a352429903f4e719680bd55a4689b59d0bd41b36",
+   "generated_by": "see Makefile",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/app_simulator.png",
+   "sha256": "c2cf3dc81de49d236cd237664462daa4bd77cadf1a55db49c537e9a6eb388d28",
+   "generated_by": "see Makefile",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_ablation.png",
+   "sha256": "d1ba4d160db00eed08ba2cd102cc57b01c165ada69fd861cdbd006411220e1eb",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_codec_gain.png",
+   "sha256": "f563cf392d7fd9b6549c813de6383e48f679646bb0438c8ccb2c9adecf0636ca",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_coverage_abstention.png",
+   "sha256": "49b2ecc582d6a81061aba58d5ca04576798fb483d2857cdc009093858411f799",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_error_budget.png",
+   "sha256": "d75feb547cc0ceba563307db36bac49e6b912295e3402f1be5dbbc51e0224804",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_h1_rehearsal.png",
+   "sha256": "a7c0776e321b481f0dd3f702c51b0f007492773fc97d56f0acf8de1312d42151",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_h2_discriminability.png",
+   "sha256": "4d265d9c79e979d183edcbc78228e9ac50601770b4e0b6c5d6b73d37ab59e93e",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_h5_icc.png",
+   "sha256": "d9e2b17a5972b2d611c018788b863c64c82228f5f9290bf0900ccdc79b44bf31",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_power_vs_proposal.png",
+   "sha256": "e4e73c064b0d881c0645daaf83ef74ee20245f08286893adaae01af53a740e10",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/figures/fig_sim_vs_reality.png",
+   "sha256": "17e90ed26a91116411a92a8e0ccfa4bdad405275051381e23cd59591e54e9074",
+   "generated_by": "analysis/figures.py or analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/abstention_tradeoff.csv",
+   "sha256": "8e0e424a06886bfa373e025cdef2c629c3367e1ae58973dba3d80bb2868b939a",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/acceptance.csv",
+   "sha256": "97c4f083094f2d0975e3702f33f63ebdcc6cb4b47215173f093c914a6b606b2d",
+   "generated_by": "analysis/acceptance.py",
+   "provenance": "SYNTHETIC inputs; CPU proxy"
+  },
+  {
+   "path": "results/tables/acceptance_faults.csv",
+   "sha256": "0b33b6654120e850c8d85490275488c34ac8709093a404319e50f6e00da773b5",
+   "generated_by": "analysis/acceptance.py",
+   "provenance": "SYNTHETIC inputs; CPU proxy"
+  },
+  {
+   "path": "results/tables/budget_by_stratum.csv",
+   "sha256": "741fc42e08042a734526e9529a98ed94d2597ccb68783e11cbf86808a9521945",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/budget_mixed_model.csv",
+   "sha256": "862b38e173115fe03e25171890bc2be47e3a59e3437954a00e10cccfabb9192e",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/budget_planted_recovery.csv",
+   "sha256": "65665bdd10fa7e73a1b9735e9cc4b1f4707e7d4e6b36171d2a9d9a4bc1606624",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c6_h1_mixed_model.csv",
+   "sha256": "b4f7e39903ddf4e0fdbc226e6e7ac87053bac18a10b53d2793bbf211483ca4c9",
+   "generated_by": "analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c6_h1_power.csv",
+   "sha256": "275e65826c3389b847947c5d8150e30f4b1219cce00e758d0355586cff9b305d",
+   "generated_by": "analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c6_h1_power_curve.csv",
+   "sha256": "de9ab56f08c341ccfb507cc47e354253c960f9cde006e3cc6230b241563b8ace",
+   "generated_by": "analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c6_h2_discriminability.csv",
+   "sha256": "a7b8a76b51ebf3665fdd92c8ec4add6e00d85771997d43789ed3eaad9b587a9c",
+   "generated_by": "analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c6_realised_gradient.csv",
+   "sha256": "9cdabb90f0c61624da04c27224d56c4be8fecf4be88dbc33ece923a3a07d6429",
+   "generated_by": "analysis/rehearsal.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c7_ablation.csv",
+   "sha256": "9a1efb26de903be1a4eee6397cde9f4013b98288442ac112494cf386d8848b6d",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c7_coverage_shift.csv",
+   "sha256": "1c726335f188160b3bd92cd36a6ce27cce16a6e15363066a2dfad37cfbec8c52",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c7_frozen_split_quantiles.csv",
+   "sha256": "89ee46eba4743fe115b84dbcdca0ea51c91d9b87bb2094739d74331943529c86",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c7_h4_criteria.csv",
+   "sha256": "871f6f2b06c70e26f8c2ef0ba560baaefc1f0bc09a0b7a4b247fadb5425ecccb",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c7_matched_abstention.csv",
+   "sha256": "fe6f6e90e5b7de2f52fb7b21e9cfd48fa6689c009231e141e7c2cb149aa8ff3a",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c7_training_history.csv",
+   "sha256": "c9bf09a7f09cb663fae8363d54573a96ba980f9675e94a1aad3008b1fb5fd60d",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c8_e1_loso.csv",
+   "sha256": "cbe6224ef5349ed47d2e78c47b33dc699dd133a345b2a6756355182dcb2b769b",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/c8_h5_icc.csv",
+   "sha256": "4eeb662e8614f8b570529eba7f0c373f8777938a0f56362cabf512f28f68fd8e",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/codec_real_gain.csv",
+   "sha256": "6d09ecb0aa1d1e0e71c6dcb5d2248bdc198d1794895a3aeac9718144bc107cf4",
+   "generated_by": "sim/codec_real.py",
+   "provenance": "SYNTHETIC rendering, real codec"
+  },
+  {
+   "path": "results/tables/coverage.csv",
+   "sha256": "e27258442eea4aa0698535fc4d46b2f3df31ff758c4129f02adbaddc18eea342",
+   "generated_by": "tools/coverage.py",
+   "provenance": "software test"
+  },
+  {
+   "path": "results/tables/coverage_criterion.csv",
+   "sha256": "9645995665c788c70633070f8493c358ea682c924ea1a95b870c6417660145a8",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "software test"
+  },
+  {
+   "path": "results/tables/design_checks.json",
+   "sha256": "893bc88b5d4e97974c6bb0fa345cc33a49ce39ca220854ed6bc2e71ef81b703f",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "ASSUMPTION-DRIVEN (proposal assumptions) + LITERATURE"
+  },
+  {
+   "path": "results/tables/export_parity.csv",
+   "sha256": "e56fbf946ea368d2aed92e590684bb8ccf56157e1e45ec17f669f1eae8ba86cc",
+   "generated_by": "analysis/export_models.py",
+   "provenance": "SYNTHETIC inputs"
+  },
+  {
+   "path": "results/tables/h1_power_sensitivity.csv",
+   "sha256": "1848f61cf68d5acdb4835484020e7ec4f13b2628e832b3a258043f149a8482c3",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/h3_photon_budget.csv",
+   "sha256": "ded8648733037324672908161e64ce6fc33fbdff55358f258c1d525ebd01c262",
+   "generated_by": "analysis/method_eval.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/h4_power_by_rule.csv",
+   "sha256": "182d7c518bc003723136d1e78625689ed93519738fdb5a0247b58f0ff478aa17",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/h5_reactivity_icc.csv",
+   "sha256": "911e450f40c674a2c5d7f9d62d3b56a211a56de591a11d2cde7da59799f335bd",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/power_rerun.csv",
+   "sha256": "b89b9f4a205ecf51445cb42ef0e58f5989e0eac9cdfe95ae8ac775626982c8e1",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "SYNTHETIC; ASSUMPTION-DRIVEN where it depends on simulator premises"
+  },
+  {
+   "path": "results/tables/recruitment_sim.csv",
+   "sha256": "e3c5fb5e4083fd38c4913a437a3a535d6bdd587874501f88ea2b1edd97e560d1",
+   "generated_by": "analysis/design_checks.py",
+   "provenance": "LITERATURE (Pawar et al. 2024)"
+  },
+  {
+   "path": "results/tables/sim_calibration.csv",
+   "sha256": "cad89a147a5497c5b9da768755a666fbae783379cfdc9c04a2bd64f4061a6912",
+   "generated_by": "sim/calibrate.py",
+   "provenance": "SYNTHETIC (calibrated to LITERATURE anchor)"
+  }
+ ],
+ "numbers": {
+  "pr_h1": {
+   "value": 0.8766666666666667,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    0,
+    "H1"
+   ]
+  },
+  "pr_h2": {
+   "value": 0.8036666666666666,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    0,
+    "H2"
+   ]
+  },
+  "pr_h3": {
+   "value": 0.9016666666666666,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    0,
+    "H3"
+   ]
+  },
+  "pr_h4": {
+   "value": 0.9883333333333333,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    0,
+    "H4_any_reduction"
+   ]
+  },
+  "pr_h5_one": {
+   "value": 0.911,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    0,
+    "H5_fisher_one"
+   ]
+  },
+  "pr_h5_joint": {
+   "value": 0.738,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    0,
+    "H5_joint_f"
+   ]
+  },
+  "pr_h5_joint40": {
+   "value": 0.807,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "power_rerun",
+    1,
+    "H5_joint_f"
+   ]
+  },
+  "h4rule_point30": {
+   "value": 0.508,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "h4_rules",
+    1,
+    "point_estimate_ge30pct"
+   ]
+  },
+  "h4rule_lb10_30": {
+   "value": 0.8296666666666667,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "h4_rules",
+    1,
+    "lower95_ge_10pct"
+   ]
+  },
+  "h4rule_point40": {
+   "value": 0.901,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "h4_rules",
+    2,
+    "point_estimate_ge30pct"
+   ]
+  },
+  "cov36_one": {
+   "value": 0.82,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "coverage",
+    5,
+    "p_one_stratum"
+   ]
+  },
+  "cov36_all": {
+   "value": 0.555,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "coverage",
+    5,
+    "p_all_three"
+   ]
+  },
+  "cov14_all": {
+   "value": 0.5645,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "coverage",
+    3,
+    "p_all_three"
+   ]
+  },
+  "rec_lighter": {
+   "value": 0.15357,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "recruitment",
+    "p_lighter"
+   ]
+  },
+  "rec_darker": {
+   "value": 0.662295,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "recruitment",
+    "p_darker"
+   ]
+  },
+  "rec_screen": {
+   "value": 262.0,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "recruitment",
+    "screened_median"
+   ]
+  },
+  "rec_screen90": {
+   "value": 311.0,
+   "file": "results/tables/design_checks.json",
+   "keys": [
+    "recruitment",
+    "screened_p90"
+   ]
+  },
+  "h4_dark_red": {
+   "value": 0.4326995614938761,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "point",
+    "darker_reduction"
+   ]
+  },
+  "h4_dark_red_lo": {
+   "value": 0.22842570425696787,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "ci95",
+    "darker_reduction",
+    0
+   ]
+  },
+  "h4_dark_red_hi": {
+   "value": 0.619688932618486,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "ci95",
+    "darker_reduction",
+    1
+   ]
+  },
+  "h4_gap_red": {
+   "value": 0.057981362021383376,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "point",
+    "gap_reduction"
+   ]
+  },
+  "h4_light_inc": {
+   "value": -0.6872936751713683,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "point",
+    "lighter_increase"
+   ]
+  },
+  "h4_mincov": {
+   "value": 0.9586370571283268,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "point",
+    "min_coverage"
+   ]
+  },
+  "h4_abst_spread": {
+   "value": 31.5625064053357,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "point",
+    "abstention_spread_pp"
+   ]
+  },
+  "h4_p_c1": {
+   "value": 0.905,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "p_pass",
+    "c1"
+   ]
+  },
+  "h4_p_c2": {
+   "value": 0.2935,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "p_pass",
+    "c2"
+   ]
+  },
+  "h4_p_c5": {
+   "value": 0.0,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "p_pass",
+    "c5"
+   ]
+  },
+  "h4_p_all": {
+   "value": 0.0,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4",
+    "p_all_five"
+   ]
+  },
+  "h4_paired_mean": {
+   "value": 1.3921895691979966,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4_paired_darker",
+    "mean"
+   ]
+  },
+  "h4_paired_p": {
+   "value": 0.0013668140065677993,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h4_paired_darker",
+    "p"
+   ]
+  },
+  "h3_dark_pooled": {
+   "value": 0.48414218418656596,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "pooled",
+    "mean"
+   ]
+  },
+  "h3_dark_pooled_lo": {
+   "value": 0.014131474474741834,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "pooled",
+    "lo95"
+   ]
+  },
+  "h3_dark_pooled_hi": {
+   "value": 0.9541528938983901,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "pooled",
+    "hi95"
+   ]
+  },
+  "h3_dark_pooled_p": {
+   "value": 0.0219205669622698,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "pooled",
+    "p"
+   ]
+  },
+  "h3_dark_std": {
+   "value": 0.7504446211795136,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "standard",
+    "mean"
+   ]
+  },
+  "h3_dark_dim": {
+   "value": 0.2178397471936182,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "dim",
+    "mean"
+   ]
+  },
+  "h3_dark_dim_p": {
+   "value": 0.13977804950309056,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h3",
+    "darker",
+    "dim",
+    "p"
+   ]
+  },
+  "h5_icc60": {
+   "value": 0.1523118785802879,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference",
+    "overall",
+    "icc"
+   ]
+  },
+  "h5_icc60_lo": {
+   "value": -0.034849427311084,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference",
+    "overall",
+    "lo95"
+   ]
+  },
+  "h5_icc60_hi": {
+   "value": 0.33272154995247105,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference",
+    "overall",
+    "hi95"
+   ]
+  },
+  "h5_icc30hq": {
+   "value": 0.13375107913221046,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference30hq",
+    "overall",
+    "icc"
+   ]
+  },
+  "h5_icc30": {
+   "value": 0.10972705269392212,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference30",
+    "overall",
+    "icc"
+   ]
+  },
+  "h5_icc500": {
+   "value": 0.051999724045077945,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference30_500",
+    "overall",
+    "icc"
+   ]
+  },
+  "h5_level60": {
+   "value": 0.6458646391448654,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference",
+    "level_rest",
+    "icc"
+   ]
+  },
+  "h5_ppass": {
+   "value": 0.0,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "h5",
+    "reference",
+    "p_pass_36"
+   ]
+  },
+  "e1_ecg": {
+   "value": 0.7037037037037037,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "e1",
+    "ecg",
+    "accuracy"
+   ]
+  },
+  "e1_cam": {
+   "value": 0.6759259259259259,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "e1",
+    "cam",
+    "accuracy"
+   ]
+  },
+  "budget_planted": {
+   "value": 0.91,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "budget",
+    "planted_coverage_min"
+   ]
+  },
+  "budget_nwin": {
+   "value": 36737,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "budget",
+    "n_windows"
+   ]
+  },
+  "params": {
+   "value": 9625,
+   "file": "results/c7_summary.json",
+   "keys": [
+    "final_model",
+    "n_params"
+   ]
+  },
+  "c6_grad_A": {
+   "value": 1.1656537093584551,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "slope_per75"
+   ]
+  },
+  "c6_grad_A_lo": {
+   "value": -0.32206899318400256,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "lo95"
+   ]
+  },
+  "c6_grad_A_hi": {
+   "value": 2.6533764119009127,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "hi95"
+   ]
+  },
+  "c6_grad_mel": {
+   "value": 6.330199343392672,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    2,
+    "slope_per75"
+   ]
+  },
+  "c6_mae_light_A": {
+   "value": 1.7573908833705227,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "mae_lighter"
+   ]
+  },
+  "c6_mae_dark_A": {
+   "value": 2.554182365960014,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "mae_darker"
+   ]
+  },
+  "c6_med_light_A": {
+   "value": 0.6796795523592171,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "median_lighter"
+   ]
+  },
+  "c6_med_dark_A": {
+   "value": 1.154742960449837,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "median_darker"
+   ]
+  },
+  "c6_sd_darker": {
+   "value": 3.652329207551737,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "sd_darker"
+   ]
+  },
+  "c6_sd_lighter": {
+   "value": 3.5369863212415202,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "realised_gradient",
+    0,
+    "sd_lighter"
+   ]
+  },
+  "c6_h1_cond": {
+   "value": 0.27,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    0,
+    "power"
+   ]
+  },
+  "c6_h1_typeI": {
+   "value": 0.048,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    0,
+    "type_I"
+   ]
+  },
+  "c6_h1_err6": {
+   "value": 0.247,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    2,
+    "power"
+   ]
+  },
+  "c6_h1_err10": {
+   "value": 0.224,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    3,
+    "power"
+   ]
+  },
+  "c6_h1_param": {
+   "value": 0.35,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    4,
+    "power"
+   ]
+  },
+  "c6_h1_logmae": {
+   "value": 0.775,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    5,
+    "power"
+   ]
+  },
+  "c6_h1_medae": {
+   "value": 0.154,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    6,
+    "power"
+   ]
+  },
+  "c6_h1_rank": {
+   "value": 0.793,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1",
+    7,
+    "power"
+   ]
+  },
+  "c6_h1_mm": {
+   "value": 0.54,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1_mixed_model",
+    "power"
+   ]
+  },
+  "c6_h1_mm_nonconv": {
+   "value": 0,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h1_mixed_model",
+    "nonconverged"
+   ]
+  },
+  "c6_h2_correct_A": {
+   "value": 0.951,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2",
+    0,
+    "share"
+   ]
+  },
+  "c6_h2_B_inconcl": {
+   "value": 1.0,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2",
+    5,
+    "share"
+   ]
+  },
+  "c6_h2_B_equiv": {
+   "value": 0.002,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2",
+    7,
+    "share"
+   ]
+  },
+  "c6_h2_slopeA": {
+   "value": 5.6383019929322575,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2_pool_slope_A",
+    "penalty_slope_per75"
+   ]
+  },
+  "c6_h2_slopeB": {
+   "value": -0.16701243174009126,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2_pool_slope_B",
+    "penalty_slope_per75"
+   ]
+  },
+  "c6_h2_slopeB_lo": {
+   "value": -0.7275338179285528,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2_pool_slope_B",
+    "lo95"
+   ]
+  },
+  "c6_h2_slopeB_hi": {
+   "value": 0.3935089544483702,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2_pool_slope_B",
+    "hi95"
+   ]
+  },
+  "c6_h2_typeI": {
+   "value": 0.053,
+   "file": "results/c6_summary.json",
+   "keys": [
+    "h2_type_I_permutation"
+   ]
+  },
+  "rtf_onnx": {
+   "value": 0.8014669785222212,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "rtf_onnx"
+   ]
+  },
+  "rtf_numpy": {
+   "value": 0.8394287529111096,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "rtf_numpy"
+   ]
+  },
+  "mem_mb": {
+   "value": 73.131595,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "mem_mb"
+   ]
+  },
+  "update_ms": {
+   "value": 793.8004405000072,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "update_ms"
+   ]
+  },
+  "faults_wrong": {
+   "value": 7,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "faults_wrong"
+   ]
+  },
+  "coverage_pct": {
+   "value": 80.3,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "coverage_pct"
+   ]
+  },
+  "tests": {
+   "value": 56,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "tests"
+   ]
+  },
+  "parity_fp16": {
+   "value": 0.0006430451888377,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "parity_fp16"
+   ]
+  },
+  "parity_int8": {
+   "value": 0.0137220485344471,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "parity_int8"
+   ]
+  },
+  "codec_small_500": {
+   "value": 0.11840650441811625,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "codec_small_500"
+   ]
+  },
+  "codec_large_500": {
+   "value": 0.73764631784523,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "codec_large_500"
+   ]
+  },
+  "codec_small_2000": {
+   "value": 0.09654841957457778,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "codec_small_2000"
+   ]
+  },
+  "matched_dark_diff": {
+   "value": -0.1306554436894016,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "matched_dark_diff"
+   ]
+  },
+  "matched_dark_lo": {
+   "value": -0.4467109900011299,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "matched_dark_lo"
+   ]
+  },
+  "matched_dark_hi": {
+   "value": 0.0811504117104841,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "matched_dark_hi"
+   ]
+  },
+  "matched_light_diff": {
+   "value": 0.9960266834976104,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "matched_light_diff"
+   ]
+  },
+  "abl_SAMA_lighter": {
+   "value": 0.6536195518778679,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_SAMA_lighter"
+   ]
+  },
+  "abl_SAMA_middle": {
+   "value": 0.8752113402569434,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_SAMA_middle"
+   ]
+  },
+  "abl_SAMA_darker": {
+   "value": 1.825261274504095,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_SAMA_darker"
+   ]
+  },
+  "abl_noFiLM_lighter": {
+   "value": 0.5619570766323628,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_noFiLM_lighter"
+   ]
+  },
+  "abl_noFiLM_middle": {
+   "value": 0.9501443483658452,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_noFiLM_middle"
+   ]
+  },
+  "abl_noFiLM_darker": {
+   "value": 1.5838095162422257,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_noFiLM_darker"
+   ]
+  },
+  "abl_nogroupDRO_lighter": {
+   "value": 0.4491277451472405,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_nogroupDRO_lighter"
+   ]
+  },
+  "abl_nogroupDRO_middle": {
+   "value": 0.8683184808182998,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_nogroupDRO_middle"
+   ]
+  },
+  "abl_nogroupDRO_darker": {
+   "value": 1.7603578010727894,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_nogroupDRO_darker"
+   ]
+  },
+  "abl_noCNN_lighter": {
+   "value": 1.90757764743574,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_noCNN_lighter"
+   ]
+  },
+  "abl_noCNN_middle": {
+   "value": 3.388725531591784,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_noCNN_middle"
+   ]
+  },
+  "abl_noCNN_darker": {
+   "value": 3.328112046592399,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_noCNN_darker"
+   ]
+  },
+  "abl_POS_gate_lighter": {
+   "value": 2.090202529208781,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_POS_gate_lighter"
+   ]
+  },
+  "abl_POS_gate_middle": {
+   "value": 3.333958944666651,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_POS_gate_middle"
+   ]
+  },
+  "abl_POS_gate_darker": {
+   "value": 3.2174508490824563,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abl_POS_gate_darker"
+   ]
+  },
+  "abst_lighter": {
+   "value": 0.0212224108658743,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abst_lighter"
+   ]
+  },
+  "abst_middle": {
+   "value": 0.1237497880996779,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abst_middle"
+   ]
+  },
+  "abst_darker": {
+   "value": 0.3368474749192314,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "abst_darker"
+   ]
+  },
+  "yield_lighter": {
+   "value": 0.9553480475382004,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "yield_lighter"
+   ]
+  },
+  "yield_middle": {
+   "value": 0.8594677063909137,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "yield_middle"
+   ]
+  },
+  "yield_darker": {
+   "value": 0.6621322904267981,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "yield_darker"
+   ]
+  },
+  "cov_lighter": {
+   "value": 0.9636672325976232,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "cov_lighter"
+   ]
+  },
+  "cov_middle": {
+   "value": 0.9586370571283268,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "cov_middle"
+   ]
+  },
+  "cov_darker": {
+   "value": 0.9586804965141984,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "cov_darker"
+   ]
+  },
+  "faults_shown_250": {
+   "value": 19,
+   "file": "results/c9_summary.json",
+   "keys": [
+    "faults_shown_250"
+   ]
+  }
+ }
+}

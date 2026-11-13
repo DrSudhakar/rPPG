@@ -1,0 +1,16 @@
+results/cache/
+third_party/
+__pycache__/
+*.pyc
+report/build/
+
+# real and synthetic pilot data, trained models, build outputs
+pilot_data/
+pilot_data_SYNTHETIC/
+data_SYNTHETIC/
+models/
+results/pilot/
+results/pilot_SYNTHETIC/
+proposal/build/
+*.mkv
+*.webm

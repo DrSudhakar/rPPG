@@ -1,0 +1,15 @@
+term,coverage_95
+intercept,1.0
+ita10,1.0
+g_dim,0.97
+g_webcam,0.96
+g_phoneA,0.98
+g_phoneB,0.96
+g_codec500,0.91
+g_codec250,0.96
+d_ita10xdim,0.93
+d_ita10xwebcam,0.97
+d_ita10xphoneA,0.97
+d_ita10xphoneB,0.95
+d_ita10xcodec500,0.97
+d_ita10xcodec250,0.94

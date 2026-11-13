@@ -1,0 +1,13 @@
+ita_distribution,between_sd,ita_error_sd,power_n36
+proposal ranges,2.0,0.0,0.862
+proposal ranges,2.0,6.0,0.8653333333333333
+proposal ranges,4.0,0.0,0.43466666666666665
+proposal ranges,4.0,6.0,0.39666666666666667
+proposal ranges,6.0,0.0,0.2613333333333333
+proposal ranges,6.0,6.0,0.23933333333333334
+Indian mixture (Pawar 2024),2.0,0.0,0.97
+Indian mixture (Pawar 2024),2.0,6.0,0.964
+Indian mixture (Pawar 2024),4.0,0.0,0.5473333333333333
+Indian mixture (Pawar 2024),4.0,6.0,0.57
+Indian mixture (Pawar 2024),6.0,0.0,0.33266666666666667
+Indian mixture (Pawar 2024),6.0,6.0,0.344

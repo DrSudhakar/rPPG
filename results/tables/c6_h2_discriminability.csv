@@ -1,0 +1,9 @@
+true_world,rule,decision,share
+A,frozen,A,0.951
+A,amended,A,0.951
+A,frozen,inconclusive,0.048
+A,amended,inconclusive,0.049
+A,frozen,B,0.001
+B,frozen,inconclusive,1.0
+B,amended,inconclusive,0.998
+B,amended,B-equivalent,0.002

@@ -1,0 +1,47 @@
+{
+ "provenance": "real ffmpeg on rendered SAMA-Sim tiles (SYNTHETIC rendering); fit of gain = floor + (top-floor) A^2/(A^2+tau^2)",
+ "levels": {
+  "h264_1000": {
+   "floor": 0.099,
+   "tau": 2.057,
+   "top": 1.017,
+   "sigma": 0.17,
+   "rss": 0.0911
+  },
+  "h264_2000": {
+   "floor": 0.073,
+   "tau": 1.507,
+   "top": 1.004,
+   "sigma": 0.123,
+   "rss": 0.0456
+  },
+  "h264_250": {
+   "floor": 0.304,
+   "tau": 3.227,
+   "top": 1.014,
+   "sigma": 0.451,
+   "rss": 1.8854
+  },
+  "h264_500": {
+   "floor": 0.071,
+   "tau": 2.494,
+   "top": 1.02,
+   "sigma": 0.234,
+   "rss": 0.0936
+  },
+  "vp8_250": {
+   "floor": 0.208,
+   "tau": 0.171,
+   "top": 0.82,
+   "sigma": 1.082,
+   "rss": 0.0393
+  },
+  "vp8_500": {
+   "floor": 0.266,
+   "tau": 0.01,
+   "top": 0.828,
+   "sigma": 0.979,
+   "rss": 0.0458
+  }
+ }
+}

@@ -1,0 +1,171 @@
+{
+ "provenance": "SYNTHETIC (SAMA-Sim pools); ASSUMPTION-DRIVEN",
+ "studies": 1000,
+ "realised_gradient": [
+  {
+   "world": "A",
+   "n": 270,
+   "slope_per75": 1.1656537093584551,
+   "lo95": -0.32206899318400256,
+   "hi95": 2.6533764119009127,
+   "mae_lighter": 1.7573908833705227,
+   "mae_middle": 1.8775992799585153,
+   "mae_darker": 2.554182365960014,
+   "sd_lighter": 3.5369863212415202,
+   "sd_middle": 3.342585125730565,
+   "sd_darker": 3.652329207551737,
+   "median_lighter": 0.6796795523592171,
+   "median_middle": 0.8762646366884419,
+   "median_darker": 1.154742960449837
+  },
+  {
+   "world": "B",
+   "n": 270,
+   "slope_per75": 1.49855661183148,
+   "lo95": -0.9052623064863857,
+   "hi95": 3.9023755301493455,
+   "mae_lighter": 2.1609594096899913,
+   "mae_middle": 2.423134998334625,
+   "mae_darker": 2.8173650321459247,
+   "sd_lighter": 5.771572535860594,
+   "sd_middle": 5.1009361286922985,
+   "sd_darker": 5.6747215340201915,
+   "median_lighter": 0.6132750151212394,
+   "median_middle": 0.8212538457015234,
+   "median_darker": 1.1446344974852818
+  },
+  {
+   "world": "melanin",
+   "n": 120,
+   "slope_per75": 6.330199343392672,
+   "lo95": 3.9969143969663863,
+   "hi95": 8.663484289818959,
+   "mae_lighter": 0.9736280167687689,
+   "mae_middle": 2.7275252839764135,
+   "mae_darker": 4.9595074645638775,
+   "sd_lighter": 1.0377354132082133,
+   "sd_middle": 4.290950282503398,
+   "sd_darker": 4.26794307060297,
+   "median_lighter": 0.7012825080412453,
+   "median_middle": 1.0061795154140858,
+   "median_darker": 3.702182107973319
+  }
+ ],
+ "h1": [
+  {
+   "method": "pool resampling (conditional)",
+   "ita_error_sd": 0.0,
+   "power": 0.27,
+   "type_I": 0.048
+  },
+  {
+   "method": "pool resampling (conditional)",
+   "ita_error_sd": 3.0,
+   "power": 0.268,
+   "type_I": 0.056
+  },
+  {
+   "method": "pool resampling (conditional)",
+   "ita_error_sd": 6.0,
+   "power": 0.247,
+   "type_I": 0.061
+  },
+  {
+   "method": "pool resampling (conditional)",
+   "ita_error_sd": 10.0,
+   "power": 0.224,
+   "type_I": 0.04
+  },
+  {
+   "method": "parametric (fresh participants)",
+   "ita_error_sd": 0.0,
+   "power": 0.35,
+   "type_I": NaN
+  },
+  {
+   "method": "pool resampling, endpoint log MAE",
+   "ita_error_sd": 0.0,
+   "power": 0.775,
+   "type_I": NaN
+  },
+  {
+   "method": "pool resampling, endpoint median AE",
+   "ita_error_sd": 0.0,
+   "power": 0.154,
+   "type_I": NaN
+  },
+  {
+   "method": "pool resampling, endpoint rank (Spearman)",
+   "ita_error_sd": 0.0,
+   "power": 0.793,
+   "type_I": NaN
+  }
+ ],
+ "h1_mixed_model": {
+  "power": 0.54,
+  "nonconverged": 0,
+  "singular": 0,
+  "studies": 100
+ },
+ "h2_pool_slope_A": {
+  "penalty_slope_per75": 5.6383019929322575,
+  "lo95": 3.4310546790303897,
+  "hi95": 7.845549306834125
+ },
+ "h2_pool_slope_B": {
+  "penalty_slope_per75": -0.16701243174009126,
+  "lo95": -0.7275338179285528,
+  "hi95": 0.3935089544483702
+ },
+ "h2": [
+  {
+   "true_world": "A",
+   "rule": "frozen",
+   "decision": "A",
+   "share": 0.951
+  },
+  {
+   "true_world": "A",
+   "rule": "amended",
+   "decision": "A",
+   "share": 0.951
+  },
+  {
+   "true_world": "A",
+   "rule": "frozen",
+   "decision": "inconclusive",
+   "share": 0.048
+  },
+  {
+   "true_world": "A",
+   "rule": "amended",
+   "decision": "inconclusive",
+   "share": 0.049
+  },
+  {
+   "true_world": "A",
+   "rule": "frozen",
+   "decision": "B",
+   "share": 0.001
+  },
+  {
+   "true_world": "B",
+   "rule": "frozen",
+   "decision": "inconclusive",
+   "share": 1.0
+  },
+  {
+   "true_world": "B",
+   "rule": "amended",
+   "decision": "inconclusive",
+   "share": 0.998
+  },
+  {
+   "true_world": "B",
+   "rule": "amended",
+   "decision": "B-equivalent",
+   "share": 0.002
+  }
+ ],
+ "h2_type_I_permutation": 0.053
+}

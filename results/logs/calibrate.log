@@ -1,0 +1,7 @@
+best (0.0015, 160.0) score 0.024
+{'rel_amp_green': 0.0015, 'pix_per_patch': 160.0, 'ita': -20.0, 'pos_mae': 4.380479055665858, 'sd_between': 9.900573574477114, 'target': 4.366666666666667}
+{'rel_amp_green': 0.0015, 'pix_per_patch': 160.0, 'ita': 45.0, 'pos_mae': 2.7869478253591673, 'sd_between': 8.852243188550597, 'target': 2.6333333333333333}
+
+real	3m16.876s
+user	5m58.414s
+sys	0m25.935s

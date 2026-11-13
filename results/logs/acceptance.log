@@ -1,0 +1,24 @@
+                                            test       value threshold   pass                                                                     note
+0   real-time factor, steady state (onnxruntime)    0.801467    <= 0.5  False                CPU proxy: x86_64, 1 thread; per-1 s update after warm-up
+1                   peak Python memory MB (onnx)   73.132589     < 200   True             tracemalloc (Python allocations; excludes onnxruntime arena)
+2                 time to first reading s (onnx)   30.000000    report   True                                              30 s window implies >= 30 s
+3           per-update compute ms, median (onnx)  793.800441    report   True                                          update interval 1 s; p95 939 ms
+4         real-time factor, steady state (numpy)    0.839429    <= 0.5  False                CPU proxy: x86_64, 1 thread; per-1 s update after warm-up
+5                  peak Python memory MB (numpy)   72.867343     < 200   True             tracemalloc (Python allocations; excludes onnxruntime arena)
+6                time to first reading s (numpy)   30.000000    report   True                                              30 s window implies >= 30 s
+7          per-update compute ms, median (numpy)  818.649342    report   True                                         update interval 1 s; p95 1078 ms
+8       fault injection: confident wrong numbers    7.000000         0  False       27 fault x stratum runs; shown and |error| > 5 bpm counts as wrong
+9        privacy: files written during streaming    0.000000         0   True                                                                         
+10  privacy: Android manifest network permission    0.000000         0   True                                                      source NOT COMPILED
+11   abstention per stratum x condition reported   30.000000    report   True  results/tables/c7_coverage_shift.csv and abstention_tradeoff.csv (I-08)
+                      updates  shown  confident_wrong
+fault                                                
+codec_artefacts_250k      180     19                7
+dim_100lux                180    163                0
+dropped_frames            170    170                0
+exposure_flips            180      0                0
+face_lost                 180     93                0
+frame_rate_change         180    176                0
+heavy_motion              180    111                0
+lighting_change           180    102                0
+none                      180    180                0

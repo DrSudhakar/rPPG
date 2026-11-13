@@ -1,0 +1,221 @@
+# =====================================================================================
+# SAMA configuration: every knob in the pipeline lives here.
+#
+# Override any value on the command line without editing this file:
+#     python -m sama <command> --set ita.source=none --set gate.type=pooled
+#     python -m sama <command> --config configs/my_variant.yaml
+# Each command writes the effective configuration it used (config_used.yaml) next to its
+# outputs, so every result can be traced to the exact switches that produced it.
+# `python -m sama config` prints the effective configuration and checks it.
+#
+# Allowed values are listed after each key. Unknown keys and values are rejected.
+# =====================================================================================
+
+project:
+  name: SAMA
+  # Label stamped on every output file. Use REAL-PILOT for your own recordings,
+  # REAL-PUBLIC for public datasets, SYNTHETIC for simulated sessions.
+  provenance_label: REAL-PILOT          # REAL-PILOT | REAL-PUBLIC | SYNTHETIC
+  seed: 20261109
+
+paths:
+  pilot_root: "/home/RL/Downloads/Sudhakar rPPG/Dataset/pilot_data"                # pilot_data/sessions/<participant_id>/...
+  public_root: "/home/RL/Downloads/Sudhakar rPPG/Dataset/raw"                 # UBFC-rPPG and PURE folders (see data/DATA_INVENTORY.md)
+  models: models                        # trained bundles: models/<name>/
+  outputs: results/pilot                # pilot analysis outputs
+
+# ---------------------------------------------------------------- signal processing --
+signal:
+  window_s: 30                          # analysis window (proposal: 30 s)
+  step_s: 15                            # window step (proposal: 15 s overlap)
+  band_hz: [0.7, 3.0]                   # pulse band (42-180 bpm)
+  hr_range_bpm: [40, 180]
+  # Methods computed in the pilot analysis. SAMA needs a trained bundle (training.bundle).
+  methods: [POS, CHROM, GREEN, ICA, LGI, PBV, SAMA]
+  primary_method: POS                   # baseline named in the proposal for H1-H3
+  windows_within_blocks: true           # never let a window straddle two protocol blocks
+  analysis_width: 320                   # frames are area-averaged to this width before measuring (0 = native)
+
+# ------------------------------------------------------------------- face region -----
+face:
+  # auto: OpenCV Haar detector if its model file is installed, else the operator's box,
+  # else the fixed guide box. manual_box: use the box drawn in the recorder (session.json).
+  tracker: auto                         # auto | haar | manual_box | fixed_box
+  fixed_box: [0.30, 0.15, 0.40, 0.60]   # x, y, w, h as fractions of the frame
+  redetect_every_s: 1.0
+  smoothing: 0.8                        # exponential smoothing of the tracked box (0 = none)
+  min_skin_fraction: 0.35               # below this the face is treated as lost
+
+# ------------------------------------------------------------------- skin tone (ITA) -
+ita:
+  # Where each participant's ITA° comes from:
+  #   measured  : colorimeter readings in ita.measured_file (the proposal's reference method)
+  #   camera    : estimated from the video with a white reference in view (approximate)
+  #   predicted : from a trained video->ITA model (ita.model_file; see `sama train-ita`)
+  #   monk      : no ITA; Monk ratings are used for strata (strata.by must be monk)
+  #   none      : no skin-tone input anywhere (training and gate are skin-tone blind)
+  source: camera                        # measured | camera | predicted | monk | none
+  # FiLM conditioning of the network on ITA° and brightness. Forced off when source = none.
+  conditioning: true
+  measured_file: pilot_data/ita_measured.csv
+  model_file: models/ita_model/ita_model.json
+  camera:
+    # card: a matte white or mid-grey card held beside the cheek (recommended, costs nothing)
+    # chart: a 24-patch colour chart (colour-correction matrix fitted to the chart)
+    # none: no reference; uses the camera's own white balance (unreliable; flagged)
+    white_reference: card               # card | chart | none
+    # Reflectance of the card. The recorder stores the value entered for each session in session.json,
+    # and card mode refuses to estimate ITA° for a session without it. 18 % grey card: 0.18.
+    white_reflectance: 0.18
+    regions: [cheeks]                   # cheeks | forehead (patch groups used for skin colour)
+    frames: 150                         # frames sampled across the ITA segment
+    segment: ita_capture                # block name to use; falls back to the first block
+    max_iqr_deg: 6.0                    # flag ITA_UNSTABLE if the frame-to-frame IQR exceeds this
+    trim_pct: 5                         # drop the darkest and brightest 5 % of skin pixels (shadow, highlights)
+
+# ------------------------------------------------------------------- strata ----------
+strata:
+  # How participants are grouped for reporting, group-DRO and the Mondrian gate.
+  by: ita                               # ita | monk | none
+  ita_cuts: [10, 28]                    # darker <= 10 < middle <= 28 < lighter (Del Bino & Bernerd 2013)
+  # Monk 1-10 -> strata. ASSUMPTION: no validated Monk-to-ITA mapping exists; these cuts are a
+  # convention for the pilot only and are reported as such.
+  monk_cuts: [4, 7]                     # lighter: 1-4, middle: 5-7, darker: 8-10
+
+# ------------------------------------------------------------------- Monk ratings ----
+raters:
+  n: 1                                  # 1 or 2 trained raters per participant
+  include_self_rating: true             # participant's own Monk rating, reported separately
+  consensus: mean                       # mean | rater1 (with two raters)
+
+# ------------------------------------------------------------------- reference -------
+reference:
+  # oximeter_pleth : fingertip oximeter that logs its pulse waveform (beats -> HR and HRV)
+  # oximeter_hr    : oximeter that logs only its displayed pulse rate (HR only; no HRV, no xcorr sync)
+  # polar_rr       : chest strap RR intervals (Polar H10 via a logging app)
+  # ecg            : ECG waveform (BITalino or similar)
+  type: oximeter_pleth                  # oximeter_pleth | oximeter_hr | polar_rr | ecg
+  file_glob: "reference*.csv"           # inside each session folder
+  columns: {time: time_s, pleth: pleth, hr: hr_bpm, spo2: spo2, rr: rr_ms, ecg: ecg}
+  time_format: unix_s                   # unix_s | unix_ms | relative_s
+  fs_hz: 60                             # waveform rate, used only when there is no time column
+  label: "fingertip pulse oximeter (contact PPG)"
+
+# ------------------------------------------------------------------- synchronisation -
+sync:
+  # wallclock: trust the PC clock (recorder and oximeter software on the same computer)
+  # xcorr: start from the wall clock, then refine by cross-correlating the camera pulse with the
+  #        reference waveform (needs reference.type = oximeter_pleth or ecg)
+  method: xcorr                         # wallclock | xcorr
+  max_lag_s: 3.0                        # search range around the wall-clock alignment
+  phone_max_lag_s: 30.0                 # wider search for a phone started by hand
+
+# ------------------------------------------------------------------- quality ---------
+quality:
+  # Motion index = mean absolute frame-to-frame change of the face region (8-bit luma units).
+  # Tune these with the 20 s "still / move" check in the session protocol.
+  motion_warn: 3.0                      # amber warning: HRV marked unreliable
+  motion_abstain: 6.0                   # red warning: no reading shown
+  low_light_dn: 25                      # face green channel below this -> LOW_LIGHT
+  min_fps: 12
+  max_gap_s: 0.5
+  face_lost_max_frac: 0.10
+  min_snr_db: -3.0                      # below this the pulse is too weak to show
+  qc_min_reference_valid: 0.80          # session QC: share of reference windows usable
+  qc_min_face_frac: 0.90                # session QC: share of frames with a face
+
+# ------------------------------------------------------------------- HRV -------------
+hrv:
+  enabled: true
+  window_s: 60                          # proposal: HRV in 60 s windows
+  min_beats: 40
+  max_edited_frac: 0.05                 # windows with more edited beats are dropped (proposal WP1)
+  metrics: [rmssd, sdnn, pnn50]
+
+# ------------------------------------------------------------------- training --------
+training:
+  bundle: models/sama_real              # where `sama train` writes and the pilot reads the model
+  # Any subset of: UBFC-rPPG, PURE, VIPL-HR, iBVP, SUMS, LADH, M3PD, RLAP, MMPD, PILOT.
+  # Each public dataset goes in its own folder named after it under paths.public_root
+  # (data/raw/MMPD/, data/raw/RLAP/, ...). `python -m sama datasets` prints what it found on
+  # disk and how it was recognised; sama/datasets.py documents every expected layout.
+  datasets: [UBFC-rPPG, PURE]
+  # Public datasets have no white reference, so their camera ITA° is unreliable (I-03).
+  # none: train skin-tone blind on public data (the network is then not conditioned on ITA°);
+  # camera_uncalibrated: use the uncalibrated camera estimate anyway (flagged in the bundle).
+  public_ita: none                      # none | camera_uncalibrated
+  max_recordings: 0                     # per dataset; 0 = all. A small number = quick smoke run
+  folds: 5                              # participant-level cross-validation
+  epochs: 25
+  lr: 0.002
+  channels: 24
+  window_step_s: 5                      # denser windows for training only
+  group_dro: true
+  # Groups for group-DRO: stratum needs a skin-tone source; dataset works without one
+  # (worst-dataset training); stratum_x_dataset combines both.
+  dro_groups: dataset                   # stratum | dataset | stratum_x_dataset | none
+  loss: pearson_spectral                # pearson_spectral | spectral (use spectral if no waveform)
+  chart_calibration: false              # step 2; needs chart frames in each session
+  noise_weighting: true                 # step 3
+  use_network: true                     # step 4 refinement; false = steps 2-3 + POS only
+
+# ------------------------------------------------------------------- reliability gate -
+gate:
+  type: pooled                          # pooled | mondrian | off
+  alpha: 0.10                           # 90 % intervals
+  halfwidth_max_bpm: 5.0                # abstain above this half-width
+  calibration: cross                    # cross: out-of-fold scores (CV+); split: hold out participants
+  min_calibration_participants: 9       # below this a stratum's interval is infinite (never shown)
+  draws: 200                            # one window per participant per draw
+
+# ------------------------------------------------------------------- pilot -----------
+pilot:
+  # How the pilot participants are used by the SAMA method:
+  #   test_only : model and gate trained on public data only; the pilot is a pure test set
+  #   calibrate : model from public data; the gate is recalibrated on the pilot, each participant's
+  #               interval coming from the other pilot participants' scores (leave-one-participant-out)
+  # (Fine-tuning the network on the pilot is not implemented; training.datasets must not include
+  #  PILOT while the pilot is analysed, otherwise the run stops.)
+  role: test_only                       # test_only | calibrate
+  blocks: [ita_capture, motion_check, rest, consultation, arithmetic, recovery]
+  # Blocks left out of heart-rate and HRV accuracy: the card is held near the face during
+  # ita_capture, and motion_check is deliberate movement (used only to tune quality.motion_*).
+  exclude_blocks_from_accuracy: [ita_capture, motion_check]
+  lights: [light1_500lux, light2_100lux]
+  streams: [webcam, phone]              # phone is optional
+  ladder:
+    enabled: true
+    h264_kbps: [2000, 1000, 500, 250]
+    vp8_kbps: [500, 250]
+    max_width: 1280
+  figure_codec: h264                    # codec shown in Figure 6B (one codec per figure)
+  compression_kbps: 500                 # the bitrate quoted in section 5 result 3
+  bootstrap: 2000
+
+# ------------------------------------------------------------------- live interface --
+live:
+  method: SAMA                          # POS | CHROM | SAMA (SAMA falls back to POS without a bundle)
+  update_s: 1.0
+  hr_window_s: 20                       # heart rate from the last 20 s
+  display_s: 10                         # scrolling pulse trace length
+  show_hrv: true
+  show_beats: true                      # dots on the pulse trace and a flashing dot on the video
+  gate: true                            # show interval and abstain when it is too wide
+  require_still_for_hrv: true
+
+# ------------------------------------------------------------------- recorder --------
+recorder:
+  input_format: v4l2                    # v4l2 (Linux) | dshow (Windows) | avfoundation (macOS) | file
+  device: /dev/video0                   # e.g. "video=USB Camera" (dshow) or "0" (avfoundation)
+  size: 640x480
+  fps: 30
+  pixel_format: ""                      # leave empty, or yuyv422 / mjpeg if the camera needs it
+  codec: ffv1                           # ffv1 | h264_lossless (both lossless; needed for the ladder)
+  analysis_size: 320x240                # frames sent to the live analysis
+  preview_fps: 10
+
+# ------------------------------------------------------------------- privacy ---------
+privacy:
+  save_video: true                      # recorder: lossless video is needed for the pilot
+  save_signals: true                    # patch means, readings and events
+  research_only_banner: true

@@ -1,0 +1,17 @@
+----------------------------------------------------------------------
+Ran 56 tests in 28.695s
+
+OK
+sama/signals.py           61/67     91.0%
+sama/methods.py           68/73     93.2%
+sama/stats.py            103/125    82.4%
+sama/conformal.py         46/53     86.8%
+sama/calib.py             14/18     77.8%
+sama/ita.py               12/15     80.0%
+sama/net.py              125/143    87.4%
+sama/export.py            86/121    71.1%
+sama/streaming.py         69/103    67.0%
+sama/sama_method.py      121/145    83.4%
+sama/model_io.py          18/20     90.0%
+sim/samasim.py           210/279    75.3%
+TOTAL (core)             933/1162   80.3%

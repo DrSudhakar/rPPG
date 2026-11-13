@@ -1,0 +1,13 @@
+test,value,threshold,pass,note
+"real-time factor, steady state (onnxruntime)",0.8014669785222212,<= 0.5,False,"CPU proxy: x86_64, 1 thread; per-1 s update after warm-up"
+peak Python memory MB (onnx),73.132589,< 200,True,tracemalloc (Python allocations; excludes onnxruntime arena)
+time to first reading s (onnx),30.0,report,True,30 s window implies >= 30 s
+"per-update compute ms, median (onnx)",793.8004405000072,report,True,update interval 1 s; p95 939 ms
+"real-time factor, steady state (numpy)",0.8394287529111096,<= 0.5,False,"CPU proxy: x86_64, 1 thread; per-1 s update after warm-up"
+peak Python memory MB (numpy),72.867343,< 200,True,tracemalloc (Python allocations; excludes onnxruntime arena)
+time to first reading s (numpy),30.0,report,True,30 s window implies >= 30 s
+"per-update compute ms, median (numpy)",818.6493424999952,report,True,update interval 1 s; p95 1078 ms
+fault injection: confident wrong numbers,7.0,0,False,27 fault x stratum runs; shown and |error| > 5 bpm counts as wrong
+privacy: files written during streaming,0.0,0,True,
+privacy: Android manifest network permission,0.0,0,True,source NOT COMPILED
+abstention per stratum x condition reported,30.0,report,True,results/tables/c7_coverage_shift.csv and abstention_tradeoff.csv (I-08)

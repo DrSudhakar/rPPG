@@ -1,0 +1,870 @@
+{
+ "pr_h1": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   0,
+   "H1"
+  ]
+ ],
+ "pr_h2": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   0,
+   "H2"
+  ]
+ ],
+ "pr_h3": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   0,
+   "H3"
+  ]
+ ],
+ "pr_h4": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   0,
+   "H4_any_reduction"
+  ]
+ ],
+ "pr_h5_one": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   0,
+   "H5_fisher_one"
+  ]
+ ],
+ "pr_h5_joint": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   0,
+   "H5_joint_f"
+  ]
+ ],
+ "pr_h5_joint40": [
+  "results/tables/design_checks.json",
+  [
+   "power_rerun",
+   1,
+   "H5_joint_f"
+  ]
+ ],
+ "h4rule_point30": [
+  "results/tables/design_checks.json",
+  [
+   "h4_rules",
+   1,
+   "point_estimate_ge30pct"
+  ]
+ ],
+ "h4rule_lb10_30": [
+  "results/tables/design_checks.json",
+  [
+   "h4_rules",
+   1,
+   "lower95_ge_10pct"
+  ]
+ ],
+ "h4rule_point40": [
+  "results/tables/design_checks.json",
+  [
+   "h4_rules",
+   2,
+   "point_estimate_ge30pct"
+  ]
+ ],
+ "cov36_one": [
+  "results/tables/design_checks.json",
+  [
+   "coverage",
+   5,
+   "p_one_stratum"
+  ]
+ ],
+ "cov36_all": [
+  "results/tables/design_checks.json",
+  [
+   "coverage",
+   5,
+   "p_all_three"
+  ]
+ ],
+ "cov14_all": [
+  "results/tables/design_checks.json",
+  [
+   "coverage",
+   3,
+   "p_all_three"
+  ]
+ ],
+ "rec_lighter": [
+  "results/tables/design_checks.json",
+  [
+   "recruitment",
+   "p_lighter"
+  ]
+ ],
+ "rec_darker": [
+  "results/tables/design_checks.json",
+  [
+   "recruitment",
+   "p_darker"
+  ]
+ ],
+ "rec_screen": [
+  "results/tables/design_checks.json",
+  [
+   "recruitment",
+   "screened_median"
+  ]
+ ],
+ "rec_screen90": [
+  "results/tables/design_checks.json",
+  [
+   "recruitment",
+   "screened_p90"
+  ]
+ ],
+ "h4_dark_red": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "point",
+   "darker_reduction"
+  ]
+ ],
+ "h4_dark_red_lo": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "ci95",
+   "darker_reduction",
+   0
+  ]
+ ],
+ "h4_dark_red_hi": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "ci95",
+   "darker_reduction",
+   1
+  ]
+ ],
+ "h4_gap_red": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "point",
+   "gap_reduction"
+  ]
+ ],
+ "h4_light_inc": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "point",
+   "lighter_increase"
+  ]
+ ],
+ "h4_mincov": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "point",
+   "min_coverage"
+  ]
+ ],
+ "h4_abst_spread": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "point",
+   "abstention_spread_pp"
+  ]
+ ],
+ "h4_p_c1": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "p_pass",
+   "c1"
+  ]
+ ],
+ "h4_p_c2": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "p_pass",
+   "c2"
+  ]
+ ],
+ "h4_p_c5": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "p_pass",
+   "c5"
+  ]
+ ],
+ "h4_p_all": [
+  "results/c7_summary.json",
+  [
+   "h4",
+   "p_all_five"
+  ]
+ ],
+ "h4_paired_mean": [
+  "results/c7_summary.json",
+  [
+   "h4_paired_darker",
+   "mean"
+  ]
+ ],
+ "h4_paired_p": [
+  "results/c7_summary.json",
+  [
+   "h4_paired_darker",
+   "p"
+  ]
+ ],
+ "h3_dark_pooled": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "pooled",
+   "mean"
+  ]
+ ],
+ "h3_dark_pooled_lo": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "pooled",
+   "lo95"
+  ]
+ ],
+ "h3_dark_pooled_hi": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "pooled",
+   "hi95"
+  ]
+ ],
+ "h3_dark_pooled_p": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "pooled",
+   "p"
+  ]
+ ],
+ "h3_dark_std": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "standard",
+   "mean"
+  ]
+ ],
+ "h3_dark_dim": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "dim",
+   "mean"
+  ]
+ ],
+ "h3_dark_dim_p": [
+  "results/c7_summary.json",
+  [
+   "h3",
+   "darker",
+   "dim",
+   "p"
+  ]
+ ],
+ "h5_icc60": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference",
+   "overall",
+   "icc"
+  ]
+ ],
+ "h5_icc60_lo": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference",
+   "overall",
+   "lo95"
+  ]
+ ],
+ "h5_icc60_hi": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference",
+   "overall",
+   "hi95"
+  ]
+ ],
+ "h5_icc30hq": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference30hq",
+   "overall",
+   "icc"
+  ]
+ ],
+ "h5_icc30": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference30",
+   "overall",
+   "icc"
+  ]
+ ],
+ "h5_icc500": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference30_500",
+   "overall",
+   "icc"
+  ]
+ ],
+ "h5_level60": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference",
+   "level_rest",
+   "icc"
+  ]
+ ],
+ "h5_ppass": [
+  "results/c7_summary.json",
+  [
+   "h5",
+   "reference",
+   "p_pass_36"
+  ]
+ ],
+ "e1_ecg": [
+  "results/c7_summary.json",
+  [
+   "e1",
+   "ecg",
+   "accuracy"
+  ]
+ ],
+ "e1_cam": [
+  "results/c7_summary.json",
+  [
+   "e1",
+   "cam",
+   "accuracy"
+  ]
+ ],
+ "budget_planted": [
+  "results/c7_summary.json",
+  [
+   "budget",
+   "planted_coverage_min"
+  ]
+ ],
+ "budget_nwin": [
+  "results/c7_summary.json",
+  [
+   "budget",
+   "n_windows"
+  ]
+ ],
+ "params": [
+  "results/c7_summary.json",
+  [
+   "final_model",
+   "n_params"
+  ]
+ ],
+ "c6_grad_A": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "slope_per75"
+  ]
+ ],
+ "c6_grad_A_lo": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "lo95"
+  ]
+ ],
+ "c6_grad_A_hi": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "hi95"
+  ]
+ ],
+ "c6_grad_mel": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   2,
+   "slope_per75"
+  ]
+ ],
+ "c6_mae_light_A": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "mae_lighter"
+  ]
+ ],
+ "c6_mae_dark_A": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "mae_darker"
+  ]
+ ],
+ "c6_med_light_A": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "median_lighter"
+  ]
+ ],
+ "c6_med_dark_A": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "median_darker"
+  ]
+ ],
+ "c6_sd_darker": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "sd_darker"
+  ]
+ ],
+ "c6_sd_lighter": [
+  "results/c6_summary.json",
+  [
+   "realised_gradient",
+   0,
+   "sd_lighter"
+  ]
+ ],
+ "c6_h1_cond": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   0,
+   "power"
+  ]
+ ],
+ "c6_h1_typeI": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   0,
+   "type_I"
+  ]
+ ],
+ "c6_h1_err6": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   2,
+   "power"
+  ]
+ ],
+ "c6_h1_err10": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   3,
+   "power"
+  ]
+ ],
+ "c6_h1_param": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   4,
+   "power"
+  ]
+ ],
+ "c6_h1_logmae": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   5,
+   "power"
+  ]
+ ],
+ "c6_h1_medae": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   6,
+   "power"
+  ]
+ ],
+ "c6_h1_rank": [
+  "results/c6_summary.json",
+  [
+   "h1",
+   7,
+   "power"
+  ]
+ ],
+ "c6_h1_mm": [
+  "results/c6_summary.json",
+  [
+   "h1_mixed_model",
+   "power"
+  ]
+ ],
+ "c6_h1_mm_nonconv": [
+  "results/c6_summary.json",
+  [
+   "h1_mixed_model",
+   "nonconverged"
+  ]
+ ],
+ "c6_h2_correct_A": [
+  "results/c6_summary.json",
+  [
+   "h2",
+   0,
+   "share"
+  ]
+ ],
+ "c6_h2_B_inconcl": [
+  "results/c6_summary.json",
+  [
+   "h2",
+   5,
+   "share"
+  ]
+ ],
+ "c6_h2_B_equiv": [
+  "results/c6_summary.json",
+  [
+   "h2",
+   7,
+   "share"
+  ]
+ ],
+ "c6_h2_slopeA": [
+  "results/c6_summary.json",
+  [
+   "h2_pool_slope_A",
+   "penalty_slope_per75"
+  ]
+ ],
+ "c6_h2_slopeB": [
+  "results/c6_summary.json",
+  [
+   "h2_pool_slope_B",
+   "penalty_slope_per75"
+  ]
+ ],
+ "c6_h2_slopeB_lo": [
+  "results/c6_summary.json",
+  [
+   "h2_pool_slope_B",
+   "lo95"
+  ]
+ ],
+ "c6_h2_slopeB_hi": [
+  "results/c6_summary.json",
+  [
+   "h2_pool_slope_B",
+   "hi95"
+  ]
+ ],
+ "c6_h2_typeI": [
+  "results/c6_summary.json",
+  [
+   "h2_type_I_permutation"
+  ]
+ ],
+ "rtf_onnx": [
+  "results/c9_summary.json",
+  [
+   "rtf_onnx"
+  ]
+ ],
+ "rtf_numpy": [
+  "results/c9_summary.json",
+  [
+   "rtf_numpy"
+  ]
+ ],
+ "mem_mb": [
+  "results/c9_summary.json",
+  [
+   "mem_mb"
+  ]
+ ],
+ "update_ms": [
+  "results/c9_summary.json",
+  [
+   "update_ms"
+  ]
+ ],
+ "faults_wrong": [
+  "results/c9_summary.json",
+  [
+   "faults_wrong"
+  ]
+ ],
+ "coverage_pct": [
+  "results/c9_summary.json",
+  [
+   "coverage_pct"
+  ]
+ ],
+ "tests": [
+  "results/c9_summary.json",
+  [
+   "tests"
+  ]
+ ],
+ "parity_fp16": [
+  "results/c9_summary.json",
+  [
+   "parity_fp16"
+  ]
+ ],
+ "parity_int8": [
+  "results/c9_summary.json",
+  [
+   "parity_int8"
+  ]
+ ],
+ "codec_small_500": [
+  "results/c9_summary.json",
+  [
+   "codec_small_500"
+  ]
+ ],
+ "codec_large_500": [
+  "results/c9_summary.json",
+  [
+   "codec_large_500"
+  ]
+ ],
+ "codec_small_2000": [
+  "results/c9_summary.json",
+  [
+   "codec_small_2000"
+  ]
+ ],
+ "matched_dark_diff": [
+  "results/c9_summary.json",
+  [
+   "matched_dark_diff"
+  ]
+ ],
+ "matched_dark_lo": [
+  "results/c9_summary.json",
+  [
+   "matched_dark_lo"
+  ]
+ ],
+ "matched_dark_hi": [
+  "results/c9_summary.json",
+  [
+   "matched_dark_hi"
+  ]
+ ],
+ "matched_light_diff": [
+  "results/c9_summary.json",
+  [
+   "matched_light_diff"
+  ]
+ ],
+ "abl_SAMA_lighter": [
+  "results/c9_summary.json",
+  [
+   "abl_SAMA_lighter"
+  ]
+ ],
+ "abl_SAMA_middle": [
+  "results/c9_summary.json",
+  [
+   "abl_SAMA_middle"
+  ]
+ ],
+ "abl_SAMA_darker": [
+  "results/c9_summary.json",
+  [
+   "abl_SAMA_darker"
+  ]
+ ],
+ "abl_noFiLM_lighter": [
+  "results/c9_summary.json",
+  [
+   "abl_noFiLM_lighter"
+  ]
+ ],
+ "abl_noFiLM_middle": [
+  "results/c9_summary.json",
+  [
+   "abl_noFiLM_middle"
+  ]
+ ],
+ "abl_noFiLM_darker": [
+  "results/c9_summary.json",
+  [
+   "abl_noFiLM_darker"
+  ]
+ ],
+ "abl_nogroupDRO_lighter": [
+  "results/c9_summary.json",
+  [
+   "abl_nogroupDRO_lighter"
+  ]
+ ],
+ "abl_nogroupDRO_middle": [
+  "results/c9_summary.json",
+  [
+   "abl_nogroupDRO_middle"
+  ]
+ ],
+ "abl_nogroupDRO_darker": [
+  "results/c9_summary.json",
+  [
+   "abl_nogroupDRO_darker"
+  ]
+ ],
+ "abl_noCNN_lighter": [
+  "results/c9_summary.json",
+  [
+   "abl_noCNN_lighter"
+  ]
+ ],
+ "abl_noCNN_middle": [
+  "results/c9_summary.json",
+  [
+   "abl_noCNN_middle"
+  ]
+ ],
+ "abl_noCNN_darker": [
+  "results/c9_summary.json",
+  [
+   "abl_noCNN_darker"
+  ]
+ ],
+ "abl_POS_gate_lighter": [
+  "results/c9_summary.json",
+  [
+   "abl_POS_gate_lighter"
+  ]
+ ],
+ "abl_POS_gate_middle": [
+  "results/c9_summary.json",
+  [
+   "abl_POS_gate_middle"
+  ]
+ ],
+ "abl_POS_gate_darker": [
+  "results/c9_summary.json",
+  [
+   "abl_POS_gate_darker"
+  ]
+ ],
+ "abst_lighter": [
+  "results/c9_summary.json",
+  [
+   "abst_lighter"
+  ]
+ ],
+ "abst_middle": [
+  "results/c9_summary.json",
+  [
+   "abst_middle"
+  ]
+ ],
+ "abst_darker": [
+  "results/c9_summary.json",
+  [
+   "abst_darker"
+  ]
+ ],
+ "yield_lighter": [
+  "results/c9_summary.json",
+  [
+   "yield_lighter"
+  ]
+ ],
+ "yield_middle": [
+  "results/c9_summary.json",
+  [
+   "yield_middle"
+  ]
+ ],
+ "yield_darker": [
+  "results/c9_summary.json",
+  [
+   "yield_darker"
+  ]
+ ],
+ "cov_lighter": [
+  "results/c9_summary.json",
+  [
+   "cov_lighter"
+  ]
+ ],
+ "cov_middle": [
+  "results/c9_summary.json",
+  [
+   "cov_middle"
+  ]
+ ],
+ "cov_darker": [
+  "results/c9_summary.json",
+  [
+   "cov_darker"
+  ]
+ ],
+ "faults_shown_250": [
+  "results/c9_summary.json",
+  [
+   "faults_shown_250"
+  ]
+ ]
+}
