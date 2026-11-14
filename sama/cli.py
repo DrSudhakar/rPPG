@@ -46,7 +46,8 @@ def main(argv=None):
     ap.add_argument("--target", choices=["monk", "ita"], default="monk", help="train-ita: label to learn")
     ap.add_argument("--learner", choices=["ridge", "gbr"], default="ridge", help="train-ita: model")
     ap.add_argument("--bundle", help="test: trained bundle to evaluate (default: training.bundle)")
-    ap.add_argument("--datasets", help="test: comma-separated datasets to test on (default: training.datasets)")
+    ap.add_argument("--datasets", help="test: comma-separated datasets to test on (default: training.datasets); "
+                                    "datasets: comma-separated datasets to probe for (default: all supported)")
     ap.add_argument("--root", help="datasets: folder to probe (default: paths.public_root)")
     ap.add_argument("--json", action="store_true", help="datasets: machine-readable output")
     ap.add_argument("--host", default="127.0.0.1")
@@ -106,11 +107,15 @@ def main(argv=None):
     if a.command == "datasets":
         from .datasets import probe, probe_text
         root = a.root or cfg.paths.public_root
+        # Scan every dataset sama/datasets.py knows how to read, not just the ones listed in
+        # training.datasets -- this command is for "what's on disk", regardless of what you've
+        # currently configured training to use. Pass --datasets to narrow it on purpose.
+        names = [x.strip() for x in a.datasets.split(",") if x.strip()] if a.datasets else None
         if a.json:
-            print(json.dumps(probe(root, cfg.training.datasets or None, cfg.paths.pilot_root), indent=1))
+            print(json.dumps(probe(root, names, cfg.paths.pilot_root), indent=1))
         else:
-            print(probe_text(root, cfg.training.datasets or None, cfg.paths.pilot_root))
-        return 0
+            print(probe_text(root, names, cfg.paths.pilot_root))
+        return 0    
 
     if a.command in ("train", "all"):
         from .datasets import PUBLIC_NAMES
